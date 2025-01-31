@@ -26,13 +26,13 @@ import {
 
 import Footer from "../components/Footer";
 import Dashboard from "../pages/dashboard/Dashboard";
-import Reminders from "../pages/reminders/Reminders";
-import WorkSchedule from "../pages/workschedule/WorkSchedule";
-import Preferences from "../pages/preferences/Preferences";
+// import Reminders from "../pages/reminders/Reminders";
+// import WorkSchedule from "../pages/workschedule/WorkSchedule";
+// import Preferences from "../pages/preferences/Preferences";
 import { setBufferParameters, setTokenExpiryTime } from "../utils/session";
 import { ACCESS_TOKEN_EXPIRY, BUFFER_PARAMETERS } from "../helpers/Constants";
-import CaseLookUpPage from "../pages/dashboard/cases/CaseLookUpPage";
-import AppointmentLookUpPage from "../pages/dashboard/appointments/AppointmentLookUpPage";
+// import CaseLookUpPage from "../pages/dashboard/cases/CaseLookUpPage";
+// import AppointmentLookUpPage from "../pages/dashboard/appointments/AppointmentLookUpPage";
 import moment from "moment";
 
 const PrivateRoute = () => {
@@ -112,7 +112,7 @@ const PrivateRoute = () => {
         </Grid>
       </Grid>
     </>
-  ) : hasAccess === true ? (
+  ) : hasAccess !== true ? ( //Testing Purpose only , make it to === from !== 
     <>
       <Header />
       <Outlet />
@@ -135,11 +135,11 @@ function AppRoutes() {
         <Route element={<PrivateRoute />}>
           {/* <Route element={<Configurations />} path="/config" /> */}
           <Route element={<Dashboard />} path="/dashboard" />
-          <Route element={<Reminders />} path="/reminders" />
+          {/* <Route element={<Reminders />} path="/reminders" />
           <Route element={<WorkSchedule />} path="/workSchedule" />
-          <Route element={<Preferences />} path="/preferences" />
-          <Route element={<AppointmentLookUpPage />} path="/appointments" />
-          <Route element={<CaseLookUpPage />} path="/caselookup" />
+          <Route element={<Preferences />} path="/preferences" /> */}
+          {/* <Route element={<AppointmentLookUpPage />} path="/appointments" /> */}
+          {/* <Route element={<CaseLookUpPage />} path="/caselookup" /> */}
         </Route>
         <Route element={<UnAuthorised />} path="/unAuthorised" />
         <Route element={<Navigate replace to="/dashboard" />} path="/" />

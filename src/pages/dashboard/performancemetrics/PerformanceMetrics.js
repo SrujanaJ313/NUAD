@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Typography,
@@ -13,6 +13,13 @@ import {
   Stack,
 } from "@mui/material";
 import { styled } from "@mui/system";
+import {
+  appointmentsLocalOfficeURL,
+  appointmentsCaseManagerURL,
+  // kpiSummaryURL,
+} from "../../../helpers/Urls";
+import client from "../../../helpers/Api";
+import { genericSortOptionsAlphabetically } from "../../../helpers/utils";
 
 const Container = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -23,7 +30,7 @@ const Container = styled(Box)(({ theme }) => ({
   backgroundColor: "#f5f5f5",
   display: "flex",
   flexDirection: "column",
-  gap: theme.spacing(2),
+  gap: theme.spacing(1),
 }));
 
 const Header = styled(Typography)(({ theme }) => ({
@@ -42,135 +49,288 @@ const Value = styled(Box)(({ theme }) => ({
   color: "#000",
 }));
 
-const Link = styled(Typography)(({ theme }) => ({
-  color: "#183084",
-  cursor: "pointer",
-  textDecoration: "underline",
-  marginTop: theme.spacing(2),
-  "&:hover": {
-    textDecoration: "none",
-  },
-}));
-
-const StatItem = ({ label, value, percentage }) => (
-  <Grid container spacing={1} alignItems="center">
-    <Grid item xs={6}>
-      <Label>{label}</Label>
-    </Grid>
-    <Grid
-      item
-      xs={!percentage ? 6 : 3}
-      textAlign={!percentage ? "right" : "inherit"}
-    >
-      <Value>{value}</Value>
-    </Grid>
-    {percentage && (
-      <Grid item xs={3}>
-        <Value>%</Value>
+const StatItem = ({ label, value, percentage }) => {
+  return (
+    <Grid container spacing={0.9} alignItems="center">
+      <Grid item xs={10}>
+        <Label>{label}</Label>
       </Grid>
-    )}
-  </Grid>
-);
+      <Grid item xs={2}>
+        <Value>{value}</Value>
+      </Grid>
+      {/* {percentage?.toString() && (
+        <Grid item xs={3}>
+          <Value>{percentage}%</Value>
+        </Grid>
+      )} */}
+    </Grid>
+  );
+};
 
-const PerformanceMetrics = () => {
+const PerformanceMetrics = ({ userId }) => {
+  const [period, setPeriod] = useState("THREE_MONTHS");
+  const [caseManager, setCaseManager] = useState([]);
+  const [localOffice, setLocalOffice] = useState([]);
+  const [caseManagerId, setCaseManagerId] = useState(userId || "");
+  const [localOfficeId, setLocalOfficeId] = useState("");
+  const [kpiSummary, setKpiSummary] = useState({});
+  const [selectedOption, setSelectedOption] = useState("");
   const data = {
-    caseload: "#",
-    avgWeeksToEmployment: "#",
-    appointments: [
-      { label: "Completed:", value: "#", percentage: "#" },
-      { label: "No Shows:", value: "#", percentage: "#" },
-      { label: "RTW:", value: "#", percentage: "#" },
-      { label: "Rescheduled:", value: "#", percentage: "#" },
-      { label: "Failed:", value: "#", percentage: "#" },
-      { label: "Remote:", value: "#", percentage: "#" },
-      { label: "In-person:", value: "#", percentage: "#" },
+    caseload: kpiSummary?.caseLoad,
+    avgWksOfEmployment: kpiSummary?.avgWksOfEmployment,
+    timeliness: [
+      {
+        label: "Total Separation Determination made:",
+        value: kpiSummary?.completedApptCount,
+        percentage: kpiSummary?.completedApptPercent,
+      },
+      {
+        label: "Total Non-Separation Determination made:",
+        value: kpiSummary?.completedRTWApptCount,
+        percentage: kpiSummary?.completedRTWApptPercent,
+      },
+      {
+        label: "Total Separation Determinations:",
+        value: kpiSummary?.completedApptCount,
+        percentage: kpiSummary?.completedApptPercent,
+      },
+      {
+        label: "Untimely Separation Determinations:",
+        value: kpiSummary?.completedRTWApptCount,
+        percentage: kpiSummary?.completedRTWApptPercent,
+      },
+      {
+        label: "Timely Non-Separation Determinations:",
+        value: kpiSummary?.completedApptCount,
+        percentage: kpiSummary?.completedApptPercent,
+      },
+      {
+        label: "Untimely Non-Separation Determinations:",
+        value: kpiSummary?.completedRTWApptCount,
+        percentage: kpiSummary?.completedRTWApptPercent,
+      },
+      {
+        label: "Total Timely%:",
+        value: kpiSummary?.completedApptCount,
+        percentage: kpiSummary?.completedApptPercent,
+      },
+      {
+        label: "Total Untimely%:",
+        value: kpiSummary?.completedRTWApptCount,
+        percentage: kpiSummary?.completedRTWApptPercent,
+      },
     ],
-    inadequateWorkSearches: "#",
-    jobReferralsMade: "#",
-    trainingReferralsMade: "#",
+    btq: [
+      {
+        label: "Cases selected by BTQ:",
+        value: kpiSummary?.noShowRTWCount,
+        percentage: kpiSummary?.noShowRTWPercent,
+      },
+      {
+        label: "Passed BTQ:",
+        value: kpiSummary?.noShowRescheduledCount,
+        percentage: kpiSummary?.noShowRescheduledPercent,
+      },
+      {
+        label: "Failed BTQ:",
+        value: kpiSummary?.noShowFailedCount,
+        percentage: kpiSummary?.noShowFailedPercent,
+      },
+    ],
   };
-  const [period, setPeriod] = useState(30);
-  const [selectedFor, setSelectedFor] = useState("mary");
+
+  const onPageLoadFields = {
+    CaseManager: {
+      url: appointmentsCaseManagerURL,
+      setData: setCaseManager,
+      propertyName: "name",
+      checkCaseManager: true,
+    },
+    LocalOffice: {
+      url: appointmentsLocalOfficeURL,
+      setData: setLocalOffice,
+      propertyName: "officeName",
+      checkCaseManager: false,
+    },
+  };
+
+  function fetchCaseManager() {
+    return [
+      {
+        id: Number("123"),
+        name: "Madhu",
+      },
+    ];
+  }
+
+  useEffect(() => {
+    async function loadData(fieldName) {
+      try {
+        const { url, setData, propertyName, checkCaseManager } =
+          onPageLoadFields[fieldName];
+        const data = checkCaseManager
+          ? fetchCaseManager()
+          : await client.get(url);
+        const sortedData = genericSortOptionsAlphabetically(data, propertyName);
+        setData(sortedData);
+      } catch (errorResponse) {
+        console.error("Error in Performance metrics loadData", errorResponse);
+      }
+    }
+
+    Promise.all(
+      Object.keys(onPageLoadFields).map((fieldName) => loadData(fieldName))
+    );
+  }, []);
+
+  useEffect(() => {
+    async function getKPISummary(payload) {
+      try {
+        const result =
+          process.env.REACT_APP_ENV === "mockserver"
+            ? await client.get(kpiSummaryURL, payload)
+            : await client.post(kpiSummaryURL, payload);
+        setKpiSummary(result);
+      } catch (errorResponse) {
+        console.error("Error in getKPISummary", errorResponse);
+      }
+    }
+    if (!period) {
+      return;
+    }
+    let payload = {
+      periodRange: period,
+    };
+    if (selectedOption === "Agency") {
+      payload["agencySelectedInd"] = "Y";
+      getKPISummary(payload);
+    } else if (selectedOption === "CaseManager" && caseManagerId) {
+      payload["caseMgrId"] = caseManagerId;
+      getKPISummary(payload);
+    } else if (selectedOption === "LocalOffice" && localOfficeId) {
+      payload["lofId"] = localOfficeId;
+      getKPISummary(payload);
+    } else {
+      return;
+    }
+  }, [caseManagerId, localOfficeId, period, selectedOption]);
 
   const handlePeriodChange = (event) => {
     setPeriod(event.target.value);
   };
 
-  const handleForChange = (event) => {
-    setSelectedFor(event.target.value);
+  const handleRadioChange = (e) => {
+    setSelectedOption(e.target.value);
+    setCaseManagerId("");
+    setLocalOfficeId("");
   };
 
   return (
-    <Container>
+    <Container
+      sx={{
+        // height: "calc(100% - 5.1rem)",
+        overflowY: "auto",
+        "&::-webkit-scrollbar": {
+          width: "5px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "#888",
+          borderRadius: "10px",
+        },
+        "&::-webkit-scrollbar-thumb:hover": {
+          backgroundColor: "#555",
+        },
+        "&::-webkit-scrollbar-track": {
+          backgroundColor: "#f1f1f1",
+        },
+      }}
+    >
       <Header variant="h6">Key Performance Metrics</Header>
-      <Label>Coming soon...</Label>
-      {/*<Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>*/}
-      {/*  <Label>For:</Label>*/}
-      {/*  <FormControl component="fieldset">*/}
-      {/*    <RadioGroup*/}
-      {/*      row*/}
-      {/*      value={selectedFor}*/}
-      {/*      onChange={handleForChange}*/}
-      {/*      aria-label="for"*/}
-      {/*      name="for"*/}
-      {/*    >*/}
-      {/*      <FormControlLabel value="mary" control={<Radio />} label="Mary" />*/}
-      {/*      <FormControlLabel value="lo" control={<Radio />} label="LO" />*/}
-      {/*      <FormControlLabel*/}
-      {/*        value="agency"*/}
-      {/*        control={<Radio />}*/}
-      {/*        label="Agency"*/}
-      {/*      />*/}
-      {/*    </RadioGroup>*/}
-      {/*  </FormControl>*/}
-      {/*</Box>*/}
-      {/*<StatItem label="Caseload:" value={data.caseload} />*/}
-      {/*<Stack direction="row">*/}
-      {/*  <Stack width="30%" justifyContent={"center"}>*/}
-      {/*    <Typography className="label-text">Over the past:</Typography>*/}
-      {/*  </Stack>*/}
-      {/*  <Stack width="70%">*/}
-      {/*    <Select*/}
-      {/*      size="small"*/}
-      {/*      value={period}*/}
-      {/*      onChange={handlePeriodChange}*/}
-      {/*      fullWidth*/}
-      {/*    >*/}
-      {/*      <MenuItem value={30}>30 days</MenuItem>*/}
-      {/*      <MenuItem value={60}>60 days</MenuItem>*/}
-      {/*      <MenuItem value={90}>90 days</MenuItem>*/}
-      {/*    </Select>*/}
-      {/*  </Stack>*/}
-      {/*</Stack>*/}
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <RadioGroup value={selectedOption} onChange={handleRadioChange}>
+          <Box display="flex" alignItems="center">
+            <FormControlLabel
+              value="michele"
+              control={<Radio />}
+              label="Michele"
+              sx={{
+                ".MuiFormControlLabel-label": {
+                  color: "#183084",
+                  fontWeight: "bold",
+                },
+              }}
+            />
+          </Box>
 
-      {/*<StatItem*/}
-      {/*  label="Avg weeks to employment:"*/}
-      {/*  value={data.avgWeeksToEmployment}*/}
-      {/*/>*/}
-      {/*<Label>Appointments</Label>*/}
-      {/*<Box sx={{ display: "flex", flexDirection: "column", px: 2, gap: 1 }}>*/}
-      {/*  {data.appointments.map((item) => (*/}
-      {/*    <StatItem*/}
-      {/*      key={item.label}*/}
-      {/*      label={item.label}*/}
-      {/*      value={item.value}*/}
-      {/*      percentage={item.percentage}*/}
-      {/*    />*/}
-      {/*  ))}*/}
-      {/*</Box>*/}
+          <Box display="flex" alignItems="center">
+            <FormControlLabel
+              value="BAU"
+              control={<Radio />}
+              label="BAU"
+              sx={{
+                ".MuiFormControlLabel-label": {
+                  color: "#183084",
+                  fontWeight: "bold",
+                },
+              }}
+            />
+          </Box>
+          <Box display="flex" alignItems="center">
+            <FormControlLabel
+              value="agency"
+              control={<Radio />}
+              label="Agency"
+              sx={{
+                ".MuiFormControlLabel-label": {
+                  color: "#183084",
+                  fontWeight: "bold",
+                },
+              }}
+            />
+          </Box>
+        </RadioGroup>
+      </Box>
+      <Stack direction="row">
+        <Stack width="30%" justifyContent={"center"}>
+          <Typography className="label-text">Over the past:</Typography>
+        </Stack>
+        <Stack width="70%">
+          <Select
+            size="small"
+            value={period}
+            onChange={handlePeriodChange}
+            fullWidth
+          >
+            <MenuItem value={"THREE_MONTHS"}>3 Months</MenuItem>
+            <MenuItem value={"SIX_MONTHS"}>6 Months</MenuItem>
+            <MenuItem value={"ONE_YEAR"}>1 Year</MenuItem>
+          </Select>
+        </Stack>
+      </Stack>
 
-      {/*<StatItem*/}
-      {/*  label="Inadequate Work Searches:"*/}
-      {/*  value={data.inadequateWorkSearches}*/}
-      {/*/>*/}
-      {/*<StatItem label="Job Referrals made:" value={data.jobReferralsMade} />*/}
-      {/*<StatItem*/}
-      {/*  label="Training Referrals made:"*/}
-      {/*  value={data.trainingReferralsMade}*/}
-      {/*/>*/}
-      {/*<Box textAlign={"right"}>*/}
-      {/*  <Link>Graphical View</Link>*/}
-      {/*</Box>*/}
+      <Label>Timeliness:</Label>
+      <Box sx={{ display: "flex", flexDirection: "column", px: 1.5, gap: 0.7 }}>
+        {data.timeliness.map((item) => (
+          <StatItem
+            key={item.label}
+            label={item.label}
+            value={item.value}
+            percentage={item.percentage}
+          />
+        ))}
+      </Box>
+
+      <Label>BTQ:</Label>
+      <Box sx={{ display: "flex", flexDirection: "column", px: 1.5, gap: 0.7 }}>
+        {data.btq.map((item) => (
+          <StatItem
+            key={item.label}
+            label={item.label}
+            value={item.value}
+            percentage={item.percentage}
+          />
+        ))}
+      </Box>
     </Container>
   );
 };

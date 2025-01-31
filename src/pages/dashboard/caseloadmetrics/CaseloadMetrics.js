@@ -23,7 +23,7 @@ import {
 import { styled } from "@mui/material/styles";
 import client from "../../../helpers/Api";
 import { caseloadMetricsURL } from "../../../helpers/Urls";
-import { CookieNames, getCookieItem } from "../../../utils/cookies";
+// import { CookieNames, getCookieItem } from "../../../utils/cookies";
 import { appointmentStaffListURL } from "../../../helpers/Urls";
 import {
   getMsgsFromErrorCode,
@@ -40,6 +40,7 @@ const STAGES = [
   "delayed",
   "All",
 ];
+
 const labels = {
   "Initial Appointment": "Initial Appointment",
   "1st Subsequent Appointment": "1st Subsequent Appointment",
@@ -61,6 +62,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   color: "#ffffff",
   textAlign: "center",
   lineHeight: "10px",
+  padding:"10px"
 }));
 
 const ContentCell = styled(TableCell)(({ theme }) => ({
@@ -97,13 +99,12 @@ const CaseloadMetrics = React.memo(
 
     const [errors, setErrors] = useState([]);
     const keyMapping = {
-      Initial: "initialInterview",
-      "1stSub": "firstSubInterview",
-      "2ndSub": "secondSubInterview",
-      "Follow-up": "followUp",
-      "HI Priority": "hiPriority",
-      Failed: "failed",
-      "Beyond 21 days": "delayed",
+      "Total Cases": "totalCases",
+      "Not Started": "notStarted",
+      "Due in 1 Week": "dueInOneWeek",
+      "Due Today":"dueToday",
+      "Overdue": "overdue",
+      "Follow Up": "followUp",
     };
 
     useEffect(() => {
@@ -132,7 +133,10 @@ const CaseloadMetrics = React.memo(
     useEffect(() => {
       async function fetchAppointmentStaffListData() {
         try {
-          const data = await client.get(appointmentStaffListURL);
+          const data =
+            process.env.REACT_APP_ENV === "mockserver"
+              ? await client.get(appointmentStaffListURL)
+              : await client.get(appointmentStaffListURL);
           const sortedData = sortAlphabetically(data);
           setAppointmentStaffList(sortedData);
         } catch (errorResponse) {
@@ -167,7 +171,7 @@ const CaseloadMetrics = React.memo(
         <Stack direction="row" spacing={2}>
           <Stack
             direction="row"
-            style={{ marginTop: "0.5rem", width: "20rem" }}
+            style={{ marginTop: "0.5rem", width: "15rem" }}
           >
             <FormControl fullWidth size="small">
               <InputLabel id="select-source-label">
@@ -243,9 +247,9 @@ const CaseloadMetrics = React.memo(
           </TableContainer>
         </Stack>
 
-        <Box
+        {/* <Box
           sx={{
-            mt: "21px",
+            mt: "6px",
             position: "absolute",
             right: "24px",
             zIndex: "10",
@@ -261,7 +265,7 @@ const CaseloadMetrics = React.memo(
               ? "Switch to Caseload View"
               : "Switch to Calendar View"}
           </Link>
-        </Box>
+        </Box> */}
         {!!errors?.length && (
           <Stack mt={1} direction="column" useFlexGap flexWrap="wrap">
             {errors.map((x) => (

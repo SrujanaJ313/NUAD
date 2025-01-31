@@ -13,22 +13,19 @@ import {
   DialogContent,
   Typography,
   Stack,
-  Link,
+  // Link,
 } from "@mui/material";
 import TablePagination from "@mui/material/TablePagination";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import { visuallyHidden } from "@mui/utils";
 import cloneDeep from "lodash/cloneDeep";
-import ReAssignCase from "./ReAssignCase";
 import CustomModal from "../../../components/customModal/CustomModal";
 import moment from "moment";
-import { getUserName } from "../../../utils/cookies";
-
 import CaseModeTableRow from "./CaseModeTableRow";
 import { caseLoadSummaryURL } from "../../../helpers/Urls";
 import client from "../../../helpers/Api";
 import { getMsgsFromErrorCode } from "../../../helpers/utils";
-import { tableSortActiveLabel } from "../../../helpers/styles";
+// import Schedule from "./Schedule";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
@@ -39,34 +36,52 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const COLUMNS = [
   {
+    id: "dueDate",
+    label: "Due Date",
+  },
+  {
     id: "claimantName",
     label: "Claimant",
+  },
+  {
+    id: "ssn",
+    label: "SSN",
   },
   {
     id: "byeDt",
     label: "BYE",
   },
   {
-    id: "stage",
-    label: "Stage",
+    id: "complexity",
+    label: "Complexity",
   },
   {
-    id: "status",
-    label: "Status",
+    id: "assignedDate",
+    label: "Assigned Date",
   },
   {
-    id: "ccaWeeks",
-    label: "# Wks",
+    id: "openIssues",
+    label: "Open Issues",
   },
   {
-    id: "followUpDt",
-    label: "Follow-up",
+    id: "ff",
+    label: "FF",
   },
   {
-    id: "indicator",
+    id: "weeksFiled",
+    label: "Weeks Filed",
+  },
+  {
+    id: "indicators",
     label: "Indicators",
   },
 ];
+
+const TYPES = {
+  reassign: "Reassign Case",
+  schedule: "Schedule",
+  reassignAll: "Reassign Cases belonging to ",
+};
 
 const CaseModeView = ({
   showCalendarView,
@@ -96,22 +111,16 @@ const CaseModeView = ({
   });
 
   useEffect(() => {
-    const newPagination = {
-      pageNumber: 1,
-      pageSize: 10,
-      needTotalCount: true,
-    };
-    setPagination(newPagination);
     const payload = {
       metric: selectedStage,
       userId: userId,
-      pagination: newPagination,
+      pagination: pagination,
       sortBy: sortBy,
     };
 
-    if (selectedStage && userId) {
+    // if (selectedStage && userId) {
       getCaseLoadSummaryData(payload);
-    }
+    // }
   }, [selectedStage, userId]);
 
   const handleChangePage = (event, newPage) => {
@@ -182,7 +191,8 @@ const CaseModeView = ({
   const getCaseLoadSummaryData = async (payload) => {
     try {
       setErrorMessages([]);
-      const response = await client.post(caseLoadSummaryURL, payload);
+      // const response = await client.post(caseLoadSummaryURL, payload);
+      const response = await client.get(caseLoadSummaryURL, payload);// This is for local Test only
       setReassignInd(response?.reassignInd);
       setRows(cloneDeep(response.caseLoadSummaryList));
       setTotalCount(response.pagination.totalItemCount);
@@ -195,7 +205,7 @@ const CaseModeView = ({
     }
   };
   const getTitle = () => {
-    if (type === "reassign") {
+    if (["reassign", "schedule", "reassignAll"].includes(type)) {
       return (
         <>
           <span style={{ paddingRight: "5%" }}>
@@ -215,7 +225,7 @@ const CaseModeView = ({
   };
 
   return (
-    <>
+    <div style={{ height: "635px" }}>
       <Box
         sx={{
           mt: "2px",
@@ -224,37 +234,26 @@ const CaseModeView = ({
           zIndex: "10",
         }}
       >
-        <Link
-          href="#"
-          underline="always"
-          color="#183084"
-          onClick={onSwitchView}
-        >
-          {showCalendarView
-            ? "Switch to Caseload view"
-            : "Switch to Calendar View"}
-        </Link>
       </Box>
       <Box sx={{ paddingTop: 3, paddingBottom: 2 }}>
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} sx={{ maxHeight: "490px" }}>
           <Table
             sx={{ minWidth: 750 }}
             size="small"
             aria-label="customized table"
+            stickyHeader
           >
-            <TableHead>
+            <TableHead style={{ backgroundColor: "#183084" }}>
               <TableRow>
-                <StyledTableCell></StyledTableCell>
+                <StyledTableCell sx={{padding:"5px"}}></StyledTableCell>
                 {COLUMNS.map((column) => (
-                  <StyledTableCell key={column.id}>
-                    {" "}
+                  <StyledTableCell key={column.id} sx={{padding:"10px 5px"}}>
                     <TableSortLabel
                       active={sortBy.field === column.id}
                       direction={
                         sortBy.field === column.id ? sortBy.direction : "asc"
                       }
                       onClick={createSortHandler(column.id)}
-                      sx={tableSortActiveLabel}
                     >
                       {column.label}
                       {sortBy.field === column.id ? (
@@ -309,36 +308,47 @@ const CaseModeView = ({
             {type && (
               <Stack mt={2}>
                 <Typography fontWeight={600} fontSize={"1rem"} color="primary">
-                  Reassign Case
+                  {/* {type === "reassign" ? "Reassign Case" : "Schedule"} */}
+                  {type !== "reassignAll"? TYPES[type]:`${TYPES[type]}${selectedRow?.claimantName || 'Mary Peters'}`}
                 </Typography>
               </Stack>
             )}
-            {type === "reassign" && (
+            {type === "workoncase" && (
               <Stack>
-                <ReAssignCase
+                {/* <Schedule
                   onCancel={() => setOpen(false)}
                   selectedRow={selectedRow}
-                />
+                /> */}
               </Stack>
             )}
+            
           </Stack>
         </DialogContent>
       </CustomModal>
-
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          variant="contained"
-          color="primary"
-          disabled={!reassignInd || !selectedRow}
-          onClick={() => {
-            setOpen(true);
-            setType("reassign");
+      <div
+        style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "50%",
           }}
         >
-          Reassign Case
-        </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            // disabled={!reassignInd}
+            onClick={() => {
+              setOpen(true);
+              setType("schedule");
+            }}
+          >
+            Work on Case
+          </Button>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
