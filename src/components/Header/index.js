@@ -152,7 +152,7 @@ export default function Header() {
             </IconButton>
             <Stack>
               <Typography color="white" fontSize={"2rem"}>
-                RESEA
+                ADJUDICATION DASHBOARD
               </Typography>
             </Stack>
           </Stack>
