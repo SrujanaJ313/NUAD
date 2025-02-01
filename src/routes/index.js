@@ -34,6 +34,8 @@ import { ACCESS_TOKEN_EXPIRY, BUFFER_PARAMETERS } from "../helpers/Constants";
 // import CaseLookUpPage from "../pages/dashboard/cases/CaseLookUpPage";
 // import AppointmentLookUpPage from "../pages/dashboard/appointments/AppointmentLookUpPage";
 import moment from "moment";
+import WorkonCase from "../pages/WorkOnCase";
+import AnimationOptions from "../pages/AnimationOptions";
 
 const PrivateRoute = () => {
   const [loading, setLoading] = useState(false);
@@ -135,6 +137,8 @@ function AppRoutes() {
         <Route element={<PrivateRoute />}>
           {/* <Route element={<Configurations />} path="/config" /> */}
           <Route element={<Dashboard />} path="/dashboard" />
+          <Route element={<WorkonCase />} path="/workoncase" />
+          <Route element={<AnimationOptions />} path="/options" />
           {/* <Route element={<Reminders />} path="/reminders" />
           <Route element={<WorkSchedule />} path="/workSchedule" />
           <Route element={<Preferences />} path="/preferences" /> */}
