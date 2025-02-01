@@ -23,6 +23,7 @@ const indicatorColors = {
 };
 
 const CaseModeTableRow = ({ row, selectedRow, setSelectedRow }) => {
+  console.log(row);
   return (
     <TableRow key={row?.caseNum}>
       <StyledTableCell padding="checkbox">
@@ -39,9 +40,8 @@ const CaseModeTableRow = ({ row, selectedRow, setSelectedRow }) => {
       </StyledTableCell>
       {/* <StyledTableCell>{row.claimantName}</StyledTableCell> */}
       <StyledTableCell>
-        {" "}
         <Stack spacing={1.5} direction="row">
-          <Typography>{row.claimantName}</Typography>
+          <Typography>{row.dueDate}</Typography>
           {row.partialSsn && (
             <Tooltip title={row.partialSsn} placement="right-start">
               <MoreHorizIcon />
@@ -49,23 +49,28 @@ const CaseModeTableRow = ({ row, selectedRow, setSelectedRow }) => {
           )}
         </Stack>
       </StyledTableCell>
+      <StyledTableCell>{row.claimantName}</StyledTableCell>
+      <StyledTableCell>{row.ssn}</StyledTableCell>
       <StyledTableCell>{row.byeDt}</StyledTableCell>
-      <StyledTableCell>{row.stage}</StyledTableCell>
-      <StyledTableCell>
+      {/* <StyledTableCell>
         <Stack spacing={1.5} direction="row">
           {row.status}
           &nbsp; &nbsp; &nbsp;
-          {row.statusDt || ""}
+          {row.byeDt || ""}
         </Stack>
-      </StyledTableCell>
-      <StyledTableCell>{row.ccaWeeks}</StyledTableCell>
-      <StyledTableCell>{row.followUpDt}</StyledTableCell>
-      <StyledTableCell
+      </StyledTableCell> */}
+      <StyledTableCell>{row.complexity}</StyledTableCell>
+      <StyledTableCell>{row.assignedDate}</StyledTableCell>
+      <StyledTableCell>{row.openIssues}</StyledTableCell>
+      <StyledTableCell>{row.ff}</StyledTableCell>
+      <StyledTableCell>{row.weeksFiled}</StyledTableCell>
+      <StyledTableCell>{row.indicators}</StyledTableCell>
+      {/* <StyledTableCell
         style={{ color: row.indicatorColor }}
         indicator={row.indicator}
       >
         {row.indicator === "LATE" ? ">21" : row.indicator}
-      </StyledTableCell>
+      </StyledTableCell> */}
     </TableRow>
   );
 };

@@ -331,8 +331,9 @@ const CaseModeView = ({
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
-            width: "50%",
+            justifyContent: "flex-start",
+            width: "100%",
+            // backgroundColor:"pink"
           }}
         >
           <Button
