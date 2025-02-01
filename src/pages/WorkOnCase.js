@@ -16,6 +16,9 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
+  Checkbox,
+  FormControl,
+  InputLabel
 } from "@mui/material";
 
 const WorkonCase = () => {
@@ -49,97 +52,40 @@ const WorkonCase = () => {
           </Paper>
         ))}
       </Stack>
-
-      {/* New Contact Button */}
-      <Button variant="contained" color="primary">
-        + New Contact
-      </Button>
-
-      {/* Attempt to Contact Entry Section */}
-      <Paper elevation={3} sx={{ p: 2 }}>
-        <Typography
-          variant="h6"
-          sx={{ bgcolor: "#003366", color: "white", p: 1 }}
+      {/* Parties Section */}
+      <TableContainer component={Paper}>
+        <Stack
+          direction="row"
+          spacing={2}
+          alignItems="center"
+          sx={{ width: "100%", padding: "10px" }}
         >
-          Attempt to Contact Entry
-        </Typography>
-        <Stack spacing={2} mt={2}>
-          <Stack direction="row" spacing={2}>
-            <Select displayEmpty fullWidth>
+          <FormControl sx={{ width: "30%" }}>
+            <InputLabel id="-label">Party</InputLabel>
+            <Select
+              displayEmpty
+              // sx={{ height: "35px" }}
+              labelId="-label"
+              id=""
+              label="Party"
+            >
               <MenuItem value="" disabled>
-                Entity
+                Party
               </MenuItem>
               <MenuItem value="Employer">Employer</MenuItem>
               <MenuItem value="Claimant">Claimant</MenuItem>
             </Select>
-            <TextField label="Name" variant="outlined" fullWidth />
-            <TextField
-              label="Date"
-              type="date"
-              variant="outlined"
-              fullWidth
-              InputLabelProps={{ shrink: true }}
-            />
-            <TextField
-              label="Time"
-              type="time"
-              variant="outlined"
-              fullWidth
-              InputLabelProps={{ shrink: true }}
-            />
-          </Stack>
-          <Stack direction="row" spacing={2}>
-            <Select displayEmpty fullWidth>
-              <MenuItem value="" disabled>
-                Method
-              </MenuItem>
-              <MenuItem value="Phone">Phone</MenuItem>
-              <MenuItem value="Email">Email</MenuItem>
-            </Select>
-            <TextField label="Phone" variant="outlined" fullWidth />
-            <TextField label="Email" variant="outlined" fullWidth />
-          </Stack>
-          <TextField
-            label="Response Deadline"
-            type="date"
-            variant="outlined"
-            fullWidth
-            InputLabelProps={{ shrink: true }}
+          </FormControl>
+          <FormControlLabel
+            control={<Checkbox />}
+            label="A: All parties - deadline passed"
           />
-          <RadioGroup>
-            <FormControlLabel
-              value="direct"
-              control={<Radio />}
-              label="Direct Contact made, see comments below"
-            />
-            <FormControlLabel
-              value="message"
-              control={<Radio />}
-              label="Left message advising party that failure to respond by MM/DD/YYYY 00:00 AM/PM will result in determination based on available information"
-            />
-            <FormControlLabel
-              value="unsuccessful"
-              control={<Radio />}
-              label="Unsuccessful contact attempt"
-            />
-          </RadioGroup>
-          <TextField
-            label="Comments"
-            variant="outlined"
-            fullWidth
-            multiline
-            rows={3}
+          <FormControlLabel
+            control={<Checkbox />}
+            label="A: All parties - upcoming deadline"
           />
-          <Stack direction="row" spacing={2} justifyContent="flex-end">
-            <Button variant="contained" color="primary">
-              ADD
-            </Button>
-            <Button variant="outlined" color="secondary">
-              CANCEL
-            </Button>
-          </Stack>
         </Stack>
-      </Paper>
+      </TableContainer>
 
       {/* Table Section */}
       <TableContainer component={Paper}>
@@ -170,6 +116,120 @@ const WorkonCase = () => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      {/* New Contact Button */}
+      <Button variant="contained" color="primary" sx={{ width: "20%" }}>
+        + New Contact
+      </Button>
+
+      {/* Attempt to Contact Entry Section */}
+      <Paper elevation={3} sx={{ p: 2 }}>
+        <Typography
+          variant="h6"
+          sx={{ bgcolor: "#003366", color: "white", p: 1 }}
+        >
+          Attempt to Contact Entry
+        </Typography>
+        <Stack spacing={2} mt={2}>
+          <Stack direction="row" spacing={2}>
+            <Select displayEmpty sx={{ width: "12%", height: "50%" }}>
+              <MenuItem value="" disabled>
+                Entity
+              </MenuItem>
+              <MenuItem value="Employer">Employer</MenuItem>
+              <MenuItem value="Claimant">Claimant</MenuItem>
+            </Select>
+            <TextField
+              label="Name"
+              variant="outlined"
+              sx={{ width: "15%", height: "50%" }}
+            />
+            <TextField
+              label="Date"
+              type="date"
+              variant="outlined"
+              sx={{ width: "12%", height: "50%" }}
+              InputLabelProps={{ shrink: true }}
+            />
+            <Select displayEmpty sx={{ width: "12%", height: "50%" }}>
+              <MenuItem value="" disabled>
+                Time
+              </MenuItem>
+              <MenuItem value="Morning">Morning</MenuItem>
+              <MenuItem value="Afternoon">Afternoon</MenuItem>
+            </Select>
+            <Select displayEmpty sx={{ width: "12%", height: "50%" }}>
+              <MenuItem value="" disabled>
+                Method
+              </MenuItem>
+              <MenuItem value="Phone">Phone</MenuItem>
+              <MenuItem value="Email">Email</MenuItem>
+            </Select>
+            <TextField
+              label="Phone"
+              type="number"
+              variant="outlined"
+              sx={{ width: "15%", height: "50%" }}
+            />
+            <TextField
+              label="Email"
+              variant="outlined"
+              sx={{ width: "15%", height: "50%" }}
+            />
+          </Stack>
+          <Stack direction="row" spacing={2}>
+            <TextField
+              label="Response Deadline"
+              type="date"
+              variant="outlined"
+              sx={{ width: "25%", height: "50%" }}
+              InputLabelProps={{ shrink: true }}
+            />
+            <Select displayEmpty sx={{ width: "25%", height: "50%" }}>
+              <MenuItem value="" disabled>
+                Response Type
+              </MenuItem>
+              <MenuItem value="Urgent">Urgent</MenuItem>
+              <MenuItem value="Standard">Standard</MenuItem>
+            </Select>
+          </Stack>
+          <RadioGroup>
+            <FormControlLabel
+              value="direct"
+              control={<Radio />}
+              label="Direct Contact made, see comments below"
+            />
+            <FormControlLabel
+              value="message"
+              control={<Radio />}
+              label="Left message advising party that failure to respond by MM/DD/YYYY 00:00 AM/PM will result in determination based on available information"
+            />
+            <FormControlLabel
+              value="unsuccessful"
+              control={<Radio />}
+              label="Unsuccessful contact attempt"
+            />
+          </RadioGroup>
+          <Stack direction="row" spacing={2} sx={{ width: "80%" }}>
+            <TextField
+              label="Comments"
+              variant="outlined"
+              fullWidth
+              multiline
+              rows={3}
+              sx={{ height: "50%" }}
+            />
+            <Stack direction="row" spacing={2} alignItems="center">
+              <Button variant="contained" color="primary">
+                ADD
+              </Button>
+              <Button variant="outlined" color="secondary">
+                CANCEL
+              </Button>
+            </Stack>
+          </Stack>
+        </Stack>
+      </Paper>
     </Stack>
   );
 };

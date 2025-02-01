@@ -26,6 +26,7 @@ import { caseLoadSummaryURL } from "../../../helpers/Urls";
 import client from "../../../helpers/Api";
 import { getMsgsFromErrorCode } from "../../../helpers/utils";
 // import Schedule from "./Schedule";
+import { useNavigate } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
@@ -96,6 +97,7 @@ const CaseModeView = ({
   const [open, setOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState("");
   const [reassignInd, setReassignInd] = useState(false);
+  const navigate = useNavigate();
 
   const [pagination, setPagination] = useState({
     pageNumber: 1,
@@ -332,8 +334,7 @@ const CaseModeView = ({
           style={{
             display: "flex",
             justifyContent: "flex-start",
-            width: "100%",
-            // backgroundColor:"pink"
+            width: "100%"
           }}
         >
           <Button
@@ -342,7 +343,8 @@ const CaseModeView = ({
             // disabled={!reassignInd}
             onClick={() => {
               setOpen(true);
-              setType("schedule");
+              // setType("schedule");
+              navigate("/workoncase")
             }}
           >
             Work on Case
