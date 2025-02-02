@@ -3,13 +3,10 @@ import {
   TableCell,
   TableRow,
   Radio,
-  Stack,
-  Typography,
-  Tooltip,
   FormControlLabel,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import ToolTip from "../../../components/Tooltip";
 
 const StyledTableCell = styled(TableCell)(({ theme, indicator }) => ({
   lineHeight: "1rem",
@@ -38,41 +35,21 @@ const CaseModeTableRow = ({ row, selectedRow, setSelectedRow }) => {
           }}
         />
       </StyledTableCell>
-      {/* <StyledTableCell>{row.claimantName}</StyledTableCell> */}
-      <StyledTableCell>
-        <Stack spacing={1.5} direction="row">
-          <Typography>{row.dueDate}</Typography>
-          {row.partialSsn && (
-            <Tooltip title={row.partialSsn} placement="right-start">
-              <MoreHorizIcon />
-            </Tooltip>
-          )}
-        </Stack>
-      </StyledTableCell>
+      <StyledTableCell>{row.dueDate}</StyledTableCell>
       <StyledTableCell>{row.claimantName}</StyledTableCell>
       <StyledTableCell>{row.ssn}</StyledTableCell>
       <StyledTableCell>{row.byeDt}</StyledTableCell>
-      {/* <StyledTableCell>
-        <Stack spacing={1.5} direction="row">
-          {row.status}
-          &nbsp; &nbsp; &nbsp;
-          {row.byeDt || ""}
-        </Stack>
-      </StyledTableCell> */}
       <StyledTableCell>{row.complexity}</StyledTableCell>
       <StyledTableCell>{row.assignedDate}</StyledTableCell>
-      <StyledTableCell>{row.openIssues}</StyledTableCell>
+      <ToolTip>
+        <StyledTableCell>{row.openIssues}</StyledTableCell>
+      </ToolTip>
       <StyledTableCell>{row.ff}</StyledTableCell>
       <StyledTableCell>{row.weeksFiled}</StyledTableCell>
       <StyledTableCell>{row.indicators}</StyledTableCell>
-      {/* <StyledTableCell
-        style={{ color: row.indicatorColor }}
-        indicator={row.indicator}
-      >
-        {row.indicator === "LATE" ? ">21" : row.indicator}
-      </StyledTableCell> */}
     </TableRow>
   );
 };
 
 export default CaseModeTableRow;
+
