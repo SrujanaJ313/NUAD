@@ -35,49 +35,61 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   lineHeight: "1rem",
 }));
 
-const COLUMNS = [
-  {
-    id: "dueDate",
-    label: "Due Date",
-  },
-  {
-    id: "claimantName",
-    label: "Claimant",
-  },
-  {
-    id: "ssn",
-    label: "SSN",
-  },
-  {
-    id: "byeDt",
-    label: "BYE",
-  },
-  {
-    id: "complexity",
-    label: "Complexity",
-  },
-  {
-    id: "assignedDate",
-    label: "Assigned Date",
-  },
-  {
-    id: "openIssues",
-    label: "Open Issues",
-  },
-  {
-    id: "ff",
-    label: "FF",
-  },
-  {
-    id: "weeksFiled",
-    label: "Weeks Filed",
-  },
-  {
-    id: "indicators",
-    label: "Indicators",
-  },
-];
+// const COLUMNS = [
+//   {
+//     id: "dueDate",
+//     label: "Due Date",
+//   },
+//   {
+//     id: "claimantName",
+//     label: "Claimant",
+//   },
+//   {
+//     id: "ssn",
+//     label: "SSN",
+//   },
+//   {
+//     id: "byeDt",
+//     label: "BYE",
+//   },
+//   {
+//     id: "complexity",
+//     label: "Complexity",
+//   },
+//   {
+//     id: "assignedDate",
+//     label: "Assigned Date",
+//   },
+//   {
+//     id: "openIssues",
+//     label: "Open Issues",
+//   },
+//   {
+//     id: "ff",
+//     label: "FF",
+//   },
+//   {
+//     id: "weeksFiled",
+//     label: "Weeks Filed",
+//   },
+//   {
+//     id: "indicators",
+//     label: "Indicators",
+//   },
+// ];
 
+const COLUMNS = [
+  { id: "dueDate", label: "Due Date", width: "100px" },
+  { id: "claimantName", label: "Claimant Name", width: "150px" },
+  { id: "ssn", label: "SSN", width: "100px" },
+  { id: "byeDt", label: "BYE Date", width: "100px" },
+  { id: "complexity", label: "Complexity", width: "100px" },
+  { id: "assignedDate", label: "Assigned Date", width: "120px" },
+  { id: "openIssues", label: "Open Issues", width: "100px" },
+  { id: "ff", label: "FF", width: "80px" },
+  { id: "weeksFiled", label: "Weeks Filed", width: "100px" },
+  { id: "indicators", label: "Indicators", width: "100px" },
+];
 const TYPES = {
   reassign: "Reassign Case",
   schedule: "Schedule",
@@ -121,7 +133,7 @@ const CaseModeView = ({
     };
 
     // if (selectedStage && userId) {
-      getCaseLoadSummaryData(payload);
+    getCaseLoadSummaryData(payload);
     // }
   }, [selectedStage, userId]);
 
@@ -194,7 +206,7 @@ const CaseModeView = ({
     try {
       setErrorMessages([]);
       // const response = await client.post(caseLoadSummaryURL, payload);
-      const response = await client.get(caseLoadSummaryURL, payload);// This is for local Test only
+      const response = await client.get(caseLoadSummaryURL, payload); // This is for local Test only
       setReassignInd(response?.reassignInd);
       setRows(cloneDeep(response.caseLoadSummaryList));
       setTotalCount(response.pagination.totalItemCount);
@@ -235,8 +247,7 @@ const CaseModeView = ({
           right: "24px",
           zIndex: "10",
         }}
-      >
-      </Box>
+      ></Box>
       <Box sx={{ paddingTop: 3, paddingBottom: 2 }}>
         <TableContainer component={Paper} sx={{ maxHeight: "490px" }}>
           <Table
@@ -247,9 +258,15 @@ const CaseModeView = ({
           >
             <TableHead style={{ backgroundColor: "#183084" }}>
               <TableRow>
-                <StyledTableCell sx={{padding:"5px"}}></StyledTableCell>
+                <StyledTableCell
+                  sx={{ padding: "5px", width: "50px" }}
+                ></StyledTableCell>
                 {COLUMNS.map((column) => (
-                  <StyledTableCell key={column.id} sx={{padding:"10px 5px"}}>
+                  <StyledTableCell
+                    key={column.id}
+                    sx={{ padding: "10px 5px" }}
+                    width={column.width}
+                  >
                     <TableSortLabel
                       active={sortBy.field === column.id}
                       direction={
@@ -297,8 +314,8 @@ const CaseModeView = ({
           useFlexGap
           flexWrap="wrap"
         >
-          {errorMessages.map((x) => (
-            <div>
+          {errorMessages.map((x, index) => (
+            <div key={index}>
               <span className="errorMsg">*{x}</span>
             </div>
           ))}
@@ -310,20 +327,13 @@ const CaseModeView = ({
             {type && (
               <Stack mt={2}>
                 <Typography fontWeight={600} fontSize={"1rem"} color="primary">
-                  {/* {type === "reassign" ? "Reassign Case" : "Schedule"} */}
-                  {type !== "reassignAll"? TYPES[type]:`${TYPES[type]}${selectedRow?.claimantName || 'Mary Peters'}`}
+                  {type !== "reassignAll"
+                    ? TYPES[type]
+                    : `${TYPES[type]}${selectedRow?.claimantName || "Mary Peters"}`}
                 </Typography>
               </Stack>
             )}
-            {type === "workoncase" && (
-              <Stack>
-                {/* <Schedule
-                  onCancel={() => setOpen(false)}
-                  selectedRow={selectedRow}
-                /> */}
-              </Stack>
-            )}
-            
+            {type === "workoncase" && <Stack>{/* <Schedule /> */}</Stack>}
           </Stack>
         </DialogContent>
       </CustomModal>
@@ -334,17 +344,15 @@ const CaseModeView = ({
           style={{
             display: "flex",
             justifyContent: "flex-start",
-            width: "100%"
+            width: "100%",
           }}
         >
           <Button
             variant="contained"
             color="primary"
-            // disabled={!reassignInd}
             onClick={() => {
               setOpen(true);
-              // setType("schedule");
-              navigate("/workoncase")
+              navigate("/workoncase");
             }}
           >
             Work on Case

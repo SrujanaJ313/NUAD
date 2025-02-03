@@ -11,7 +11,12 @@ const indicatorColors = {
   WL: "#f36d6d",
   FF: "Green",
 };
-const StyledTableCell = styled(TableCell)(({ theme, indicator}) => ({
+const StyledTableCell = styled(TableCell)(({ theme, indicator,width }) => ({
+  padding: "10px 5px",
+  width: width || "auto", // Set explicit width for each column
+  whiteSpace: "nowrap", // Prevent text wrapping
+  overflow: "hidden",
+  textOverflow: "ellipsis", // Add ellipsis for overflow text
   lineHeight: "1rem",
   color: indicatorColors[indicator] || "inherit",
 }));
@@ -19,7 +24,7 @@ const StyledTableCell = styled(TableCell)(({ theme, indicator}) => ({
 const CaseModeTableRow = ({ row, selectedRow, setSelectedRow }) => {
   return (
     <TableRow key={row?.caseNum}>
-      <StyledTableCell padding="checkbox">
+      <StyledTableCell padding="normal">
         <FormControlLabel
           value={row?.caseNum}
           control={<Radio />}
