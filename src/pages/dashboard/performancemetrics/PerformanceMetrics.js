@@ -20,6 +20,7 @@ import {
 } from "../../../helpers/Urls";
 import client from "../../../helpers/Api";
 import { genericSortOptionsAlphabetically } from "../../../helpers/utils";
+import { StackedBarChartOutlined } from "@mui/icons-material";
 
 const Container = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -228,7 +229,6 @@ const PerformanceMetrics = ({ userId }) => {
   return (
     <Container
       sx={{
-        // height: "calc(100% - 5.1rem)",
         overflowY: "auto",
         "&::-webkit-scrollbar": {
           width: "5px",
@@ -246,50 +246,45 @@ const PerformanceMetrics = ({ userId }) => {
       }}
     >
       <Header variant="h6">Key Performance Metrics</Header>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <RadioGroup value={selectedOption} onChange={handleRadioChange}>
-          <Box display="flex" alignItems="center">
-            <FormControlLabel
-              value="michele"
-              control={<Radio />}
-              label="Michele"
-              sx={{
-                ".MuiFormControlLabel-label": {
-                  color: "#183084",
-                  fontWeight: "bold",
-                },
-              }}
-            />
-          </Box>
-
-          <Box display="flex" alignItems="center">
-            <FormControlLabel
-              value="BAU"
-              control={<Radio />}
-              label="BAU"
-              sx={{
-                ".MuiFormControlLabel-label": {
-                  color: "#183084",
-                  fontWeight: "bold",
-                },
-              }}
-            />
-          </Box>
-          <Box display="flex" alignItems="center">
-            <FormControlLabel
-              value="agency"
-              control={<Radio />}
-              label="Agency"
-              sx={{
-                ".MuiFormControlLabel-label": {
-                  color: "#183084",
-                  fontWeight: "bold",
-                },
-              }}
-            />
-          </Box>
+      <Stack direction="row" alignItems="center" spacing={2}>
+        <Typography sx={{color: "#183084",fontWeight: "bold"}}>For:</Typography>
+        <RadioGroup value={selectedOption} onChange={handleRadioChange} row>
+          <FormControlLabel
+            value="michele"
+            control={<Radio />}
+            label="Michele"
+            sx={{
+              ".MuiFormControlLabel-label": {
+                color: "#183084",
+                fontWeight: "bold",
+              },
+            }}
+          />
+          <FormControlLabel
+            value="BAU"
+            control={<Radio />}
+            label="BAU"
+            sx={{
+              ".MuiFormControlLabel-label": {
+                color: "#183084",
+                fontWeight: "bold",
+              },
+            }}
+          />
+          <FormControlLabel
+            value="agency"
+            control={<Radio />}
+            label="Agency"
+            sx={{
+              ".MuiFormControlLabel-label": {
+                color: "#183084",
+                fontWeight: "bold",
+              },
+            }}
+          />
         </RadioGroup>
-      </Box>
+      </Stack>
+
       <Stack direction="row">
         <Stack width="30%" justifyContent={"center"}>
           <Typography className="label-text">Over the past:</Typography>
@@ -336,3 +331,4 @@ const PerformanceMetrics = ({ userId }) => {
 };
 
 export default PerformanceMetrics;
+

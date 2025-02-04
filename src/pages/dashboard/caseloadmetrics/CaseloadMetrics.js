@@ -8,13 +8,9 @@ import {
   TableHead,
   TableRow,
   Paper,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
   MenuItem,
   Select,
   Typography,
-  Link,
   Stack,
   ButtonBase,
   InputLabel,
@@ -120,7 +116,7 @@ const CaseloadMetrics = React.memo(
         setCaseloadMetrics(response);
       } catch (err) {
         console.error("Failed to fetch caseload metrics", err);
-        setErrors(err);
+        // setErrors(err);
       }
     };
 
@@ -144,19 +140,12 @@ const CaseloadMetrics = React.memo(
             `GET:${process.env.REACT_APP_APPOINTMENT_STAFF_LIST}`,
             errorResponse
           );
-          setErrors(newErrMsgs);
+          // setErrors(newErrMsgs);
         }
       }
       fetchAppointmentStaffListData();
     }, []);
 
-    const handleSwitchView = useCallback(
-      (event) => {
-        event.preventDefault();
-        onSwitchView(event);
-      },
-      [onSwitchView]
-    );
 
     const handleCellClick = (index) => {
       const stage = STAGES[index] || STAGES[0];

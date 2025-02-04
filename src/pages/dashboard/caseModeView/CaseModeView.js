@@ -215,7 +215,7 @@ const CaseModeView = ({
         `POST:${process.env.REACT_APP_CASELOAD_SUMMARY}`,
         errorResponse
       );
-      setErrorMessages(newErrMsgs);
+      // setErrorMessages(newErrMsgs);
     }
   };
   const getTitle = () => {
