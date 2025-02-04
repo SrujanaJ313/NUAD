@@ -292,8 +292,8 @@ const CaseModeView = ({
                 <CaseModeTableRow
                   key={index}
                   row={row}
-                  setSelectedRow={setSelectedRow}
                   selectedRow={selectedRow}
+                  setSelectedRow={setSelectedRow}
                 />
               ))}
             </TableBody>
@@ -350,6 +350,7 @@ const CaseModeView = ({
           <Button
             variant="contained"
             color="primary"
+            disabled={!selectedRow}
             onClick={() => {
               setOpen(true);
               navigate("/workoncase");

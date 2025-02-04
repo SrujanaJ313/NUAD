@@ -35,7 +35,8 @@ const CaseModeTableRow = ({ row, selectedRow, setSelectedRow }) => {
           value={row?.caseNum}
           control={<Radio />}
           label=""
-          checked={row?.caseNum === selectedRow.caseNum}
+          // checked={row?.caseNum === selectedRow.caseNum}
+          checked={row?.claimantName === selectedRow.claimantName}
           onChange={() => {
             // const row = rows?.find((r) => r.caseNum === Number(e.target.value));
             setSelectedRow(row);
