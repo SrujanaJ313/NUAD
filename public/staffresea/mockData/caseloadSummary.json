@@ -1,148 +1,148 @@
 {
   "caseLoadSummaryList": [
     {
-      "dueDate": "2025-02-10",
+      "dueDate": "02/10/2025",
       "claimantName": "John Doe",
       "ssn": "123-45-6789",
-      "byeDt": "2025-06-15",
-      "complexity": "High",
-      "assignedDate": "2025-01-25",
+      "byeDt": "06/15/2025",
+      "complexity": "HI",
+      "assignedDate": "06/15/2025",
       "openIssues": 3,
       "ff": "CMT - Y",
       "weeksFiled": 12,
-      "indicators": "Pending Verification"
+      "indicators": "New"
     },
     {
-      "dueDate": "2025-02-12",
+      "dueDate": "12/02/2025",
       "claimantName": "Jane Smith",
       "ssn": "987-65-4321",
-      "byeDt": "2025-07-01",
-      "complexity": "Medium",
-      "assignedDate": "2025-01-30",
+      "byeDt": "07/01/2025",
+      "complexity": "MED",
+      "assignedDate": "01/30/2025",
       "openIssues": 1,
        "ff": "EMP - Y",
       "weeksFiled": 8,
-      "indicators": "Approved"
+      "indicators": "New"
     },
     {
-      "dueDate": "2025-02-15",
+      "dueDate": "02/15/2025",
       "claimantName": "Michael Johnson",
       "ssn": "555-22-3333",
-      "byeDt": "2025-05-20",
-      "complexity": "Low",
-      "assignedDate": "2025-02-01",
+      "byeDt": "05/20/2025",
+      "complexity": "LOW",
+      "assignedDate": "02/01/2025",
       "openIssues": 0,
       "ff": "CMT - Y",
       "weeksFiled": 15,
-      "indicators": "Completed"
+     "indicators": "New"
     },
     {
-      "dueDate": "2025-02-18",
+      "dueDate": "02/18/2025",
       "claimantName": "Emily Davis",
       "ssn": "444-11-2222",
-      "byeDt": "2025-08-10",
-      "complexity": "High",
-      "assignedDate": "2025-02-03",
+      "byeDt": "08/10/2025",
+      "complexity": "HI",
+      "assignedDate": "02/03/2025",
       "openIssues": 5,
        "ff": "EMP - Y",
       "weeksFiled": 20,
-      "indicators": "Fraud Alert"
+      "indicators": "New"
     },
     {
-      "dueDate": "2025-02-20",
+      "dueDate": "02/20/2025",
       "claimantName": "Robert Brown",
       "ssn": "666-77-8888",
-      "byeDt": "2025-04-25",
-      "complexity": "Medium",
-      "assignedDate": "2025-02-05",
+      "byeDt": "04/25/2025",
+      "complexity": "MED",
+      "assignedDate": "02/05/2025",
       "openIssues": 2,
       "ff": "CMT - Y",
       "weeksFiled": 10,
-      "indicators": "Under Review"
+      "indicators": "New"
     },
     {
-      "dueDate": "2025-02-22",
+      "dueDate": "02/22/2025",
       "claimantName": "Sarah Wilson",
       "ssn": "333-44-5555",
-      "byeDt": "2025-09-12",
-      "complexity": "Low",
-      "assignedDate": "2025-02-07",
+      "byeDt": "09/12/2025",
+      "complexity": "LOW",
+      "assignedDate": "07/02/2025",
       "openIssues": 1,
        "ff": "EMP - Y",
       "weeksFiled": 5,
-      "indicators": "Approved"
+      "indicators": "New"
     },
     {
-      "dueDate": "2025-02-25",
+      "dueDate": "02/25/2025",
       "claimantName": "David Clark",
       "ssn": "222-33-4444",
-      "byeDt": "2025-10-05",
-      "complexity": "High",
-      "assignedDate": "2025-02-10",
+      "byeDt": "02/12/2025",
+      "complexity": "HI",
+      "assignedDate": "02/10/2025",
       "openIssues": 4,
       "ff": "CMT - Y",
       "weeksFiled": 18,
-      "indicators": "Pending Review"
+      "indicators": "New"
     },
     {
-      "dueDate": "2025-02-27",
+      "dueDate": "02/27/2025",
       "claimantName": "Olivia Martinez",
       "ssn": "111-22-3333",
-      "byeDt": "2025-11-18",
-      "complexity": "Medium",
-      "assignedDate": "2025-02-12",
+      "byeDt": "02/12/2025",
+      "complexity": "MED",
+      "assignedDate": "02/12/2025",
       "openIssues": 2,
        "ff": "EMP - Y",
       "weeksFiled": 11,
-      "indicators": "Pending Verification"
+      "indicators": "New"
     },
     {
-      "dueDate": "2025-02-28",
+      "dueDate": "02/12/2025",
       "claimantName": "James Anderson",
       "ssn": "777-88-9999",
-      "byeDt": "2025-12-03",
-      "complexity": "Low",
-      "assignedDate": "2025-02-15",
+      "byeDt": "02/12/2025",
+      "complexity": "LOW",
+      "assignedDate": "02/12/2025",
       "openIssues": 0,
       "ff": "CMT - Y",
       "weeksFiled": 7,
-      "indicators": "Completed"
+     "indicators": "New"
     },
     {
-      "dueDate": "2025-03-01",
+      "dueDate": "02/12/2025",
       "claimantName": "Sophia Thomas",
       "ssn": "888-99-0000",
-      "byeDt": "2026-01-20",
-      "complexity": "High",
-      "assignedDate": "2025-02-18",
+      "byeDt": "02/12/2025",
+      "complexity": "HI",
+      "assignedDate": "02/12/2025",
       "openIssues": 6,
        "ff": "EMP - Y",
       "weeksFiled": 22,
-      "indicators": "Fraud Alert"
+      "indicators": "New"
     },
     {
-      "dueDate": "2025-03-03",
+      "dueDate": "02/12/2025",
       "claimantName": "Daniel White",
       "ssn": "999-00-1111",
-      "byeDt": "2026-02-10",
-      "complexity": "Medium",
-      "assignedDate": "2025-02-20",
+      "byeDt": "02/12/2025",
+      "complexity": "MED",
+      "assignedDate": "02/20/2025",
       "openIssues": 3,
       "ff": "CMT - Y",
       "weeksFiled": 14,
-      "indicators": "Under Investigation"
+      "indicators": "New"
     },
     {
-      "dueDate": "2025-03-05",
+      "dueDate": "03/05/2025",
       "claimantName": "Emma Harris",
       "ssn": "000-11-2222",
-      "byeDt": "2026-03-15",
-      "complexity": "Low",
-      "assignedDate": "2025-02-22",
+      "byeDt": "03/15/2026",
+      "complexity": "LOW",
+      "assignedDate": "02/22/2025",
       "openIssues": 0,
        "ff": "EMP - Y",
       "weeksFiled": 9,
-      "indicators": "Approved"
+      "indicators": "New"
     }
   ]
 }

@@ -1,9 +1,16 @@
-import React, { useState } from "react";
-import { TableCell, TableRow, Radio, FormControlLabel } from "@mui/material";
+import React from "react";
+import {
+  TableCell,
+  TableRow,
+  Radio,
+  FormControlLabel,
+  Paper,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import CustomWidthTooltip from "../../../components/Tooltip";
 import OpenIssuesTitle from "./OpenIssuesTitle";
 import FFOptions from "./FFOptions";
+// import GifWithText from "../../../components/NewGif/index";
 
 const indicatorColors = {
   LATE: "#ab0c0c",
@@ -11,12 +18,12 @@ const indicatorColors = {
   WL: "#f36d6d",
   FF: "Green",
 };
-const StyledTableCell = styled(TableCell)(({ theme, indicator,width }) => ({
+const StyledTableCell = styled(TableCell)(({ theme, indicator, width }) => ({
   padding: "10px 5px",
-  width: width || "auto", // Set explicit width for each column
-  whiteSpace: "nowrap", // Prevent text wrapping
+  width: width || "auto",
+  whiteSpace: "nowrap",
   overflow: "hidden",
-  textOverflow: "ellipsis", // Add ellipsis for overflow text
+  textOverflow: "ellipsis",
   lineHeight: "1rem",
   color: indicatorColors[indicator] || "inherit",
 }));
@@ -24,7 +31,7 @@ const StyledTableCell = styled(TableCell)(({ theme, indicator,width }) => ({
 const CaseModeTableRow = ({ row, selectedRow, setSelectedRow }) => {
   return (
     <TableRow key={row?.caseNum}>
-      <StyledTableCell padding="normal">
+      <StyledTableCell padding="checkbox">
         <FormControlLabel
           value={row?.caseNum}
           control={<Radio />}
@@ -51,7 +58,32 @@ const CaseModeTableRow = ({ row, selectedRow, setSelectedRow }) => {
         <StyledTableCell indicator="FF">{row.ff}</StyledTableCell>
       </CustomWidthTooltip>
       <StyledTableCell>{row.weeksFiled}</StyledTableCell>
-      <StyledTableCell>{row.indicators}</StyledTableCell>
+      <CustomWidthTooltip title={row.indicators}>
+        <StyledTableCell>
+          <Paper
+            elevate={2}
+            style={{
+              width: "50px",
+              padding: "5px",
+              fontWeight: "bolder",
+              color: "blue",
+              textAlign: "center",
+              position: "relative",
+            }}
+          >
+            {row.indicators}
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                right: 10,
+                width: "10px",
+                borderTop: "1px solid black",
+              }}
+            />
+          </Paper>
+        </StyledTableCell>
+      </CustomWidthTooltip>
     </TableRow>
   );
 };

@@ -10,11 +10,11 @@ import {
 
 const options = [
   "Partially received",
-  "Received",
-  "To be reviewed",
-  "Review in progress",
-  "Review completed",
-  "FF Certified",
+  // "Received",
+  // "To be reviewed",
+  // "Review in progress",
+  // "Review completed",
+  // "FF Certified",
 ];
 
 const FFOptions = () => {
