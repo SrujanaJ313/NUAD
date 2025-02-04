@@ -5,6 +5,7 @@ import {
   Radio,
   FormControlLabel,
   Paper,
+  Stack,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import CustomWidthTooltip from "../../../components/Tooltip";
@@ -55,7 +56,16 @@ const CaseModeTableRow = ({ row, selectedRow, setSelectedRow }) => {
         <StyledTableCell>{row.openIssues}</StyledTableCell>
       </CustomWidthTooltip>
       <CustomWidthTooltip title={<FFOptions />}>
-        <StyledTableCell indicator="FF">{row.ff}</StyledTableCell>
+        <StyledTableCell indicator="FF">
+          {row?.ff?.split(",").map((f) => (
+            <div
+              key={f}
+              style={{ color: "green", textDecoration: "underline" }}
+            >
+              {f}
+            </div>
+          ))}
+        </StyledTableCell>
       </CustomWidthTooltip>
       <StyledTableCell>{row.weeksFiled}</StyledTableCell>
       <CustomWidthTooltip title={row.indicators}>
