@@ -10,7 +10,6 @@ import { styled } from "@mui/material/styles";
 import CustomWidthTooltip from "../../../components/Tooltip";
 import OpenIssuesTitle from "./OpenIssuesTitle";
 import FFOptions from "./FFOptions";
-// import GifWithText from "../../../components/NewGif/index";
 
 const indicatorColors = {
   LATE: "#ab0c0c",
