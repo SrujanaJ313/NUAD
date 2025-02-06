@@ -5,7 +5,6 @@ import {
   Radio,
   RadioGroup,
   FormControlLabel,
-  FormControl,
   Grid,
   Select,
   MenuItem,
@@ -16,7 +15,6 @@ import { styled } from "@mui/system";
 import {
   appointmentsLocalOfficeURL,
   appointmentsCaseManagerURL,
-  // kpiSummaryURL,
 } from "../../../helpers/Urls";
 import client from "../../../helpers/Api";
 import { genericSortOptionsAlphabetically } from "../../../helpers/utils";
@@ -111,12 +109,12 @@ const PerformanceMetrics = ({ userId }) => {
         percentage: kpiSummary?.completedRTWApptPercent,
       },
       {
-        label: "Total Timely%:",
+        label: "Total Timely %:",
         value: kpiSummary?.completedApptCount,
         percentage: kpiSummary?.completedApptPercent,
       },
       {
-        label: "Total Untimely%:",
+        label: "Total Untimely %:",
         value: kpiSummary?.completedRTWApptCount,
         percentage: kpiSummary?.completedRTWApptPercent,
       },

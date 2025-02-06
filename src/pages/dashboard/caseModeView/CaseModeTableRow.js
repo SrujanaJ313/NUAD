@@ -60,7 +60,7 @@ const CaseModeTableRow = ({ row, selectedRow, setSelectedRow }) => {
           {row?.ff?.split(",").map((f) => (
             <div
               key={f}
-              style={{ color: "green", textDecoration: "underline" }}
+              style={{ color: "green", textDecoration: "underline", fontSize:"12px" }}
             >
               {f}
             </div>

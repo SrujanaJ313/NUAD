@@ -19,14 +19,27 @@ const options = [
 
 const FFOptions = () => {
   return (
-    <Paper elevation={3} style={{ width: "210px" }}>
+    <Paper elevation={2} style={{ width: "180px" }}>
       <List>
         {options.map((option, index) => (
           <ListItem key={index} dense>
-            <ListItemIcon>
-              <Checkbox edge="start" size="small" />
+            <ListItemIcon
+              sx={{ minWidth: "auto", padding: 0 }}
+            >
+              <Checkbox
+                edge="start"
+                size="small"
+                sx={{
+                  width: 16,
+                  height: 16,
+                  padding: 0,
+                  "& .MuiSvgIcon-root": {
+                    fontSize: 16,
+                  },
+                }}
+              />
             </ListItemIcon>
-            <ListItemText primary={option} />
+            <ListItemText sx={{padding:"0 10px",fontSize:"1px", fontSize:"5px"}} primary={option} />
           </ListItem>
         ))}
       </List>
