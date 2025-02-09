@@ -245,9 +245,13 @@ const CaseModeView = ({
           mt: "2px",
           position: "absolute",
           right: "24px",
-          zIndex: "10",
+          // zIndex: "10",
+          color:"#183084",
+          fontWeight:"bold"
         }}
-      ></Box>
+      >
+        Total Issues: 21
+      </Box>
       <Box sx={{ paddingTop: 3, paddingBottom: 2 }}>
         <TableContainer component={Paper} sx={{ maxHeight: "490px" }}>
           <Table
