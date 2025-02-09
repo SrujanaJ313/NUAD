@@ -33,21 +33,45 @@ const StyledTableCell = styled(TableCell)({
   color: "inherit", // Inherit color from parent
 });
 
+const STEPS = [
+  { label: "Contact", active: true, stepNumber: 0 },
+  { label: "Charging", active: false, stepNumber: 1 },
+  { label: "Fact Finding", active: false, stepNumber: 2 },
+  { label: "Record Decision", active: false, stepNumber: 3 },
+  { label: "End Date", active: false, stepNumber: 4 },
+];
 const WorkonCase = () => {
   const [isAddContactVisible, setIsAddContactVisible] = useState(false);
+  const [steps, setSteps] = useState(STEPS);
+  const [activeStep, setActiveStep] = useState(STEPS[0]);
+
+  const handleNextNavigation = () => {
+    const changedSteps = steps.map((step) =>
+      step.stepNumber === activeStep.stepNumber + 1
+        ? { ...step, active: true }
+        : step
+    );
+    setActiveStep(STEPS[activeStep.stepNumber + 1]);
+    setSteps(changedSteps);
+  };
+
+  const handleBackNavigation = () => {
+    const changedSteps = steps.map((step) =>
+      step.stepNumber === activeStep.stepNumber
+        ? { ...step, active: false }
+        : step
+    );
+    setActiveStep(STEPS[activeStep.stepNumber - 1]);
+    setSteps(changedSteps);
+  };
+
   return (
     <Stack spacing={2} sx={{ p: 3, minHeight: "90vh" }}>
       {/* Steps Navigation */}
       <Stack direction="row" spacing={1}>
-        {[
-          { label: "Contact", active: true },
-          { label: "Charging", active: false },
-          { label: "Fact Finding", active: false },
-          { label: "Record Decision", active: false },
-          { label: "End Date", active: false },
-        ].map((step, index) => (
+        {steps.map((step) => (
           <Paper
-            key={index}
+            key={step.label}
             sx={{
               p: 3,
               bgcolor: step.active ? "#004d00" : "#4CAF50",
@@ -60,7 +84,7 @@ const WorkonCase = () => {
             }}
           >
             <Typography variant="h6" fontSize={"medium"}>
-              {index + 1}. {step.label}
+              {step.stepNumber + 1}.{step.label}
             </Typography>
           </Paper>
         ))}
@@ -155,8 +179,12 @@ const WorkonCase = () => {
         </Table>
       </TableContainer>
 
-      {/* Add and Next Buttons */}
-      <Stack width={"12%"} direction={"row"} justifyContent={"space-between"}>
+      {/* Add, Next and Back Buttons */}
+      <Stack
+        width={activeStep.label !== "Contact" ? "20%" : "12%"}
+        direction={"row"}
+        justifyContent={"space-between"}
+      >
         <Button
           variant="contained"
           color="primary"
@@ -164,7 +192,20 @@ const WorkonCase = () => {
         >
           Add
         </Button>
-        <Button variant="contained" color="primary">
+        {activeStep.label !== "Contact" && (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleBackNavigation}
+          >
+            Back
+          </Button>
+        )}
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleNextNavigation}
+        >
           Next
         </Button>
       </Stack>
