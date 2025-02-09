@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   Stack,
   Typography,
@@ -18,12 +18,25 @@ import {
   Radio,
   Checkbox,
   FormControl,
-  InputLabel
+  InputLabel,
+  styled,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+// import moment from "moment";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
+
+const StyledTableCell = styled(TableCell)({
+  color: "inherit", // Inherit color from parent
+});
 
 const WorkonCase = () => {
+  const [isAddContactVisible, setIsAddContactVisible] = useState(false);
   return (
-    <Stack spacing={2} sx={{ p: 3 }}>
+    <Stack spacing={2} sx={{ p: 3, minHeight: "90vh" }}>
       {/* Steps Navigation */}
       <Stack direction="row" spacing={1}>
         {[
@@ -60,20 +73,23 @@ const WorkonCase = () => {
           alignItems="center"
           sx={{ width: "100%", padding: "10px" }}
         >
-          <FormControl sx={{ width: "30%" }}>
-            <InputLabel id="-label">Party</InputLabel>
+          <FormControl size="small" sx={{ width: "30%" }}>
+            <InputLabel id="party-dropdown">*Party</InputLabel>
             <Select
-              displayEmpty
-              // sx={{ height: "35px" }}
-              labelId="-label"
-              id=""
               label="Party"
+              // value={formik.values.reassignReasonCd}
+              value={""}
+              // onChange={formik.handleChange}
+              // onBlur={formik.handleBlur}
+              name="party"
             >
-              <MenuItem value="" disabled>
-                Party
+              <MenuItem value="Ryan">Ryan Stevens</MenuItem>
+              <MenuItem value="Londonderry">
+                Londonderry School District
               </MenuItem>
-              <MenuItem value="Employer">Employer</MenuItem>
-              <MenuItem value="Claimant">Claimant</MenuItem>
+              <MenuItem value="Symbio">Symbio Sys Solutions Inc</MenuItem>
+              <MenuItem value="Pike">Pike Industries</MenuItem>
+              <MenuItem value="Parties">All Parties</MenuItem>
             </Select>
           </FormControl>
           <FormControlLabel
@@ -84,6 +100,14 @@ const WorkonCase = () => {
             control={<Checkbox />}
             label="A: All parties - upcoming deadline"
           />
+
+          <IconButton
+            // onClick={() => formik.resetForm()}
+            aria-label="reset"
+            sx={{ color: "#183084" }}
+          >
+            <RestartAltIcon />
+          </IconButton>
         </Stack>
       </TableContainer>
 
@@ -91,19 +115,33 @@ const WorkonCase = () => {
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
-            <TableRow>
-              <TableCell>Party</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Date</TableCell>
-              <TableCell>Time</TableCell>
-              <TableCell>Type</TableCell>
-              <TableCell>Method</TableCell>
-              <TableCell>Response Deadline</TableCell>
-              <TableCell>Comments</TableCell>
+            <TableRow sx={{ backgroundColor: "#183084", color: "white" }}>
+              <StyledTableCell></StyledTableCell>
+              <StyledTableCell>Party</StyledTableCell>
+              <StyledTableCell>Name</StyledTableCell>
+              <StyledTableCell>Date</StyledTableCell>
+              <StyledTableCell>Time</StyledTableCell>
+              <StyledTableCell>Type</StyledTableCell>
+              <StyledTableCell>Method</StyledTableCell>
+              <StyledTableCell>Response Deadline</StyledTableCell>
+              <StyledTableCell>Comments</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             <TableRow>
+              <TableCell sx={{ padding: "0 15px" }}>
+                <FormControlLabel
+                  // value={row?.caseNum}
+                  control={<Radio />}
+                  label=""
+                  // checked={row?.caseNum === selectedRow.caseNum}
+                  // checked={row?.claimantName === selectedRow.claimantName}
+                  onChange={() => {
+                    // const row = rows?.find((r) => r.caseNum === Number(e.target.value));
+                    // setSelectedRow(row);
+                  }}
+                />
+              </TableCell>
               <TableCell>Employer</TableCell>
               <TableCell>Premium Retail Services, Inc.</TableCell>
               <TableCell>01/15/2025</TableCell>
@@ -117,119 +155,236 @@ const WorkonCase = () => {
         </Table>
       </TableContainer>
 
-      {/* New Contact Button */}
-      <Button variant="contained" color="primary" sx={{ width: "20%" }}>
-        + New Contact
-      </Button>
+      {/* Add and Next Buttons */}
+      <Stack width={"12%"} direction={"row"} justifyContent={"space-between"}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => setIsAddContactVisible(true)}
+        >
+          Add
+        </Button>
+        <Button variant="contained" color="primary">
+          Next
+        </Button>
+      </Stack>
 
       {/* Attempt to Contact Entry Section */}
-      <Paper elevation={3} sx={{ p: 2 }}>
-        <Typography
-          variant="h6"
-          sx={{ bgcolor: "#003366", color: "white", p: 1 }}
-        >
-          Attempt to Contact Entry
-        </Typography>
-        <Stack spacing={2} mt={2}>
-          <Stack direction="row" spacing={2}>
-            <Select displayEmpty sx={{ width: "12%", height: "50%" }}>
-              <MenuItem value="" disabled>
-                Entity
-              </MenuItem>
-              <MenuItem value="Employer">Employer</MenuItem>
-              <MenuItem value="Claimant">Claimant</MenuItem>
-            </Select>
-            <TextField
-              label="Name"
-              variant="outlined"
-              sx={{ width: "15%", height: "50%" }}
-            />
-            <TextField
-              label="Date"
-              type="date"
-              variant="outlined"
-              sx={{ width: "12%", height: "50%" }}
-              InputLabelProps={{ shrink: true }}
-            />
-            <Select displayEmpty sx={{ width: "12%", height: "50%" }}>
-              <MenuItem value="" disabled>
-                Time
-              </MenuItem>
-              <MenuItem value="Morning">Morning</MenuItem>
-              <MenuItem value="Afternoon">Afternoon</MenuItem>
-            </Select>
-            <Select displayEmpty sx={{ width: "12%", height: "50%" }}>
-              <MenuItem value="" disabled>
-                Method
-              </MenuItem>
-              <MenuItem value="Phone">Phone</MenuItem>
-              <MenuItem value="Email">Email</MenuItem>
-            </Select>
-            <TextField
-              label="Phone"
-              type="number"
-              variant="outlined"
-              sx={{ width: "15%", height: "50%" }}
-            />
-            <TextField
-              label="Email"
-              variant="outlined"
-              sx={{ width: "15%", height: "50%" }}
-            />
-          </Stack>
-          <Stack direction="row" spacing={2}>
-            <TextField
-              label="Response Deadline"
-              type="date"
-              variant="outlined"
-              sx={{ width: "25%", height: "50%" }}
-              InputLabelProps={{ shrink: true }}
-            />
-            <Select displayEmpty sx={{ width: "25%", height: "50%" }}>
-              <MenuItem value="" disabled>
-                Response Type
-              </MenuItem>
-              <MenuItem value="Urgent">Urgent</MenuItem>
-              <MenuItem value="Standard">Standard</MenuItem>
-            </Select>
-          </Stack>
-          <RadioGroup>
-            <FormControlLabel
-              value="direct"
-              control={<Radio />}
-              label="Direct Contact made, see comments below"
-            />
-            <FormControlLabel
-              value="message"
-              control={<Radio />}
-              label="Left message advising party that failure to respond by MM/DD/YYYY 00:00 AM/PM will result in determination based on available information"
-            />
-            <FormControlLabel
-              value="unsuccessful"
-              control={<Radio />}
-              label="Unsuccessful contact attempt"
-            />
-          </RadioGroup>
-          <Stack direction="row" spacing={2} sx={{ width: "80%" }}>
-            <TextField
-              label="Comments"
-              variant="outlined"
-              fullWidth
-              multiline
-              rows={3}
-              sx={{ height: "50%" }}
-            />
-            <Stack direction="row" spacing={2} alignItems="center">
-              <Button variant="contained" color="primary">
-                ADD
-              </Button>
-              <Button variant="outlined" color="secondary">
-                CANCEL
-              </Button>
+      {isAddContactVisible && (
+        <Paper elevation={3} sx={{ p: 2 }}>
+          <Typography
+            variant="h6"
+            sx={{ bgcolor: "#183084", color: "white", p: 1 }}
+          >
+            Attempt to Contact Details
+          </Typography>
+          <Stack spacing={2} mt={2}>
+            <Stack direction="row" spacing={2}>
+              <FormControl size="small" sx={{ width: "15%" }}>
+                <InputLabel id="party-dropdown">*Party</InputLabel>
+                <Select
+                  label="Party"
+                  // value={formik.values.reassignReasonCd}
+                  value={""}
+                  // onChange={formik.handleChange}
+                  // onBlur={formik.handleBlur}
+                  name="party"
+                >
+                  <MenuItem value="Ryan">Ryan Stevens</MenuItem>
+                  <MenuItem value="Londonderry">
+                    Londonderry School District
+                  </MenuItem>
+                  <MenuItem value="Symbio">Symbio Sys Solutions Inc</MenuItem>
+                  <MenuItem value="Pike">Pike Industries</MenuItem>
+                  <MenuItem value="Parties">All Parties</MenuItem>
+                </Select>
+              </FormControl>
+              <TextField
+                label="*Name"
+                size="small"
+                variant="outlined"
+                sx={{ width: "15%" }}
+                name="name"
+                // value={formik.values.empName}
+                // onChange={formik.handleChange}
+                // onBlur={formik.handleBlur}
+                // error={formik.touched.empName && Boolean(formik.errors.empName)}
+                // helperText={formik.touched.empName && formik.errors.empName}
+              />
+
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  label="*Date"
+                  value={null}
+                  // onChange={(newValue) => {
+                  //   if (newValue) {
+                  //     formik.setFieldValue("reassignDt", newValue);
+                  //   } else {
+                  //     formik.setFieldValue("reassignDt", null);
+                  //   }
+                  // }}
+                  slotProps={{
+                    textField: { size: "small" },
+                  }}
+                  // onBlur={formik.handleBlur}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      id="date"
+                      name="date"
+                      size="small"
+                      fullWidth
+                      sx={{
+                        "& .MuiInputLabel-root": {
+                          color: "#183084",
+                          fontWeight: "bold",
+                        },
+                        width: "20%",
+                        height: "32px",
+                      }}
+                    />
+                  )}
+                />
+              </LocalizationProvider>
+
+              <FormControl size="small" sx={{ width: "15%" }}>
+                <InputLabel id="time-dropdown">*Time</InputLabel>
+                <Select
+                  label="Time"
+                  // value={formik.values.reassignReasonCd}
+                  value={""}
+                  // onChange={formik.handleChange}
+                  // onBlur={formik.handleBlur}
+                  name="time"
+                >
+                  <MenuItem value="Morning">Morning</MenuItem>
+                  <MenuItem value="Afternoon">Afternoon</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl size="small" sx={{ width: "15%" }}>
+                <InputLabel id="type-dropdown">*Type</InputLabel>
+                <Select
+                  label="Type"
+                  // value={formik.values.reassignReasonCd}
+                  value={""}
+                  // onChange={formik.handleChange}
+                  // onBlur={formik.handleBlur}
+                  name="time"
+                >
+                  <MenuItem value="typeA">Type A</MenuItem>
+                  <MenuItem value="typeB">Type B</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl size="small" sx={{ width: "15%" }}>
+                <InputLabel id="method-dropdown">*Method</InputLabel>
+                <Select
+                  label="Method"
+                  // value={formik.values.reassignReasonCd}
+                  value={""}
+                  // onChange={formik.handleChange}
+                  // onBlur={formik.handleBlur}
+                  name="time"
+                >
+                  <MenuItem value="methodA">Method A</MenuItem>
+                  <MenuItem value="methodB">Method B</MenuItem>
+                </Select>
+              </FormControl>
+
+              <TextField
+                label="Phone"
+                size="small"
+                variant="outlined"
+                name="phoneNumber"
+                // value={formik.values.entityTeleNumber}
+                onChange={(event) => {
+                  const { value } = event.target;
+                  if (/^\d{0,10}$/.test(value)) {
+                    // formik.setFieldValue("entityTeleNumber", value);
+                  }
+                }}
+                // onBlur={formik.handleBlur}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">+1</InputAdornment>
+                  ),
+                }}
+              />
+            </Stack>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+                value={null}
+                label="Response Deadline"
+                // onChange={(newValue) => {
+                //   if (newValue) {
+                //     formik.setFieldValue("reassignDt", newValue);
+                //   } else {
+                //     formik.setFieldValue("reassignDt", null);
+                //   }
+                // }}
+                slotProps={{
+                  textField: { size: "small" },
+                }}
+                sx={{ width: "25%" }}
+                // onBlur={formik.handleBlur}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    id="responseDeadline"
+                    name="responseDeadline"
+                    size="small"
+                    sx={{
+                      "& .MuiInputLabel-root": {
+                        color: "#183084",
+                        fontWeight: "bold",
+                      },
+                    }}
+                  />
+                )}
+              />
+            </LocalizationProvider>
+            <RadioGroup>
+              <FormControlLabel
+                value="direct"
+                control={<Radio />}
+                label="Direct Contact made, see comments below"
+              />
+              <FormControlLabel
+                value="message"
+                control={<Radio />}
+                label="Left message advising party that failure to respond by MM/DD/YYYY 00:00 AM/PM will result in determination based on available information"
+              />
+              <FormControlLabel
+                value="unsuccessful"
+                control={<Radio />}
+                label="Unsuccessful contact attempt"
+              />
+            </RadioGroup>
+            <Stack direction="row" spacing={2} sx={{ width: "80%" }}>
+              <TextField
+                label="*Comments"
+                variant="outlined"
+                fullWidth
+                multiline
+                rows={3}
+                sx={{ height: "50%" }}
+              />
+              <Stack direction="row" spacing={2} alignItems="center">
+                <Button variant="contained" color="primary">
+                  ADD
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={() => setIsAddContactVisible(false)}
+                >
+                  CANCEL
+                </Button>
+              </Stack>
             </Stack>
           </Stack>
-        </Stack>
-      </Paper>
+        </Paper>
+      )}
     </Stack>
   );
 };
