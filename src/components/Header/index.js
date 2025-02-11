@@ -152,7 +152,7 @@ export default function Header() {
             </IconButton>
             <Stack>
               <Typography color="white" fontSize={"2rem"}>
-                ADJUDICATION DASHBOARD
+                ADJUDICASE
               </Typography>
             </Stack>
           </Stack>

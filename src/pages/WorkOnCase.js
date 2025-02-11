@@ -22,12 +22,14 @@ import {
   styled,
   InputAdornment,
   IconButton,
+  Box,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 // import moment from "moment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import AddIcon from "@mui/icons-material/Add";
 
 const StyledTableCell = styled(TableCell)({
   color: "inherit", // Inherit color from parent
@@ -40,28 +42,42 @@ const STEPS = [
   { label: "Record Decision", active: false, stepNumber: 3 },
   { label: "End Date", active: false, stepNumber: 4 },
 ];
+
 const WorkonCase = () => {
   const [isAddContactVisible, setIsAddContactVisible] = useState(false);
   const [steps, setSteps] = useState(STEPS);
   const [activeStep, setActiveStep] = useState(STEPS[0]);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const TruncatedTableCell = ({ text, maxLength = 35 }) => {
+    const truncatedText =
+      text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+
+    return (
+      <TableCell sx={{ display: "flex", alignItems: "center" }}>
+        <Typography>{truncatedText}</Typography>
+
+        <IconButton
+          size="small"
+          onClick={() => {
+            setIsExpanded(true);
+            setIsAddContactVisible(false);
+          }}
+          sx={{ marginLeft: "4px" }}
+        >
+          <AddIcon fontSize="small" />
+        </IconButton>
+      </TableCell>
+    );
+  };
 
   const handleNextNavigation = () => {
     const changedSteps = steps.map((step) =>
       step.stepNumber === activeStep.stepNumber + 1
         ? { ...step, active: true }
-        : step
+        : { ...step, active: false }
     );
     setActiveStep(STEPS[activeStep.stepNumber + 1]);
-    setSteps(changedSteps);
-  };
-
-  const handleBackNavigation = () => {
-    const changedSteps = steps.map((step) =>
-      step.stepNumber === activeStep.stepNumber
-        ? { ...step, active: false }
-        : step
-    );
-    setActiveStep(STEPS[activeStep.stepNumber - 1]);
     setSteps(changedSteps);
   };
 
@@ -76,19 +92,29 @@ const WorkonCase = () => {
               p: 3,
               bgcolor: step.active ? "#004d00" : "#4CAF50",
               color: "white",
-              textAlign: "center",
+              textAlign:
+                step.active && step.label === "Record Decision"
+                  ? "right"
+                  : "center",
               flex: 1,
               borderRadius: 0,
               clipPath:
                 "polygon(0% 0%, 80% 0%, 100% 50%, 80% 100%, 0% 100%, 20% 50%)",
+              transition: "transform 0.3s ease, box-shadow 0.3s ease", // Smooth transition
+              transform: step.active ? "scale(1.05)" : "scale(1)", // Scale up the active polygon
+              boxShadow: step.active
+                ? "0px 10px 20px rgba(0, 0, 0, 0.3)" // Stronger shadow for Z-axis effect
+                : "0px 2px 5px rgba(0, 0, 0, 0.1)", // Subtle shadow for inactive state
+              zIndex: step.active ? 1 : 0, // Ensure the active polygon is on top
             }}
           >
-            <Typography variant="h6" fontSize={"medium"}>
+            <Typography variant="h6" fontSize={step.active ? "bold" : "medium"}>
               {step.stepNumber + 1}.{step.label}
             </Typography>
           </Paper>
         ))}
       </Stack>
+
       {/* Parties Section */}
       <TableContainer component={Paper}>
         <Stack
@@ -140,7 +166,7 @@ const WorkonCase = () => {
         <Table>
           <TableHead>
             <TableRow sx={{ backgroundColor: "#183084", color: "white" }}>
-              <StyledTableCell></StyledTableCell>
+              <TableCell></TableCell>
               <StyledTableCell>Party</StyledTableCell>
               <StyledTableCell>Name</StyledTableCell>
               <StyledTableCell>Date</StyledTableCell>
@@ -153,7 +179,11 @@ const WorkonCase = () => {
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell sx={{ padding: "0 15px" }}>
+              <TableCell
+                sx={{
+                  padding: "0 10px",
+                }}
+              >
                 <FormControlLabel
                   // value={row?.caseNum}
                   control={<Radio />}
@@ -164,6 +194,7 @@ const WorkonCase = () => {
                     // const row = rows?.find((r) => r.caseNum === Number(e.target.value));
                     // setSelectedRow(row);
                   }}
+                  sx={{ width: "5px" }}
                 />
               </TableCell>
               <TableCell>Employer</TableCell>
@@ -173,44 +204,37 @@ const WorkonCase = () => {
               <TableCell>Original</TableCell>
               <TableCell>Phone</TableCell>
               <TableCell>01/17/2025 10:15 AM</TableCell>
-              <TableCell>Provided email address for response...</TableCell>
+              {/* <TableCell>Provided email address for response...</TableCell> */}
+              <TruncatedTableCell text="Provided email address for response to fact finding with message also left for a return phone call MTyrie025800" />
             </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
 
       {/* Add, Next and Back Buttons */}
-      <Stack
-        width={activeStep.label !== "Contact" ? "20%" : "12%"}
-        direction={"row"}
-        justifyContent={"space-between"}
-      >
+      <Stack width={"12%"} direction={"row"} justifyContent={"space-between"}>
         <Button
           variant="contained"
           color="primary"
-          onClick={() => setIsAddContactVisible(true)}
+          onClick={() => {
+            setIsAddContactVisible(true);
+            setIsExpanded(false);
+          }}
         >
           Add
         </Button>
-        {activeStep.label !== "Contact" && (
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleBackNavigation}
-          >
-            Back
-          </Button>
-        )}
         <Button
           variant="contained"
           color="primary"
           onClick={handleNextNavigation}
+          disabled={activeStep.stepNumber === 4}
         >
           Next
         </Button>
       </Stack>
 
-      {/* Attempt to Contact Entry Section */}
+      {/* Attempt to Contact Entry Section on Add Button */}
+
       {isAddContactVisible && (
         <Paper elevation={3} sx={{ p: 2 }}>
           <Typography
@@ -423,6 +447,70 @@ const WorkonCase = () => {
                 </Button>
               </Stack>
             </Stack>
+          </Stack>
+        </Paper>
+      )}
+
+      {/* Plus Button Attempt to Contact Details */}
+      {isExpanded && (
+        <Paper elevation={3} sx={{ p: 2 }}>
+          <Typography
+            variant="h6"
+            sx={{ bgcolor: "#183084", color: "white", p: 1 }}
+          >
+            Attempt to Contact Details
+          </Typography>
+          <Stack spacing={2} mt={2}>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>
+                      <b>Party</b>
+                    </TableCell>
+                    <TableCell>
+                      <b>Date</b>
+                    </TableCell>
+                    <TableCell>
+                      <b>Time</b>
+                    </TableCell>
+                    <TableCell>
+                      <b>Type</b>
+                    </TableCell>
+                    <TableCell>
+                      <b>Method</b>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>E: Premium Retail Services, Inc.</TableCell>
+                    <TableCell>01/15/2025</TableCell>
+                    <TableCell>10:15 AM</TableCell>
+                    <TableCell>Original</TableCell>
+                    <TableCell>Phone</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <Box display="flex" alignItems="center" sx={{ mt: 2 }}>
+              <Radio checked size="small" sx={{ mr: 1 }} />
+              <Typography variant="body1">
+                <b>Left Message:</b> Advising party that failure to respond by
+                MM/DD/YYYY 00:00 AM/PM will result in determination based on
+                available information.
+              </Typography>
+            </Box>
+            <Paper
+              elevation={1}
+              sx={{ p: 2, bgcolor: "#f5f5f5", border: "1px solid #ccc" }}
+            >
+              <Typography variant="body1">
+                <b>Comments:</b> Provided email address for response to fact
+                finding with message also left for a return phone call
+                MTyrie025800
+              </Typography>
+            </Paper>
           </Stack>
         </Paper>
       )}
