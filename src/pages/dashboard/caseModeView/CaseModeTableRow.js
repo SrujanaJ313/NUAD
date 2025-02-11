@@ -73,8 +73,8 @@ const CaseModeTableRow = ({ row, selectedRow, setSelectedRow }) => {
           <Paper
             elevate={2}
             style={{
-              width: "50px",
-              padding: "5px",
+              width: "auto",
+              padding: "5px 0px",
               fontWeight: "bolder",
               color: "blue",
               textAlign: "center",

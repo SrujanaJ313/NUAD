@@ -22,7 +22,7 @@
       "openIssues": 1,
        "ff": "EMP - Y",
       "weeksFiled": 8,
-      "indicators": "New"
+      "indicators": "Masslayoff"
     },
     {
       "dueDate": "02/15/2025",
@@ -34,7 +34,7 @@
       "openIssues": 0,
       "ff": "CMT - Y,EMP - Y",
       "weeksFiled": 15,
-     "indicators": "New"
+     "indicators": "In pay status"
     },
     {
       "dueDate": "02/18/2025",
@@ -58,7 +58,7 @@
       "openIssues": 2,
       "ff": "CMT - Y,EMP - Y",
       "weeksFiled": 10,
-      "indicators": "New"
+      "indicators": "In pay status"
     },
     {
       "dueDate": "02/22/2025",
@@ -70,7 +70,7 @@
       "openIssues": 1,
        "ff": "EMP - Y",
       "weeksFiled": 5,
-      "indicators": "New"
+      "indicators": "Masslayoff"
     },
     {
       "dueDate": "02/25/2025",

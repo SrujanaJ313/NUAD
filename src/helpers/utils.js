@@ -75,7 +75,7 @@ export function getGreeting(userName) {
     greeting = "Good Evening";
   }
 
-  return `${greeting}, ${userName}!`;
+  return `${greeting}, ${userName || "Michele Tyrie"}!`;
 }
 
 function isValidDateString(dateString) {
