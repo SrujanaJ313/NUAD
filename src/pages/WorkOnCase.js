@@ -30,6 +30,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import AddIcon from "@mui/icons-material/Add";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
+import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
 
 const StyledTableCell = styled(TableCell)({
   color: "inherit", // Inherit color from parent
@@ -78,6 +81,16 @@ const WorkonCase = () => {
         : { ...step, active: false }
     );
     setActiveStep(STEPS[activeStep.stepNumber + 1]);
+    setSteps(changedSteps);
+  };
+
+  const handleBackNavigation = () => {
+    const changedSteps = steps.map((step) =>
+      step.stepNumber === activeStep.stepNumber - 1
+        ? { ...step, active: true }
+        : { ...step, active: false }
+    );
+    setActiveStep(STEPS[activeStep.stepNumber - 1]);
     setSteps(changedSteps);
   };
 
@@ -144,11 +157,11 @@ const WorkonCase = () => {
           </FormControl>
           <FormControlLabel
             control={<Checkbox />}
-            label="A: All parties - deadline passed"
+            label="Deadline has passed"
           />
           <FormControlLabel
             control={<Checkbox />}
-            label="A: All parties - upcoming deadline"
+            label="Deadline is upcoming"
           />
 
           <IconButton
@@ -158,6 +171,39 @@ const WorkonCase = () => {
           >
             <RestartAltIcon />
           </IconButton>
+          <Stack direction={"row"} justifyContent="end" sx={{ width: "25%" }}>
+            <Stack width={"20%"}>
+              <ArrowCircleLeftOutlinedIcon
+                fontSize="large"
+                sx={{
+                  color: activeStep.label === "Contact" ? "#BDBDBD" : "#183084",
+                  "&:hover": {
+                    cursor:
+                      activeStep.label === "Contact"
+                        ? "not-allowed"
+                        : "pointer",
+                  },
+                }}
+                onClick={handleBackNavigation}
+              />
+            </Stack>
+            <Stack>
+              <ArrowCircleRightOutlinedIcon
+                fontSize="large"
+                sx={{
+                  color:
+                    activeStep.label === "End Date" ? "#BDBDBD" : "#183084",
+                  "&:hover": {
+                    cursor:
+                      activeStep.label === "End Date"
+                        ? "not-allowed"
+                        : "pointer",
+                  },
+                }}
+                onClick={handleNextNavigation}
+              />
+            </Stack>
+          </Stack>
         </Stack>
       </TableContainer>
 
@@ -181,21 +227,13 @@ const WorkonCase = () => {
             <TableRow>
               <TableCell
                 sx={{
-                  padding: "0 10px",
+                  paddingTop: "0",
+                  paddingBottom: "0",
+                  paddingRight: "0px",
+                  height: "100%",
                 }}
               >
-                <FormControlLabel
-                  // value={row?.caseNum}
-                  control={<Radio />}
-                  label=""
-                  // checked={row?.caseNum === selectedRow.caseNum}
-                  // checked={row?.claimantName === selectedRow.claimantName}
-                  onChange={() => {
-                    // const row = rows?.find((r) => r.caseNum === Number(e.target.value));
-                    // setSelectedRow(row);
-                  }}
-                  sx={{ width: "5px" }}
-                />
+                <VisibilityIcon fontSize="medium" sx={{ marginTop: "9px" }} />
               </TableCell>
               <TableCell>Employer</TableCell>
               <TableCell>Premium Retail Services, Inc.</TableCell>
@@ -212,26 +250,27 @@ const WorkonCase = () => {
       </TableContainer>
 
       {/* Add, Next and Back Buttons */}
-      <Stack width={"12%"} direction={"row"} justifyContent={"space-between"}>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            setIsAddContactVisible(true);
-            setIsExpanded(false);
-          }}
-        >
-          Add
-        </Button>
-        <Button
+      {/* <Stack width={"12%"} direction={"row"} justifyContent={"space-between"}> */}
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => {
+          setIsAddContactVisible(true);
+          setIsExpanded(false);
+        }}
+        sx={{ width: "25%" }}
+      >
+        <AddIcon fontSize="large" color="white" /> Add New Contact Attempt
+      </Button>
+      {/* <Button
           variant="contained"
           color="primary"
           onClick={handleNextNavigation}
           disabled={activeStep.stepNumber === 4}
         >
           Next
-        </Button>
-      </Stack>
+        </Button> */}
+      {/* </Stack> */}
 
       {/* Attempt to Contact Entry Section on Add Button */}
 
@@ -425,6 +464,11 @@ const WorkonCase = () => {
                 control={<Radio />}
                 label="Unsuccessful contact attempt"
               />
+              <FormControlLabel
+                value="unsuccessful"
+                control={<Radio />}
+                label="unauthorized person contacted - only display if the Method is selected as phone"
+              />
             </RadioGroup>
             <Stack direction="row" spacing={2} sx={{ width: "80%" }}>
               <TextField
@@ -480,6 +524,9 @@ const WorkonCase = () => {
                     <TableCell>
                       <b>Method</b>
                     </TableCell>
+                    <TableCell>
+                      <b>Response Deadline</b>
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -488,7 +535,8 @@ const WorkonCase = () => {
                     <TableCell>01/15/2025</TableCell>
                     <TableCell>10:15 AM</TableCell>
                     <TableCell>Original</TableCell>
-                    <TableCell>Phone</TableCell>
+                    <TableCell>Phone: 603-856-7771</TableCell>
+                    <TableCell>1/17/2025 10:15am</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -511,6 +559,27 @@ const WorkonCase = () => {
                 MTyrie025800
               </Typography>
             </Paper>
+            <Stack direction="row" spacing={2} sx={{ width: "80%" }}>
+              <TextField
+                label="*Comments"
+                variant="outlined"
+                fullWidth
+                multiline
+                rows={3}
+                sx={{ height: "50%" }}
+              />
+              <Stack direction="row" spacing={2} alignItems="center">
+                <Button variant="contained" color="primary">
+                  ADD
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={() => setIsAddContactVisible(false)}
+                >
+                  CANCEL
+                </Button>
+              </Stack>
+            </Stack>
           </Stack>
         </Paper>
       )}
