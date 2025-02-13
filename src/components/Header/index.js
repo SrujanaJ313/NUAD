@@ -24,7 +24,7 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
 import { TreeItem } from "@mui/x-tree-view/TreeItem";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { getGreeting } from "../../helpers/utils";
 
 const drawerWidth = 240;
@@ -69,6 +69,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   // let userDetails = null;
   // if (getCookieItem(CookieNames.USER)) {
@@ -156,6 +157,44 @@ export default function Header() {
               </Typography>
             </Stack>
           </Stack>
+          {location.pathname === "/workoncase" && (
+            <Stack
+              direction={"row"}
+              justifyContent={"flex-end"} // Changed from "space-around" to "space-between"
+              alignItems={"center"}
+              sx={{ width: "60%" }} // Reduced width from 45% to 35%
+              gap={2}
+            >
+              <Stack>
+                <Typography color="white" fontSize={"14px"} fontWeight={"bold"}>
+                  Ryan Stevens....
+                </Typography>
+              </Stack>
+              <Stack direction={"row"}>
+                <Typography color={"white"} fontWeight="bold">
+                  BYE:&nbsp;
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ color: "white", fontWeight: "bold" }}
+                >
+                  11/15/2025
+                </Typography>
+              </Stack>
+              <Stack direction={"row"}>
+                <Typography color={"white"} fontWeight="bold">
+                  Case #:&nbsp;
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ color: "white", fontWeight: "bold" }}
+                >
+                  7148625-1
+                </Typography>
+              </Stack>
+            </Stack>
+          )}
+
           <Stack direction={"row"} alignItems={"center"}>
             <Typography color="white"> {getGreeting(getUserName())}</Typography>
             <IconButton
@@ -315,3 +354,4 @@ export default function Header() {
     </>
   );
 }
+

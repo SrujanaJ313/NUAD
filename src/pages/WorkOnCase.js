@@ -39,11 +39,46 @@ const StyledTableCell = styled(TableCell)({
 });
 
 const STEPS = [
-  { label: "Contact", active: true, stepNumber: 0 },
-  { label: "Charging", active: false, stepNumber: 1 },
-  { label: "Fact Finding", active: false, stepNumber: 2 },
-  { label: "Record Decision", active: false, stepNumber: 3 },
-  { label: "End Date", active: false, stepNumber: 4 },
+  {
+    label: "Contact",
+    active: true,
+    stepNumber: 0,
+    completionStatus: "N",
+    bgColor: "#4CAF50",
+    color: "white",
+  },
+  {
+    label: "Charging",
+    active: false,
+    stepNumber: 1,
+    completionStatus: "N",
+    bgColor: "white",
+    color: "black",
+  },
+  {
+    label: "Fact Finding",
+    active: false,
+    stepNumber: 2,
+    completionStatus: "N",
+    bgColor: "white",
+    color: "black",
+  },
+  {
+    label: "Record Decision",
+    active: false,
+    stepNumber: 3,
+    completionStatus: "N",
+    bgColor: "white",
+    color: "black",
+  },
+  {
+    label: "End Date",
+    active: false,
+    stepNumber: 4,
+    completionStatus: "N",
+    bgColor: "white",
+    color: "black",
+  },
 ];
 
 const WorkonCase = () => {
@@ -75,27 +110,100 @@ const WorkonCase = () => {
   };
 
   const handleNextNavigation = () => {
-    const changedSteps = steps.map((step) =>
-      step.stepNumber === activeStep.stepNumber + 1
-        ? { ...step, active: true }
-        : { ...step, active: false }
-    );
-    setActiveStep(STEPS[activeStep.stepNumber + 1]);
+    const currentActiveStep = activeStep.stepNumber + 1;
+    const changedSteps = steps.map((step) => {
+      if (step.stepNumber === currentActiveStep) {
+        return { ...step, active: true, bgColor: "#4CAF50", color: "white" };
+      } else if (step.stepNumber < currentActiveStep) {
+        return {
+          ...step,
+          active: false,
+          completionStatus: "Y",
+          bgColor: "#183084",
+          color: "white",
+        };
+      } else {
+        return step;
+      }
+    });
+    setActiveStep(STEPS[currentActiveStep]);
     setSteps(changedSteps);
   };
 
   const handleBackNavigation = () => {
-    const changedSteps = steps.map((step) =>
-      step.stepNumber === activeStep.stepNumber - 1
-        ? { ...step, active: true }
-        : { ...step, active: false }
-    );
-    setActiveStep(STEPS[activeStep.stepNumber - 1]);
+    const currentActiveStep = activeStep.stepNumber - 1;
+    const changedSteps = steps.map((step) => {
+      if (step.stepNumber === currentActiveStep) {
+        return { ...step, active: true, bgColor: "#4CAF50", color: "white" };
+      } else if (step.stepNumber > currentActiveStep) {
+        return {
+          ...step,
+          active: false,
+          completionStatus: "Y",
+          bgColor: "white",
+          color: "black",
+        };
+      } else {
+        return step;
+      }
+    });
+    setActiveStep(STEPS[currentActiveStep]);
     setSteps(changedSteps);
   };
 
   return (
     <Stack spacing={2} sx={{ p: 3, minHeight: "90vh" }}>
+      {/* Adjudicate Header */}
+      <Paper
+        sx={{
+          width: "100%",
+          margin: "auto",
+          padding: 2,
+          backgroundColor: "#f5f5f5",
+        }}
+      >
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          width="100%"
+        >
+          <Typography variant="h6" color="primary" fontWeight="bold">
+            Adjudicate
+          </Typography>
+          <Stack direction="row" spacing={4}>
+            <Box display="flex" alignItems="center">
+              <Typography variant="body1" fontWeight="bold">
+                Case Due Date:&nbsp;
+              </Typography>
+              <Typography variant="body2" sx={{color:"#183084", fontWeight:"bold"}}>1/23/2025</Typography>
+            </Box>
+            <Box display="flex" alignItems="center">
+              <Typography variant="body1" fontWeight="bold">
+                Issues:&nbsp;
+              </Typography>
+              <Typography variant="body2" sx={{color:"#183084", fontWeight:"bold"}}>4</Typography>
+            </Box>
+            <Box display="flex" alignItems="center">
+              <Typography variant="body1" fontWeight="bold">
+                Claim Status:&nbsp;
+              </Typography>
+              <Typography variant="body2" sx={{color:"#183084", fontWeight:"bold"}}>
+                Valid Final
+              </Typography>
+            </Box>
+            <Box display="flex" alignItems="center">
+              <Typography variant="body1" fontWeight="bold">
+                WBA:&nbsp;
+              </Typography>
+              <Typography variant="body2" sx={{color:"#183084", fontWeight:"bold"}}>
+                $427.00
+              </Typography>
+            </Box>
+          </Stack>
+        </Stack>
+      </Paper>
+
       {/* Steps Navigation */}
       <Stack direction="row" spacing={1}>
         {steps.map((step) => (
@@ -103,12 +211,9 @@ const WorkonCase = () => {
             key={step.label}
             sx={{
               p: 3,
-              bgcolor: step.active ? "#004d00" : "#4CAF50",
-              color: "white",
-              textAlign:
-                step.active && step.label === "Record Decision"
-                  ? "right"
-                  : "center",
+              bgcolor: step.bgColor,
+              color: step.color,
+              textAlign: "center",
               flex: 1,
               borderRadius: 0,
               clipPath:
@@ -122,7 +227,7 @@ const WorkonCase = () => {
             }}
           >
             <Typography variant="h6" fontSize={step.active ? "bold" : "medium"}>
-              {step.stepNumber + 1}.{step.label}
+              {step.stepNumber + 1}. {step.label}
             </Typography>
           </Paper>
         ))}
@@ -171,7 +276,7 @@ const WorkonCase = () => {
           >
             <RestartAltIcon />
           </IconButton>
-          <Stack direction={"row"} justifyContent="end" sx={{ width: "25%" }}>
+          <Stack direction={"row"} justifyContent="end" sx={{ width: "35%" }}>
             <Stack width={"20%"}>
               <ArrowCircleLeftOutlinedIcon
                 fontSize="large"
@@ -236,7 +341,7 @@ const WorkonCase = () => {
                 <VisibilityIcon fontSize="medium" sx={{ marginTop: "9px" }} />
               </TableCell>
               <TableCell>Employer</TableCell>
-              <TableCell>Premium Retail Services, Inc.</TableCell>
+              <TableCell>Premium Retail Services, Inc.- NAME</TableCell>
               <TableCell>01/15/2025</TableCell>
               <TableCell>10:15 AM</TableCell>
               <TableCell>Original</TableCell>
@@ -416,38 +521,21 @@ const WorkonCase = () => {
                 }}
               />
             </Stack>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DatePicker
-                value={null}
-                label="Response Deadline"
-                // onChange={(newValue) => {
-                //   if (newValue) {
-                //     formik.setFieldValue("reassignDt", newValue);
-                //   } else {
-                //     formik.setFieldValue("reassignDt", null);
-                //   }
-                // }}
-                slotProps={{
-                  textField: { size: "small" },
-                }}
-                sx={{ width: "25%" }}
-                // onBlur={formik.handleBlur}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    id="responseDeadline"
-                    name="responseDeadline"
-                    size="small"
-                    sx={{
-                      "& .MuiInputLabel-root": {
-                        color: "#183084",
-                        fontWeight: "bold",
-                      },
-                    }}
-                  />
-                )}
-              />
-            </LocalizationProvider>
+
+            <TextField
+              label="Response Deadline"
+              id="responseDeadline"
+              name="responseDeadline"
+              size="small"
+              sx={{
+                // "& .MuiInputLabel-root": {
+                //   color: "#183084",
+                //   fontWeight: "bold",
+                // },
+                width: "25%",
+              }}
+            />
+
             <RadioGroup>
               <FormControlLabel
                 value="direct"
