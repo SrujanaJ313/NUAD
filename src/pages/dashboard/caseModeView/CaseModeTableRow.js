@@ -16,7 +16,6 @@ const indicatorColors = {
   LATE: "#ab0c0c",
   HI: "red",
   WL: "#f36d6d",
-  FF: "Green",
 };
 const StyledTableCell = styled(TableCell)(({ theme, indicator, width }) => ({
   padding: "10px 5px",
@@ -25,7 +24,7 @@ const StyledTableCell = styled(TableCell)(({ theme, indicator, width }) => ({
   overflow: "hidden",
   textOverflow: "ellipsis",
   lineHeight: "1rem",
-  color: indicatorColors[indicator] || "inherit",
+  color: "inherit",
 }));
 
 const CaseModeTableRow = ({ row, selectedRow, setSelectedRow }) => {
@@ -56,11 +55,11 @@ const CaseModeTableRow = ({ row, selectedRow, setSelectedRow }) => {
         <StyledTableCell>{row.openIssues}</StyledTableCell>
       </CustomWidthTooltip>
       <CustomWidthTooltip title={<FFOptions />}>
-        <StyledTableCell indicator="FF">
+        <StyledTableCell>
           {row?.ff?.split(",").map((f) => (
             <div
               key={f}
-              style={{ color: "green", textDecoration: "underline", fontSize:"12px" }}
+              style={{ color: "black", textDecoration: "underline", fontSize:"12px" }}
             >
               {f}
             </div>

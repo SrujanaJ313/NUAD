@@ -73,7 +73,7 @@ const PerformanceMetrics = ({ userId }) => {
   const [caseManagerId, setCaseManagerId] = useState(userId || "");
   const [localOfficeId, setLocalOfficeId] = useState("");
   const [kpiSummary, setKpiSummary] = useState({});
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState("michele");
   const data = {
     caseload: kpiSummary?.caseLoad,
     avgWksOfEmployment: kpiSummary?.avgWksOfEmployment,

@@ -95,11 +95,11 @@ const CaseloadMetrics = React.memo(
 
     const [errors, setErrors] = useState([]);
     const keyMapping = {
-      "Total Cases": "totalCases",
+      "#Total Cases": "totalCases",
       "Not Started": "notStarted",
       "Due in 1 Week": "dueInOneWeek",
-      "Due Today":"dueToday",
-      "Overdue": "overdue",
+      "Due Today": "dueToday",
+      Overdue: "overdue",
       "Follow Up": "followUp",
     };
 
@@ -146,7 +146,6 @@ const CaseloadMetrics = React.memo(
       fetchAppointmentStaffListData();
     }, []);
 
-
     const handleCellClick = (index) => {
       const stage = STAGES[index] || STAGES[0];
 
@@ -158,7 +157,7 @@ const CaseloadMetrics = React.memo(
     return (
       <Box sx={{ paddingBottom: 0, paddingTop: 0.5 }}>
         <Stack direction="row" spacing={2}>
-          <Stack
+          {/* <Stack
             direction="row"
             style={{ marginTop: "0.5rem", width: "15rem" }}
           >
@@ -186,7 +185,7 @@ const CaseloadMetrics = React.memo(
                 ))}
               </Select>
             </FormControl>
-          </Stack>
+          </Stack> */}
           <TableContainer component={Paper}>
             <Table
               sx={{ minWidth: 400 }}
@@ -216,11 +215,11 @@ const CaseloadMetrics = React.memo(
                 <TableRow>
                   {metricValues.map((value, index) => {
                     let cellColor = "inherit";
-                    if (index === metricValues.length - 2) {
-                      cellColor = "orange";
-                    } else if (index === metricValues.length - 1) {
-                      cellColor = "red";
-                    }
+                    // if (index === metricValues.length - 2) {
+                    //   cellColor = "orange";
+                    // } else if (index === metricValues.length - 1) {
+                    //   cellColor = "red";
+                    // }
 
                     return (
                       <ContentCell key={index} sx={{ color: cellColor }}>

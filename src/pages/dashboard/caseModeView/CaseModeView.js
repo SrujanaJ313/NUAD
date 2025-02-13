@@ -354,7 +354,7 @@ const CaseModeView = ({
           <Button
             variant="contained"
             color="primary"
-            disabled={!selectedRow}
+            // disabled={!selectedRow}
             onClick={() => {
               setOpen(true);
               navigate("/workoncase");
