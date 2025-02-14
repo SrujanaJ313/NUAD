@@ -152,8 +152,17 @@ export default function Header() {
               <MenuIcon />
             </IconButton>
             <Stack>
-              <Typography color="white" fontSize={"2rem"}>
-                ADJUDICASE
+              <Typography
+                color="white"
+                fontSize={"2rem"}
+                sx={{
+                  fontFamily: "Kristen ITC, Lucida Sans Typewriter, sans-serif", // Fallback fonts
+                }}
+              >
+                <span style={{ fontFamily: "Kristen ITC" }}>Ad</span>
+                <span style={{ fontFamily: "Lucida Sans Typewriter" }}>
+                  judicase
+                </span>
               </Typography>
             </Stack>
           </Stack>

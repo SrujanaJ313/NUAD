@@ -12,17 +12,17 @@ import CustomWidthTooltip from "../../../components/Tooltip";
 import OpenIssuesTitle from "./OpenIssuesTitle";
 import FFOptions from "./FFOptions";
 
-const indicatorColors = {
-  LATE: "#ab0c0c",
-  HI: "red",
-  WL: "#f36d6d",
-};
+// const indicatorColors = {
+//   LATE: "#ab0c0c",
+//   HI: "red",
+//   WL: "#f36d6d",
+// };
 const StyledTableCell = styled(TableCell)(({ theme, indicator, width }) => ({
   padding: "10px 5px",
   width: width || "auto",
   whiteSpace: "nowrap",
-  overflow: "hidden",
-  textOverflow: "ellipsis",
+  // overflow: "hidden",
+  // textOverflow: "ellipsis",
   lineHeight: "1rem",
   color: "inherit",
 }));
@@ -52,45 +52,52 @@ const CaseModeTableRow = ({ row, selectedRow, setSelectedRow }) => {
       <StyledTableCell>{row.complexity}</StyledTableCell>
       <StyledTableCell>{row.assignedDate}</StyledTableCell>
       <CustomWidthTooltip title={<OpenIssuesTitle />}>
-        <StyledTableCell>{row.openIssues}</StyledTableCell>
+        <TableCell>{row.openIssues}</TableCell>
       </CustomWidthTooltip>
       <CustomWidthTooltip title={<FFOptions />}>
         <StyledTableCell>
           {row?.ff?.split(",").map((f) => (
             <div
               key={f}
-              style={{ color: "black", textDecoration: "underline", fontSize:"12px" }}
+              style={{
+                color: "black",
+                textDecoration: "underline",
+                fontSize: "12px",
+              }}
             >
               {f}
             </div>
           ))}
         </StyledTableCell>
       </CustomWidthTooltip>
-      <StyledTableCell>{row.weeksFiled}</StyledTableCell>
+      <TableCell>{row.weeksFiled}</TableCell>
+
       <CustomWidthTooltip title={row.indicators}>
         <StyledTableCell>
-          <Paper
-            elevate={2}
-            style={{
-              width: "auto",
-              padding: "5px 0px",
-              fontWeight: "bolder",
-              color: "blue",
-              textAlign: "center",
-              position: "relative",
-            }}
-          >
-            {row.indicators}
-            <div
+          {row.indicators && (
+            <Paper
+              elevate={2}
               style={{
-                position: "absolute",
-                top: 0,
-                right: 10,
-                width: "10px",
-                borderTop: "1px solid black",
+                width: "auto",
+                padding: "5px 0px",
+                fontWeight: "bolder",
+                color: "blue",
+                textAlign: "center",
+                position: "relative",
               }}
-            />
-          </Paper>
+            >
+              {row.indicators}
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  right: 10,
+                  width: "10px",
+                  borderTop: "1px solid black",
+                }}
+              />
+            </Paper>
+          )}
         </StyledTableCell>
       </CustomWidthTooltip>
     </TableRow>

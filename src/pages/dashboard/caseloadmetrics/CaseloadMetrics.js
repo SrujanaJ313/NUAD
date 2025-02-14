@@ -157,11 +157,11 @@ const CaseloadMetrics = React.memo(
     return (
       <Box sx={{ paddingBottom: 0, paddingTop: 0.5 }}>
         <Stack direction="row" spacing={2}>
-          {/* <Stack
+          <Stack
             direction="row"
             style={{ marginTop: "0.5rem", width: "15rem" }}
           >
-            <FormControl fullWidth size="small">
+            {/* <FormControl fullWidth size="small">
               <InputLabel id="select-source-label">
                 Items Assigned To
               </InputLabel>
@@ -184,8 +184,8 @@ const CaseloadMetrics = React.memo(
                   </MenuItem>
                 ))}
               </Select>
-            </FormControl>
-          </Stack> */}
+            </FormControl> */}
+          </Stack>
           <TableContainer component={Paper}>
             <Table
               sx={{ minWidth: 400 }}

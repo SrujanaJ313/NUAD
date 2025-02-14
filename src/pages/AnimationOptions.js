@@ -1,104 +1,53 @@
-import React, { useState } from 'react';
-import { Box, IconButton, Typography } from '@mui/material';
-import { ArrowBack as ArrowBackwardIcon, Close as CloseIcon} from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { Box, List, ListItem, ListItemText } from "@mui/material";
+
+const tabs = [
+  { label: "Review Continued Claims Filed", color: "#4CAF50" },
+  { label: "Review Works Search Requirements", color: "#00796B" },
+  { label: "Review Employment History", color: "#FFC107" },
+  { label: "Review Applications Filed", color: "#0D47A1" },
+  { label: "Review Determinations", color: "#E64A19" },
+];
 
 const AnimationOptions = () => {
-  const [open, setOpen] = useState(false);
-  const [optionsVisible, setOptionsVisible] = useState([]);
-  const options = [
-    { label: 'Page 1', path: '/page1' },
-    { label: 'Page 2', path: '/page2' },
-    { label: 'Page 3', path: '/page3' },
-    { label: 'Page 4', path: '/page4' },
-    { label: 'Page 5', path: '/page5' },
-  ];
-
-  const navigate = useNavigate(); // For navigation to different pages
-  
-  const handleClick = () => {
-    setOpen(!open);
-
-    if (!open) {
-      // Play sound and show options one by one
-      options.forEach((_, index) => {
-        setTimeout(() => {
-          setOptionsVisible((prev) => [...prev, index]); // Show next option
-        }, index * 1000); // Delay 1 second for each option
-      });
-    } else {
-      setOptionsVisible([]); // Hide options when clicked again
-    }
-  };
-
-  const handleOptionClick = (path) => {
-    navigate(path); // Navigate to the selected page
-  };
-
   return (
     <Box
       sx={{
-        position: 'relative',
-        height: '100vh',
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'flex-start', // Align to the left
-        alignItems: 'center',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-end",
+        backgroundColor: "transparent",
       }}
     >
-      {/* Arrow Icon Button */}
-      <IconButton
-        sx={{
-          position: 'absolute',
-          right: 0,
-          zIndex: 10,
-        }}
-        onClick={handleClick}
-      >
-         {open ? (
-          <CloseIcon sx={{ fontSize: 40 }} />
-        ) : (
-          <ArrowBackwardIcon sx={{ fontSize: 40 }} />
-        )}
-      </IconButton>
-
-      {/* Options List */}
-      <Box
-        sx={{
-          position: 'absolute',
-          right: 0,
-          top: '50%',
-          transform: 'translateY(-50%)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          zIndex: 5,
-        }}
-      >
-        {open &&
-          options.map((option, index) => (
-            <Box
-              key={index}
-              sx={{
-                opacity: optionsVisible.includes(index) ? 1 : 0,
-                transform: optionsVisible.includes(index)
-                  ? 'translateY(0)'
-                  : 'translateX(100%)',
-                transition: `all 1s ease-out`,
-                marginBottom: '8px',
-                backgroundColor: '#f0f0f0',
-                padding: '16px 24px',
-                borderRadius: '8px',
-                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                width: '300px',
-                cursor: 'pointer',
+      <List sx={{ display: "flex", flexDirection: "column", padding: 0 }}>
+        {tabs.map((tab, index) => (
+          <ListItem
+            key={index}
+            sx={{
+              height: "20vh",
+              backgroundColor: tab.color,
+              color: "white",
+              textAlign: "center",
+              justifyContent: "center",
+              padding: "0px 0px",
+              // marginBottom: "8px",
+              // borderRadius: "10px 0 0 10px",
+              cursor: "pointer",
+              "&:hover": { opacity: 0.8 },
+              // width: "fit-content",
+              transform: "rotate(180deg)",
+              writingMode: "vertical-rl",
+            }}
+          >
+            <ListItemText
+              primary={tab.label}
+              primaryTypographyProps={{
+                fontWeight: "bold",
               }}
-              onClick={() => handleOptionClick(option.path)} // Navigate on click
-            >
-              <Typography variant="h6">{option.label}</Typography>
-            </Box>
-          ))}
-      </Box>
+            />
+          </ListItem>
+        ))}
+      </List>
     </Box>
   );
 };

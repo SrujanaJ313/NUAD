@@ -246,11 +246,12 @@ const CaseModeView = ({
           position: "absolute",
           right: "24px",
           // zIndex: "10",
-          color:"#183084",
-          fontWeight:"bold"
+          color: "#183084",
+          fontWeight: "bold",
+          fontSize: "15px",
         }}
       >
-        Total Issues: 21
+        Total Issues: 17
       </Box>
       <Box sx={{ paddingTop: 3, paddingBottom: 2 }}>
         <TableContainer component={Paper} sx={{ maxHeight: "490px" }}>
@@ -274,9 +275,14 @@ const CaseModeView = ({
                     <TableSortLabel
                       active={sortBy.field === column.id}
                       direction={
-                        sortBy.field === column.id ? sortBy.direction : "asc"
+                        sortBy.field === column.id ? sortBy.direction : "desc"
                       }
                       onClick={createSortHandler(column.id)}
+                      sx={{
+                        "& .MuiTableSortLabel-icon": {
+                          opacity: column.id === "dueDate" ? 0.8 : 0, // Always show the arrow
+                        },
+                      }}
                     >
                       {column.label}
                       {sortBy.field === column.id ? (
@@ -369,3 +375,4 @@ const CaseModeView = ({
 };
 
 export default CaseModeView;
+
