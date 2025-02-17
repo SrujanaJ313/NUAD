@@ -10,7 +10,7 @@
       "byeDt": "03/15/2026",
       "complexity": "LOW",
       "assignedDate": "02/22/2025",
-      "openIssues": "0 +",
+      "openIssues": "1",
       "ff": "EMP - Y",
       "weeksFiled": 9,
       "indicators": "New"
@@ -22,7 +22,7 @@
       "byeDt": "02/12/2025",
       "complexity": "MED",
       "assignedDate": "02/12/2025",
-      "openIssues": "2 +",
+      "openIssues": "2",
       "ff": "EMP - Y",
       "weeksFiled": 11,
       "indicators": "New"
@@ -34,7 +34,7 @@
       "byeDt": "02/12/2025",
       "complexity": "HI",
       "assignedDate": "02/10/2025",
-      "openIssues": "4 +",
+      "openIssues": "4",
       "ff": "CMT - Y",
       "weeksFiled": 18,
       "indicators": "New"
@@ -46,7 +46,7 @@
       "byeDt": "09/12/2025",
       "complexity": "LOW",
       "assignedDate": "07/02/2025",
-      "openIssues": "1 +",
+      "openIssues": "1",
       "ff": "EMP - Y",
       "weeksFiled": 5,
       "indicators": "Masslayoff"
@@ -58,7 +58,7 @@
       "byeDt": "04/25/2025",
       "complexity": "MED",
       "assignedDate": "02/05/2025",
-      "openIssues": "2 +",
+      "openIssues": "2",
       "ff": "CMT - Y,EMP - Y",
       "weeksFiled": 10,
       "indicators": "In pay status"
@@ -70,7 +70,7 @@
       "byeDt": "08/10/2025",
       "complexity": "HI",
       "assignedDate": "02/03/2025",
-      "openIssues": "5 +",
+      "openIssues": "5",
       "ff": "EMP - Y",
       "weeksFiled": 20,
       "indicators": "New"
@@ -82,7 +82,7 @@
       "byeDt": "05/20/2025",
       "complexity": "LOW",
       "assignedDate": "02/01/2025",
-      "openIssues": "0 +",
+      "openIssues": "1",
       "ff": "CMT - Y,EMP - Y",
       "weeksFiled": 15,
       "indicators": "In pay status"
@@ -94,7 +94,7 @@
       "byeDt": "02/12/2025",
       "complexity": "HI",
       "assignedDate": "02/12/2025",
-      "openIssues": "6 +",
+      "openIssues": "6",
       "ff": "EMP - Y",
       "weeksFiled": 22,
       "indicators": "New"
@@ -106,7 +106,7 @@
       "byeDt": "02/12/2025",
       "complexity": "LOW",
       "assignedDate": "02/12/2025",
-      "openIssues": "0 +",
+      "openIssues": "2",
       "ff": "CMT - Y",
       "weeksFiled": 7,
       "indicators": ""
@@ -118,7 +118,7 @@
       "byeDt": "02/12/2025",
       "complexity": "MED",
       "assignedDate": "02/20/2025",
-      "openIssues": "3 +",
+      "openIssues": "3",
       "ff": "CMT - Y",
       "weeksFiled": 14,
       "indicators": "New"
@@ -130,7 +130,7 @@
       "byeDt": "06/15/2025",
       "complexity": "HI",
       "assignedDate": "06/15/2025",
-      "openIssues": "3 +",
+      "openIssues": "3",
       "ff": "CMT - Y,EMP - Y",
       "weeksFiled": 12,
       "indicators": "New"
@@ -142,7 +142,7 @@
       "byeDt": "07/01/2025",
       "complexity": "MED",
       "assignedDate": "01/30/2025",
-      "openIssues": "1 +",
+      "openIssues": "1",
       "ff": "EMP - Y",
       "weeksFiled": 8,
       "indicators": ""

@@ -6,11 +6,14 @@ import {
   FormControlLabel,
   Paper,
   Stack,
+  Typography,
+  Box
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import CustomWidthTooltip from "../../../components/Tooltip";
 import OpenIssuesTitle from "./OpenIssuesTitle";
 import FFOptions from "./FFOptions";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 // const indicatorColors = {
 //   LATE: "#ab0c0c",
@@ -52,21 +55,29 @@ const CaseModeTableRow = ({ row, selectedRow, setSelectedRow }) => {
       <StyledTableCell>{row.complexity}</StyledTableCell>
       <StyledTableCell>{row.assignedDate}</StyledTableCell>
       <CustomWidthTooltip title={<OpenIssuesTitle />}>
-        <TableCell>{row.openIssues}</TableCell>
+        <TableCell>
+          <Stack direction="row" spacing={1} alignItems="center">
+            <Typography>{row.openIssues}</Typography>
+            <InfoOutlinedIcon sx={{ width: "16px" }} fontSize="small" />
+          </Stack>
+        </TableCell>
       </CustomWidthTooltip>
       <CustomWidthTooltip title={<FFOptions />}>
         <StyledTableCell>
           {row?.ff?.split(",").map((f) => (
-            <div
+            <Box
               key={f}
-              style={{
+              sx={{
+                display: "flex",
+                alignItems: "center", // Align items vertically in the center
+                gap: 0.5, // Add a small gap between the text and icon
                 color: "black",
-                textDecoration: "underline",
                 fontSize: "12px",
               }}
             >
-              {f}
-            </div>
+              <Typography variant="body2">{f}</Typography>
+              <InfoOutlinedIcon sx={{ width: "16px" }} fontSize="small" />
+            </Box>
           ))}
         </StyledTableCell>
       </CustomWidthTooltip>

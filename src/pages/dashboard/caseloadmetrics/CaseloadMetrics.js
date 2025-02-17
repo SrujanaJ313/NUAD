@@ -58,7 +58,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   color: "#ffffff",
   textAlign: "center",
   lineHeight: "10px",
-  padding:"10px"
+  padding: "10px 0px",
 }));
 
 const ContentCell = styled(TableCell)(({ theme }) => ({
@@ -156,104 +156,77 @@ const CaseloadMetrics = React.memo(
 
     return (
       <Box sx={{ paddingBottom: 0, paddingTop: 0.5 }}>
-        <Stack direction="row" spacing={2}>
-          <Stack
-            direction="row"
-            style={{ marginTop: "0.5rem", width: "15rem" }}
-          >
-            {/* <FormControl fullWidth size="small">
-              <InputLabel id="select-source-label">
-                Items Assigned To
-              </InputLabel>
-              <Select
-                labelId="select-source-label"
-                size="small"
-                value={userId}
-                onChange={(e) => {
-                  const userName = appointmentStaffList.find(
-                    (s) => s.id === Number(e.target.value)
-                  );
-
-                  handleItemsSelection(e, userName);
-                }}
-                label="Items Assigned To"
-              >
-                {appointmentStaffList.map((staff) => (
-                  <MenuItem key={staff.id} value={staff.id}>
-                    {staff.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl> */}
-          </Stack>
-          <TableContainer component={Paper}>
-            <Table
-              sx={{ minWidth: 400 }}
-              aria-label="caseload metrics table"
-              size="small"
+        <Stack direction="row" spacing={2} justifyContent={"center"}>
+          {false && (
+            <Stack
+              direction="row"
+              style={{ marginTop: "0.5rem", width: "15rem" }}
             >
-              <TableHead>
-                <TableRow>
-                  {metricLabels.map((label, index) => (
-                    <StyledTableCell key={index}>
-                      {label === "1stSub" ? (
-                        <>
-                          1<sup>st</sup>&nbsp;&nbsp;Sub
-                        </>
-                      ) : label === "2ndSub" ? (
-                        <>
-                          2<sup>nd</sup>&nbsp;&nbsp;Sub
-                        </>
-                      ) : (
-                        label
-                      )}
-                    </StyledTableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  {metricValues.map((value, index) => {
-                    let cellColor = "inherit";
-                    // if (index === metricValues.length - 2) {
-                    //   cellColor = "orange";
-                    // } else if (index === metricValues.length - 1) {
-                    //   cellColor = "red";
-                    // }
-
-                    return (
-                      <ContentCell key={index} sx={{ color: cellColor }}>
-                        <ButtonBase onClick={() => handleCellClick(index)}>
-                          <StyledBox>{caseloadMetrics[value]}</StyledBox>
-                        </ButtonBase>
-                      </ContentCell>
+              <FormControl fullWidth size="small">
+                <InputLabel id="select-source-label">
+                  Items Assigned To
+                </InputLabel>
+                <Select
+                  labelId="select-source-label"
+                  size="small"
+                  value={userId}
+                  onChange={(e) => {
+                    const userName = appointmentStaffList.find(
+                      (s) => s.id === Number(e.target.value)
                     );
-                  })}
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
+
+                    handleItemsSelection(e, userName);
+                  }}
+                  label="Items Assigned To"
+                >
+                  {appointmentStaffList.map((staff) => (
+                    <MenuItem key={staff.id} value={staff.id}>
+                      {staff.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Stack>
+          )}
+          <Stack style={{ width: "70%" }}>
+            <TableContainer component={Paper}>
+              <Table
+                sx={{ minWidth: 400 }}
+                aria-label="caseload metrics table"
+                size="small"
+              >
+                <TableHead>
+                  <TableRow>
+                    {metricLabels.map((label, index) => (
+                      <StyledTableCell key={index}>{label}</StyledTableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    {metricValues.map((value, index) => {
+                      let cellColor = "inherit";
+                      // if (index === metricValues.length - 2) {
+                      //   cellColor = "orange";
+                      // } else if (index === metricValues.length - 1) {
+                      //   cellColor = "red";
+                      // }
+
+                      return (
+                        <ContentCell key={index} sx={{ color: cellColor }}>
+                          <ButtonBase onClick={() => handleCellClick(index)}>
+                            <StyledBox>{caseloadMetrics[value]}</StyledBox>
+                          </ButtonBase>
+                        </ContentCell>
+                      );
+                    })}
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Stack>
         </Stack>
 
-        {/* <Box
-          sx={{
-            mt: "6px",
-            position: "absolute",
-            right: "24px",
-            zIndex: "10",
-          }}
-        >
-          <Link
-            href="#"
-            underline="always"
-            color="#183084"
-            onClick={handleSwitchView}
-          >
-            {showCalendarView
-              ? "Switch to Caseload View"
-              : "Switch to Calendar View"}
-          </Link>
-        </Box> */}
         {!!errors?.length && (
           <Stack mt={1} direction="column" useFlexGap flexWrap="wrap">
             {errors.map((x) => (
@@ -283,3 +256,4 @@ const CaseloadMetrics = React.memo(
 );
 
 export default CaseloadMetrics;
+

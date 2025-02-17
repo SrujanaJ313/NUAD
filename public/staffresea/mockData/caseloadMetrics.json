@@ -1,9 +1,9 @@
 {
-  "totalCases": 9,
+  "totalCases": 12,
   "notStarted": 5,
-  "dueInOneWeek": 2,
-  "dueToday": 1,
-  "overdue": 0,
+  "dueInOneWeek": 3,
+  "dueToday": 2,
+  "overdue": 2,
   "followUp": 0
 }
 

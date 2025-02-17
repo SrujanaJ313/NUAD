@@ -18,7 +18,7 @@ import {
 import TablePagination from "@mui/material/TablePagination";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import { visuallyHidden } from "@mui/utils";
-import cloneDeep from "lodash/cloneDeep";
+// import cloneDeep from "lodash/cloneDeep";
 import CustomModal from "../../../components/customModal/CustomModal";
 import moment from "moment";
 import CaseModeTableRow from "./CaseModeTableRow";
@@ -131,7 +131,6 @@ const CaseModeView = ({
       pagination: pagination,
       sortBy: sortBy,
     };
-
     // if (selectedStage && userId) {
     getCaseLoadSummaryData(payload);
     // }
@@ -208,7 +207,15 @@ const CaseModeView = ({
       // const response = await client.post(caseLoadSummaryURL, payload);
       const response = await client.get(caseLoadSummaryURL, payload); // This is for local Test only
       setReassignInd(response?.reassignInd);
-      setRows(cloneDeep(response.caseLoadSummaryList));
+      // setRows(cloneDeep(response.caseLoadSummaryList));//Enable Once API Ready
+      //Doing Client Side Pagination for Design - start - Remove Once API Ready
+      const { pageNumber, pageSize } = payload.pagination;
+      const rowsPerPage = response.caseLoadSummaryList.slice(
+        pageNumber * pageSize - pageSize,
+        pageNumber * pageSize
+      );
+      setRows(rowsPerPage);
+      //Doing Client Side Pagination for Design - end - Remove Once API Ready
       setTotalCount(response.pagination.totalItemCount);
     } catch (errorResponse) {
       const newErrMsgs = getMsgsFromErrorCode(
@@ -244,14 +251,14 @@ const CaseModeView = ({
         sx={{
           mt: "2px",
           position: "absolute",
-          right: "24px",
+          right: "12px",
           // zIndex: "10",
           color: "#183084",
           fontWeight: "bold",
           fontSize: "15px",
         }}
       >
-        Total Issues: 17
+        Total Issues: 24
       </Box>
       <Box sx={{ paddingTop: 3, paddingBottom: 2 }}>
         <TableContainer component={Paper} sx={{ maxHeight: "490px" }}>

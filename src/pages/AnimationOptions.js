@@ -2,11 +2,11 @@ import React from "react";
 import { Box, List, ListItem, ListItemText } from "@mui/material";
 
 const tabs = [
-  { label: "Review Continued Claims Filed", color: "#4CAF50" },
-  { label: "Review Works Search Requirements", color: "#00796B" },
-  { label: "Review Employment History", color: "#FFC107" },
-  { label: "Review Applications Filed", color: "#0D47A1" },
-  { label: "Review Determinations", color: "#E64A19" },
+  { label: "Review CCFs Filed", color: "#4CAF50" },
+  { label: "Review WS Req.", color: "#00796B" },
+  { label: "Review EMP History", color: "#FFC107" },
+  { label: "Review CAPS Filed", color: "#0D47A1" },
+  { label: "Review DTMs", color: "#E64A19" },
 ];
 
 const AnimationOptions = () => {
