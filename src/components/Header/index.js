@@ -161,7 +161,7 @@ export default function Header() {
               >
                 <span style={{ fontFamily: "Kristen ITC" }}>Ad</span>
                 <span style={{ fontFamily: "Lucida Sans Typewriter" }}>
-                  judicase
+                  judiCase
                 </span>
               </Typography>
             </Stack>

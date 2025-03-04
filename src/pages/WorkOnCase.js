@@ -40,15 +40,15 @@ const StyledTableCell = styled(TableCell)({
 
 const STEPS = [
   {
-    label: "Contact",
+    label: "Contact Party",
     active: true,
     stepNumber: 0,
     completionStatus: "N",
-    bgColor: "#4CAF50",
+    bgColor: "#183084",
     color: "white",
   },
   {
-    label: "Charging",
+    label: "Review Charging",
     active: false,
     stepNumber: 1,
     completionStatus: "N",
@@ -113,14 +113,14 @@ const WorkonCase = () => {
     const currentActiveStep = activeStep.stepNumber + 1;
     const changedSteps = steps.map((step) => {
       if (step.stepNumber === currentActiveStep) {
-        return { ...step, active: true, bgColor: "#4CAF50", color: "white" };
+        return { ...step, active: true, bgColor: "#183084", color: "white" };
       } else if (step.stepNumber < currentActiveStep) {
         return {
           ...step,
           active: false,
           completionStatus: "Y",
-          bgColor: "#183084",
-          color: "white",
+          bgColor: "#e8f4ea",
+          color: "#183084",
         };
       } else {
         return step;
@@ -134,7 +134,7 @@ const WorkonCase = () => {
     const currentActiveStep = activeStep.stepNumber - 1;
     const changedSteps = steps.map((step) => {
       if (step.stepNumber === currentActiveStep) {
-        return { ...step, active: true, bgColor: "#4CAF50", color: "white" };
+        return { ...step, active: true, bgColor: "#183084", color: "white" };
       } else if (step.stepNumber > currentActiveStep) {
         return {
           ...step,
@@ -231,7 +231,7 @@ const WorkonCase = () => {
           </Paper>
 
           {/* Steps Navigation */}
-          <Stack direction="row" spacing={1}>
+          <Stack direction="row" spacing={0}>
             {steps.map((step) => (
               <Paper
                 key={step.label}
@@ -250,6 +250,7 @@ const WorkonCase = () => {
                     ? "0px 10px 20px rgba(0, 0, 0, 0.3)" // Stronger shadow for Z-axis effect
                     : "0px 2px 5px rgba(0, 0, 0, 0.1)", // Subtle shadow for inactive state
                   zIndex: step.active ? 1 : 0, // Ensure the active polygon is on top
+                  marginLeft: step.stepNumber !== 0 ? "-3%" : "",
                 }}
               >
                 <Typography
@@ -367,7 +368,9 @@ const WorkonCase = () => {
                     />
                   </TableCell>
                   <TableCell>Employer</TableCell>
-                  <TableCell>Premium Retail Services, Inc.- NAME</TableCell>
+                  <TableCell>
+                    Premium Retail Services, Inc.- Jennifer Graf
+                  </TableCell>
                   <TableCell>01/15/2025</TableCell>
                   <TableCell>10:15 AM</TableCell>
                   <TableCell>Original</TableCell>
@@ -472,7 +475,7 @@ const WorkonCase = () => {
                     </Select>
                   </FormControl>
 
-                  <TextField
+                  {/* <TextField
                     label="Phone"
                     size="small"
                     variant="outlined"
@@ -488,7 +491,7 @@ const WorkonCase = () => {
                         <InputAdornment position="start">+1</InputAdornment>
                       ),
                     }}
-                  />
+                  /> */}
                 </Stack>
 
                 <TextField
@@ -565,31 +568,40 @@ const WorkonCase = () => {
                         <TableCell>
                           <b>Party</b>
                         </TableCell>
-                        <TableCell>
+                        <TableCell sx={{ padding: "6px" }}>
                           <b>Date</b>
                         </TableCell>
-                        <TableCell>
+                        <TableCell sx={{ padding: "6px" }}>
                           <b>Time</b>
                         </TableCell>
-                        <TableCell>
+                        <TableCell sx={{ padding: "6px" }}>
                           <b>Type</b>
                         </TableCell>
-                        <TableCell>
+                        <TableCell sx={{ padding: "6px" }}>
                           <b>Method</b>
                         </TableCell>
-                        <TableCell>
+                        <TableCell sx={{ padding: "6px" }}>
+
                           <b>Response Deadline</b>
                         </TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
                       <TableRow>
-                        <TableCell>E: Premium Retail Services, Inc.</TableCell>
-                        <TableCell>01/15/2025</TableCell>
-                        <TableCell>10:15 AM</TableCell>
-                        <TableCell>Original</TableCell>
-                        <TableCell>Phone: 603-856-7771</TableCell>
-                        <TableCell>1/17/2025 10:15am</TableCell>
+                        <TableCell>
+                          E: Premium Retail Services, Inc.- Jennifer Graf
+                        </TableCell>
+                        <TableCell sx={{ padding: "6px" }}>
+                          01/15/2025
+                        </TableCell>
+                        <TableCell sx={{ padding: "6px" }}>10:15 AM</TableCell>
+                        <TableCell sx={{ padding: "6px" }}>Original</TableCell>
+                        <TableCell sx={{ padding: "6px" }}>
+                          Phone: 603-856-7771
+                        </TableCell>
+                        <TableCell sx={{ padding: "6px" }}>
+                          1/17/2025 10:15am
+                        </TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
