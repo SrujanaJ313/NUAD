@@ -57,8 +57,8 @@ const CaseModeTableRow = ({ row, selectedRow, setSelectedRow }) => {
       <CustomWidthTooltip title={<OpenIssuesTitle />}>
         <TableCell>
           <Stack direction="row" spacing={1} alignItems="center">
-            <Typography>{row.openIssues}</Typography>
-            <InfoOutlinedIcon sx={{ width: "16px" }} fontSize="small" />
+            <Typography>{row.openIssues} ...</Typography>
+            {/* <InfoOutlinedIcon sx={{ width: "16px" }} fontSize="small" /> */}
           </Stack>
         </TableCell>
       </CustomWidthTooltip>
@@ -75,8 +75,8 @@ const CaseModeTableRow = ({ row, selectedRow, setSelectedRow }) => {
                 fontSize: "12px",
               }}
             >
-              <Typography variant="body2">{f}</Typography>
-              <InfoOutlinedIcon sx={{ width: "16px" }} fontSize="small" />
+              <Typography variant="body2">{f} ...</Typography>
+              {/* <InfoOutlinedIcon sx={{ width: "16px" }} fontSize="small" /> */}
             </Box>
           ))}
         </StyledTableCell>

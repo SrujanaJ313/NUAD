@@ -5,11 +5,12 @@ import { Box, Typography, styled } from "@mui/material";
 const FolderTab = styled(Box)(({ selected }) => ({
   height: "36px",
   position: "relative",
-  backgroundColor: selected ? "#8B7355" : "#A58F7B", // Light brown color
+  // backgroundColor: selected ? "#E8F4EA" : "#A58F7B",
+  backgroundColor:  "#E8F4EA" ,
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  color: "#fff", // White font color
+  color: "#183084", // White font color
   cursor: "pointer",
   transform: "rotate(90deg)",
   marginBottom: "16px", // Gap between tabs
@@ -20,7 +21,8 @@ const FolderTab = styled(Box)(({ selected }) => ({
     height: "36px",
     width: "30px",
     borderRadius: "10px 10px 0px 0px",
-    backgroundColor: selected ? "#8B7355" : "#A58F7B", // Light brown color
+    // backgroundColor: selected ? "#8B7355" : "#A58F7B", // Light brown color
+    backgroundColor: "#E8F4EA", // Light brown color
     zIndex: -1,
   },
   "&:before": {
@@ -45,18 +47,18 @@ const FolderTab = styled(Box)(({ selected }) => ({
 
 
 const tabs = [
-  { label: "Review CCFs Filed", selected: true },
-  { label: "Review WS Req.", selected: false},
-  { label: "Review EMP History", selected: false },
-  { label: "Review CAPS Filed", selected: false },
-  { label: "Review DTMs", selected: false },
+  { label: "Applications Filed", selected: true },
+  { label: "CCFs Filed", selected: false},
+  { label: "Determinations", selected: false },
+  { label: "Employment History", selected: false },
+  { label: "WS Requirements", selected: false },
 ];
 
 const ManillaFolder = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#f2f3f7",
+        backgroundColor: "white",
         // height: "calc(100vh - 128px)", // Adjust height to fit between header and footer
         display: "flex",
         alignItems: "center",

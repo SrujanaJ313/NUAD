@@ -373,7 +373,7 @@ const CaseModeView = ({
               navigate("/workoncase");
             }}
           >
-            Work on Case
+            Adjudicate
           </Button>
         </div>
       </div>

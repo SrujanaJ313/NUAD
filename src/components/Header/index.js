@@ -153,25 +153,22 @@ export default function Header() {
             </IconButton>
             <Stack>
               <Typography
-                color="white"
+                color="lightgray"
                 fontSize={"2rem"}
                 sx={{
-                  fontFamily: "Kristen ITC, Lucida Sans Typewriter, sans-serif", // Fallback fonts
+                  fontFamily: "Imprint MT Shadow, sans-serif",
                 }}
               >
-                <span style={{ fontFamily: "Kristen ITC" }}>Ad</span>
-                <span style={{ fontFamily: "Lucida Sans Typewriter" }}>
-                  judiCase
-                </span>
+                <span>AdjudiCase</span>
               </Typography>
             </Stack>
           </Stack>
           {location.pathname === "/workoncase" && (
             <Stack
               direction={"row"}
-              justifyContent={"flex-end"} // Changed from "space-around" to "space-between"
+              justifyContent={"flex-end"}
               alignItems={"center"}
-              sx={{ width: "60%" }} // Reduced width from 45% to 35%
+              sx={{ width: "35%"}} 
               gap={2}
             >
               <Stack>
@@ -181,13 +178,23 @@ export default function Header() {
               </Stack>
               <Stack direction={"row"}>
                 <Typography color={"white"} fontWeight="bold">
-                  BYE:&nbsp;
-                </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{ color: "white", fontWeight: "bold" }}
-                >
-                  11/15/2025
+                  BYE start:&nbsp;
+                  <Typography
+                    variant="body2"
+                    component="span" // Use span to keep it inline
+                    sx={{ color: "white", fontWeight: "bold" }}
+                  >
+                    11/17/2024
+                  </Typography>
+                  &nbsp;-&nbsp; {/* Add the separator */}
+                  BYE end:&nbsp;
+                  <Typography
+                    variant="body2"
+                    component="span" // Use span to keep it inline
+                    sx={{ color: "white", fontWeight: "bold" }}
+                  >
+                    11/15/2025
+                  </Typography>
                 </Typography>
               </Stack>
               <Stack direction={"row"}>
