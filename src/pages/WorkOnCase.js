@@ -220,17 +220,8 @@ const WorkonCase = () => {
       </Box>
 
       {/* Right Side: AnimationOptions */}
-      {/* <Box
-        sx={{
-          width: "auto", // Adjust width as needed
-          height: "100vh",
-          position: "sticky",
-          top: 0,
-          right: 0,
-        }}
-      > */}
-        <ManillaFolder />
-      {/* </Box> */}
+
+      <ManillaFolder />
     </Box>
   );
 };
