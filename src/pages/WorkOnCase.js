@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import ContactParty from "./ContactParty";
 import ReviewCharging from "./ReviewCharging";
-import AnimationOptions from "./AnimationOptions";
+import ManillaFolder from "./ManillaFolder";
 
 const STEPS = [
   {
@@ -220,7 +220,7 @@ const WorkonCase = () => {
       </Box>
 
       {/* Right Side: AnimationOptions */}
-      <Box
+      {/* <Box
         sx={{
           width: "auto", // Adjust width as needed
           height: "100vh",
@@ -228,9 +228,9 @@ const WorkonCase = () => {
           top: 0,
           right: 0,
         }}
-      >
-        <AnimationOptions />
-      </Box>
+      > */}
+        <ManillaFolder />
+      {/* </Box> */}
     </Box>
   );
 };

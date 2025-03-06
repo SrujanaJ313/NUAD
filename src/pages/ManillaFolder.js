@@ -35,7 +35,7 @@ const AnimationOptions = () => {
               cursor: "pointer",
               "&:hover": { opacity: 0.8 },
               // width: "fit-content",
-              transform: "rotate(180deg)",
+              transform: "rotate(360deg)",
               writingMode: "vertical-rl",
             }}
           >
