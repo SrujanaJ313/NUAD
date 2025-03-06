@@ -9,7 +9,7 @@ const tabs = [
   { label: "Review DTMs", color: "#E64A19" },
 ];
 
-const AnimationOptions = () => {
+const ManillaFolder = () => {
   return (
     <Box
       sx={{
@@ -52,4 +52,4 @@ const AnimationOptions = () => {
   );
 };
 
-export default AnimationOptions;
+export default ManillaFolder;
