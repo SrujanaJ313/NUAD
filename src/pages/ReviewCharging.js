@@ -54,8 +54,8 @@ const data = [
     designation: "MRE",
     startDate: "12/22/2024",
     endDate: "01/04/2025",
-    liable: "60.0000",
-    status: "WS",
+    liable: "60.0000 WS",
+    status: "CHG",
   },
   {
     label: "T",

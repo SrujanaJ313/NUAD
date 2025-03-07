@@ -1,54 +1,23 @@
 import React from "react";
 import { Box, Typography, styled } from "@mui/material";
 
-// Styled component for the folder tab
-const FolderTab = styled(Box)(({ selected }) => ({
-  height: "36px",
-  position: "relative",
-  // backgroundColor: selected ? "#E8F4EA" : "#A58F7B",
-  backgroundColor:  "#E8F4EA" ,
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  color: "#183084", // White font color
-  cursor: "pointer",
+const FolderTab = styled(Box)({
+  backgroundColor: "#e8f4ea",
+  color: "black",
+  fontSize: "18px", // Slightly reduced font size for better fit
+  fontFamily: "serif",
+  textAlign: "center",
+  width: "150px", // Reduced width
+  padding: "10px",
   transform: "rotate(90deg)",
-  marginBottom: "16px", // Gap between tabs
-  zIndex: selected ? 3 : 2,
-  "&:before, &:after": {
-    content: '""',
-    position: "absolute",
-    height: "36px",
-    width: "30px",
-    borderRadius: "10px 10px 0px 0px",
-    // backgroundColor: selected ? "#8B7355" : "#A58F7B", // Light brown color
-    backgroundColor: "#E8F4EA", // Light brown color
-    zIndex: -1,
-  },
-  "&:before": {
-    left: "-20px",
-    top: 0,
-    transform: "skewX(-20deg)",
-  },
-  "&:after": {
-    right: "-20px",
-    top: 0,
-    transform: "skewX(20deg)",
-  },
-  "&:hover": {
-    backgroundColor: "#8B7355", // Darker brown on hover
-    color: "#fff",
-    zIndex: 3,
-    "&:before, &:after": {
-      backgroundColor: "#8B7355", // Darker brown on hover
-    },
-  },
-}));
-
+  outline:"1px solid black",
+  clipPath:
+    "path('M 15 0 H 125 A 15 15 0 0 1 140 15 V 65 A 15 15 0 0 1 125 80 Q 110 100 70 100 Q 30 100 15 80 A 15 15 0 0 1 0 65 V 15 A 15 15 0 0 1 15 0 Z')", // Proportionally adjusted
+});
 
 const tabs = [
   { label: "Applications Filed", selected: true },
-  { label: "CCFs Filed", selected: false},
+  { label: "CCFs Filed", selected: false },
   { label: "Determinations", selected: false },
   { label: "Employment History", selected: false },
   { label: "WS Requirements", selected: false },
@@ -58,32 +27,30 @@ const ManillaFolder = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "white",
-        // height: "calc(100vh - 128px)", // Adjust height to fit between header and footer
         display: "flex",
-        alignItems: "center",
-        // justifyContent: "flex-end",
-        // paddingTop: "5px",
+        alignItems: "flex-start",
+        justifyContent: "center",
       }}
     >
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          transform: "rotate(360deg)",
-          transformOrigin: "left top",
-          gap: 12, // Add gap between tabs
-          marginTop:"25px"
+          // alignContent: "flex-start",
+          justifyContent:"center",
+          backgroundColor:"white",
+          gap: 16, // Adjusted spacing for balance
+          height: "100%",
         }}
       >
         {tabs.map((tab, index) => (
           <FolderTab key={index} selected={tab.selected}>
             <Typography
               sx={{
-                marginLeft: "8px",
-                marginRight: "8px",
+                marginLeft: "6px",
+                marginRight: "6px",
                 fontWeight: "bold",
+                fontSize: "13px", // Further reduced to fit
               }}
             >
               {tab.label}

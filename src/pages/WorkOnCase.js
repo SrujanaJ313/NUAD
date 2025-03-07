@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import ContactParty from "./ContactParty";
 import ReviewCharging from "./ReviewCharging";
+import FactFinding from "./FactFinding";
 import ManillaFolder from "./ManillaFolder";
 
 const STEPS = [
@@ -21,7 +22,7 @@ const STEPS = [
     completionStatus: "N",
     bgColor: "white",
     color: "black",
-    component: ContactParty,
+    component: FactFinding,
   },
   {
     label: "Review Charging",
@@ -191,12 +192,12 @@ const WorkonCase = () => {
                   borderRadius: 0,
                   clipPath:
                     "polygon(0% 0%, 80% 0%, 100% 50%, 80% 100%, 0% 100%, 20% 50%)",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease", // Smooth transition
-                  transform: step.active ? "scale(1.05)" : "scale(1)", // Scale up the active polygon
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  transform: step.active ? "scale(1.05)" : "scale(1)",
                   boxShadow: step.active
-                    ? "0px 10px 20px rgba(0, 0, 0, 0.3)" // Stronger shadow for Z-axis effect
-                    : "0px 2px 5px rgba(0, 0, 0, 0.1)", // Subtle shadow for inactive state
-                  zIndex: step.active ? 1 : 0, // Ensure the active polygon is on top
+                    ? "0px 10px 20px rgba(0, 0, 0, 0.3)"
+                    : "0px 2px 5px rgba(0, 0, 0, 0.1)",
+                  zIndex: step.active ? 1 : 0,
                   marginLeft: step.stepNumber !== 0 ? "-3%" : "",
                 }}
               >
@@ -219,12 +220,10 @@ const WorkonCase = () => {
         </Stack>
       </Box>
 
-      {/* Right Side: AnimationOptions */}
-
-      <ManillaFolder />
+      {/* Right Side: ManillaFolder */}
+        <ManillaFolder />
     </Box>
   );
 };
 
 export default WorkonCase;
-
