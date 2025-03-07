@@ -17,11 +17,13 @@ import {
   TableRow,
   TextField,
   Typography,
-  FormControlLabel
+  FormControlLabel,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
+import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
+import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
 
 const initialIssues = [
   {
@@ -62,7 +64,11 @@ const initialIssues = [
   },
 ];
 
-const FactFinding = () => {
+const FactFinding = ({
+  handleNextNavigation,
+  handleBackNavigation,
+  activeStep,
+}) => {
   const [issues, setIssues] = useState(initialIssues);
   const [editIndex, setEditIndex] = useState(null);
   const [editField, setEditField] = useState(null);
@@ -106,6 +112,36 @@ const FactFinding = () => {
       <Typography variant="h6" fontWeight="bold" sx={{ color: "#183084" }}>
         Fact Finding
       </Typography>
+      <Stack direction={"row"} justifyContent="flex-end">
+      <Stack direction={"row"} justifyContent="flex-end" sx={{ width: "35%" }}>
+        <Stack width={"20%"}>
+          <ArrowCircleLeftOutlinedIcon
+            fontSize="large"
+            sx={{
+              color: activeStep?.label === "Contact" ? "#BDBDBD" : "#183084",
+              "&:hover": {
+                cursor:
+                  activeStep?.label === "Contact" ? "not-allowed" : "pointer",
+              },
+            }}
+            onClick={handleBackNavigation}
+          />
+        </Stack>
+        <Stack>
+          <ArrowCircleRightOutlinedIcon
+            fontSize="large"
+            sx={{
+              color: activeStep?.label === "End Date" ? "#BDBDBD" : "#183084",
+              "&:hover": {
+                cursor:
+                  activeStep?.label === "End Date" ? "not-allowed" : "pointer",
+              },
+            }}
+            onClick={handleNextNavigation}
+          />
+        </Stack>
+      </Stack>
+      </Stack>
 
       {/* Issues Table */}
       <TableContainer component={Paper}>

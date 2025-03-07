@@ -171,6 +171,36 @@ function ReviewCharging({
       <Typography variant="h6" sx={{ color: "#183084", fontWeight: "bold" }}>
         Current Charge Liabilities
       </Typography>
+      <Stack direction={"row"} justifyContent="flex-end">
+      <Stack direction={"row"} justifyContent="flex-end" sx={{ width: "35%" }}>
+        <Stack width={"20%"}>
+          <ArrowCircleLeftOutlinedIcon
+            fontSize="large"
+            sx={{
+              color: activeStep?.label === "Contact" ? "#BDBDBD" : "#183084",
+              "&:hover": {
+                cursor:
+                  activeStep?.label === "Contact" ? "not-allowed" : "pointer",
+              },
+            }}
+            onClick={handleBackNavigation}
+          />
+        </Stack>
+        <Stack>
+          <ArrowCircleRightOutlinedIcon
+            fontSize="large"
+            sx={{
+              color: activeStep?.label === "End Date" ? "#BDBDBD" : "#183084",
+              "&:hover": {
+                cursor:
+                  activeStep?.label === "End Date" ? "not-allowed" : "pointer",
+              },
+            }}
+            onClick={handleNextNavigation}
+          />
+        </Stack>
+      </Stack>
+      </Stack>
 
       <TableContainer component={Paper}>
         <Table>
@@ -256,36 +286,6 @@ function ReviewCharging({
 
         {!selectedOption && <SubmitCancelButtons />}
 
-        <Stack direction={"row"} justifyContent="end" width={"30%"}>
-          <Stack width={"20%"}>
-            <ArrowCircleLeftOutlinedIcon
-              fontSize="large"
-              sx={{
-                color: activeStep?.label === "Contact" ? "#BDBDBD" : "#183084",
-                "&:hover": {
-                  cursor:
-                    activeStep?.label === "Contact" ? "not-allowed" : "pointer",
-                },
-              }}
-              onClick={handleBackNavigation}
-            />
-          </Stack>
-          <Stack>
-            <ArrowCircleRightOutlinedIcon
-              fontSize="large"
-              sx={{
-                color: activeStep?.label === "End Date" ? "#BDBDBD" : "#183084",
-                "&:hover": {
-                  cursor:
-                    activeStep?.label === "End Date"
-                      ? "not-allowed"
-                      : "pointer",
-                },
-              }}
-              onClick={handleNextNavigation}
-            />
-          </Stack>
-        </Stack>
       </Stack>
 
       {selectedOption === "adjustTax" && (
