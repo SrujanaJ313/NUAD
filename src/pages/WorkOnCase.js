@@ -127,7 +127,7 @@ const WorkonCase = () => {
               width="100%"
             >
               <Typography variant="h6" color="primary" fontWeight="bold">
-                Adjudicate
+               {activeStep.label}
               </Typography>
               <Stack direction="row" spacing={4}>
                 <Box display="flex" alignItems="center">

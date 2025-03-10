@@ -18,12 +18,16 @@ import {
   TextField,
   Typography,
   FormControlLabel,
+  InputLabel,
+  FormControl,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
-import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
-import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
+import CustomModal from "../components/customModal/CustomModal";
+import DialogContent from "@mui/material/DialogContent";
+import FactFindingActionForm from "./FactFindingActionForm";
+import NavigationArrows from "./NavigationArrows";
 
 const initialIssues = [
   {
@@ -74,6 +78,7 @@ const FactFinding = ({
   const [editField, setEditField] = useState(null);
   const [editValue, setEditValue] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [editActionForm, setEditActionForm] = useState(false);
   const [newIssue, setNewIssue] = useState({
     issueType: "",
     subIssueType: "",
@@ -82,7 +87,6 @@ const FactFinding = ({
     assignToSelf: "No",
   });
 
-  // Handle editing issue type/employer
   const startEditing = (index, field, value) => {
     setEditIndex(index);
     setEditField(field);
@@ -102,45 +106,41 @@ const FactFinding = ({
     setEditField(null);
   };
 
-  // Handle new issue form input change
   const handleNewIssueChange = (e) => {
     setNewIssue({ ...newIssue, [e.target.name]: e.target.value });
   };
 
   return (
     <Stack spacing={2}>
-      <Typography variant="h6" fontWeight="bold" sx={{ color: "#183084" }}>
-        Fact Finding
-      </Typography>
-      <Stack direction={"row"} justifyContent="flex-end">
-      <Stack direction={"row"} justifyContent="flex-end" sx={{ width: "35%" }}>
-        <Stack width={"20%"}>
-          <ArrowCircleLeftOutlinedIcon
-            fontSize="large"
-            sx={{
-              color: activeStep?.label === "Contact" ? "#BDBDBD" : "#183084",
-              "&:hover": {
-                cursor:
-                  activeStep?.label === "Contact" ? "not-allowed" : "pointer",
-              },
-            }}
-            onClick={handleBackNavigation}
-          />
+      <Stack direction={"row"} justifyContent={"space-between"}>
+        <Stack width={"50%"}>
+          <Typography variant="h6" fontWeight="bold" sx={{ color: "#183084" }}>
+            Fact Finding
+          </Typography>
         </Stack>
-        <Stack>
-          <ArrowCircleRightOutlinedIcon
-            fontSize="large"
-            sx={{
-              color: activeStep?.label === "End Date" ? "#BDBDBD" : "#183084",
-              "&:hover": {
-                cursor:
-                  activeStep?.label === "End Date" ? "not-allowed" : "pointer",
-              },
-            }}
-            onClick={handleNextNavigation}
-          />
+        <Stack width={"50%"} direction={"row"} justifyContent={"flex-end"}>
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{fontWeight: "bold" }}
+          >
+            NHES Law Book
+          </Button>
         </Stack>
       </Stack>
+
+      <Stack direction={"row"} justifyContent="flex-end">
+        <Stack
+          direction={"row"}
+          justifyContent="flex-end"
+          sx={{ width: "35%" }}
+        >
+          <NavigationArrows
+            activeStep={activeStep}
+            handleBackNavigation={handleBackNavigation}
+            handleNextNavigation={handleNextNavigation}
+          />
+        </Stack>
       </Stack>
 
       {/* Issues Table */}
@@ -155,7 +155,7 @@ const FactFinding = ({
                 "Employer",
                 "CMT",
                 "EMP",
-                "RSA",
+                "RSA & EMP",
                 "Actions",
               ].map((header) => (
                 <TableCell
@@ -173,21 +173,57 @@ const FactFinding = ({
                 {/* Editable Issue Type */}
                 <TableCell>
                   {editIndex === index && editField === "issueType" ? (
-                    <Stack direction="row" spacing={1} alignItems="center">
-                      <TextField
-                        value={editValue}
-                        onChange={(e) => setEditValue(e.target.value)}
-                        size="small"
-                      />
-                      <IconButton onClick={saveEdit} color="success">
-                        <CheckIcon />
-                      </IconButton>
-                      <IconButton onClick={cancelEdit} color="error">
-                        <CloseIcon />
-                      </IconButton>
+                    <Stack
+                      direction="row"
+                      spacing={1}
+                      alignItems="center"
+                      justifyContent={"space-between"}
+                    >
+                      <Stack>
+                        <FormControl fullWidth>
+                          <InputLabel id="issue-subtype-label">
+                            Select Issue Type/Sub-Type
+                          </InputLabel>
+                          <Select
+                            labelId="issue-subtype-label"
+                            value={editValue}
+                            onChange={(e) => setEditValue(e.target.value)}
+                            label="Select an option"
+                            size="small"
+                            sx={{ width: "200px" }}
+                          >
+                            <MenuItem value="Deductible Income/Deductible Income">
+                              Deductible Income/Deductible Income
+                            </MenuItem>
+                            <MenuItem value="Availability / Transportation">
+                              Availability / Transportation
+                            </MenuItem>
+                            <MenuItem value="Fixed / Do not meet performance">
+                              Fixed / Do not meet performance
+                            </MenuItem>
+                            <MenuItem value="Ability / IIlness or injury">
+                              Ability / IIlness or injury
+                            </MenuItem>
+                            {/* Add more MenuItem components as needed */}
+                          </Select>
+                        </FormControl>
+                      </Stack>
+                      <Stack direction={"row"}>
+                        <IconButton onClick={saveEdit} color="success">
+                          <CheckIcon />
+                        </IconButton>
+                        <IconButton onClick={cancelEdit} color="error">
+                          <CloseIcon />
+                        </IconButton>
+                      </Stack>
                     </Stack>
                   ) : (
-                    <Stack direction="row" spacing={1} alignItems="center">
+                    <Stack
+                      direction="row"
+                      spacing={1}
+                      alignItems="center"
+                      justifyContent={"space-between"}
+                    >
                       <Typography>{issue.issueType}</Typography>
                       <IconButton
                         onClick={() =>
@@ -204,34 +240,71 @@ const FactFinding = ({
                 <TableCell>{issue.endDate || "--"}</TableCell>
 
                 {/* Editable Employer */}
-                <TableCell>
-                  {editIndex === index && editField === "employer" ? (
-                    <Stack direction="row" spacing={1} alignItems="center">
-                      <TextField
-                        value={editValue}
-                        onChange={(e) => setEditValue(e.target.value)}
-                        size="small"
-                      />
-                      <IconButton onClick={saveEdit} color="success">
-                        <CheckIcon />
-                      </IconButton>
-                      <IconButton onClick={cancelEdit} color="error">
-                        <CloseIcon />
-                      </IconButton>
-                    </Stack>
-                  ) : (
-                    <Stack direction="row" spacing={1} alignItems="center">
-                      <Typography>{issue.employer || "--"}</Typography>
-                      <IconButton
-                        onClick={() =>
-                          startEditing(index, "employer", issue.employer)
-                        }
+                {issue?.employer ? (
+                  <TableCell>
+                    {editIndex === index && editField === "employer" ? (
+                      <Stack
+                        direction="row"
+                        spacing={1}
+                        alignItems="center"
+                        justifyContent={"space-between"}
                       >
-                        <EditIcon />
-                      </IconButton>
-                    </Stack>
-                  )}
-                </TableCell>
+                        <Stack>
+                          <FormControl fullWidth>
+                            <InputLabel id="employer-label">
+                              Select Employer
+                            </InputLabel>
+                            <Select
+                              labelId="employer-label"
+                              value={editValue}
+                              onChange={(e) => setEditValue(e.target.value)}
+                              label="Select an option"
+                              size="small"
+                              sx={{ width: "200px" }}
+                            >
+                              <MenuItem value="LONDONDERRY SCHOOL DISTRICT">
+                                LONDONDERRY SCHOOL DISTRICT
+                              </MenuItem>
+                              <MenuItem value="LONDONDERRY SCHOOL DISTRICT">
+                                LONDONDERRY SCHOOL DISTRICT
+                              </MenuItem>
+                              <MenuItem value="LONDONDERRY SCHOOL DISTRICT">
+                                LONDONDERRY SCHOOL DISTRICT
+                              </MenuItem>
+                              {/* Add more MenuItem components as needed */}
+                            </Select>
+                          </FormControl>
+                        </Stack>
+                        <Stack direction={"row"}>
+                          <IconButton onClick={saveEdit} color="success">
+                            <CheckIcon />
+                          </IconButton>
+                          <IconButton onClick={cancelEdit} color="error">
+                            <CloseIcon />
+                          </IconButton>
+                        </Stack>
+                      </Stack>
+                    ) : (
+                      <Stack
+                        direction="row"
+                        spacing={1}
+                        alignItems="center"
+                        justifyContent={"space-between"}
+                      >
+                        <Typography>{issue.employer || "--"}</Typography>
+                        <IconButton
+                          onClick={() =>
+                            startEditing(index, "employer", issue.employer)
+                          }
+                        >
+                          <EditIcon />
+                        </IconButton>
+                      </Stack>
+                    )}
+                  </TableCell>
+                ) : (
+                  <TableCell></TableCell>
+                )}
 
                 <TableCell>{issue.cmt}</TableCell>
                 <TableCell>{issue.emp}</TableCell>
@@ -240,7 +313,7 @@ const FactFinding = ({
                 {/* Actions Column */}
                 <TableCell>
                   <IconButton>
-                    <EditIcon />
+                    <EditIcon onClick={() => setEditActionForm(true)} />
                   </IconButton>
                 </TableCell>
               </TableRow>
@@ -387,6 +460,33 @@ const FactFinding = ({
             </Box>
           </Stack>
         </Paper>
+      )}
+
+      {editActionForm && (
+        <CustomModal
+          open={editActionForm}
+          onClose={() => setEditActionForm(false)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          title="Fact Finding Questions"
+          maxWidth={"lg"}
+        >
+          <DialogContent>
+            <Stack
+              width="100%"
+              justifyContent="center"
+              alignItems="center"
+              mt={2}
+            >
+              <FactFindingActionForm />
+            </Stack>
+          </DialogContent>
+          {/* <DialogActions sx={{ margin: 2 }}>
+              <Button variant="contained" onClick={() => handleLogout()}>
+                Close
+              </Button>
+            </DialogActions> */}
+        </CustomModal>
       )}
     </Stack>
   );

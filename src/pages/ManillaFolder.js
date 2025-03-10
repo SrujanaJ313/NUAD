@@ -2,15 +2,19 @@ import React from "react";
 import { Box, Typography, styled } from "@mui/material";
 
 const FolderTab = styled(Box)({
-  backgroundColor: "#e8f4ea",
+  backgroundColor: "#a0d2a8",
+  //   #d0e9d4 (slightly darker)
+  // #b8ddbe (medium darker)
+  // #a0d2a8 (even darker)
+  // #88c692 (much darker)
   color: "black",
-  fontSize: "18px", // Slightly reduced font size for better fit
+  fontSize: "18px",
   fontFamily: "serif",
   textAlign: "center",
-  width: "150px", // Reduced width
+  width: "150px",
   padding: "10px",
   transform: "rotate(90deg)",
-  outline:"1px solid black",
+  outline: "1px solid black",
   clipPath:
     "path('M 15 0 H 125 A 15 15 0 0 1 140 15 V 65 A 15 15 0 0 1 125 80 Q 110 100 70 100 Q 30 100 15 80 A 15 15 0 0 1 0 65 V 15 A 15 15 0 0 1 15 0 Z')", // Proportionally adjusted
 });
@@ -37,8 +41,8 @@ const ManillaFolder = () => {
           display: "flex",
           flexDirection: "column",
           // alignContent: "flex-start",
-          justifyContent:"center",
-          backgroundColor:"white",
+          justifyContent: "center",
+          backgroundColor: "white",
           gap: 16, // Adjusted spacing for balance
           height: "100%",
         }}
@@ -63,3 +67,4 @@ const ManillaFolder = () => {
 };
 
 export default ManillaFolder;
+

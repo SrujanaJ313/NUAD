@@ -20,7 +20,6 @@ import {
   FormControl,
   InputLabel,
   styled,
-  //   InputAdornment,
   IconButton,
   Box,
 } from "@mui/material";
@@ -30,11 +29,10 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import AddIcon from "@mui/icons-material/Add";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
-import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
+import NavigationArrows from "./NavigationArrows";
 
 const StyledTableCell = styled(TableCell)({
-  color: "inherit", // Inherit color from parent
+  color: "inherit"
 });
 
 function ContactParty({
@@ -102,38 +100,11 @@ function ContactParty({
             <RestartAltIcon />
           </IconButton>
           <Stack direction={"row"} justifyContent="end" sx={{ width: "35%" }}>
-            <Stack width={"20%"}>
-              <ArrowCircleLeftOutlinedIcon
-                fontSize="large"
-                sx={{
-                  color:
-                    activeStep?.label === "Contact" ? "#BDBDBD" : "#183084",
-                  "&:hover": {
-                    cursor:
-                      activeStep?.label === "Contact"
-                        ? "not-allowed"
-                        : "pointer",
-                  },
-                }}
-                onClick={handleBackNavigation}
-              />
-            </Stack>
-            <Stack>
-              <ArrowCircleRightOutlinedIcon
-                fontSize="large"
-                sx={{
-                  color:
-                    activeStep?.label === "End Date" ? "#BDBDBD" : "#183084",
-                  "&:hover": {
-                    cursor:
-                      activeStep?.label === "End Date"
-                        ? "not-allowed"
-                        : "pointer",
-                  },
-                }}
-                onClick={handleNextNavigation}
-              />
-            </Stack>
+            <NavigationArrows
+              activeStep={activeStep}
+              handleBackNavigation={handleBackNavigation}
+              handleNextNavigation={handleNextNavigation}
+            />
           </Stack>
         </Stack>
       </TableContainer>

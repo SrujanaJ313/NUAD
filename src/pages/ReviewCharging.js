@@ -23,8 +23,7 @@ import {
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
-import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
-import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
+import NavigationArrows from "./NavigationArrows";
 
 const data = [
   {
@@ -173,32 +172,11 @@ function ReviewCharging({
       </Typography>
       <Stack direction={"row"} justifyContent="flex-end">
       <Stack direction={"row"} justifyContent="flex-end" sx={{ width: "35%" }}>
-        <Stack width={"20%"}>
-          <ArrowCircleLeftOutlinedIcon
-            fontSize="large"
-            sx={{
-              color: activeStep?.label === "Contact" ? "#BDBDBD" : "#183084",
-              "&:hover": {
-                cursor:
-                  activeStep?.label === "Contact" ? "not-allowed" : "pointer",
-              },
-            }}
-            onClick={handleBackNavigation}
+      <NavigationArrows
+            activeStep={activeStep}
+            handleBackNavigation={handleBackNavigation}
+            handleNextNavigation={handleNextNavigation}
           />
-        </Stack>
-        <Stack>
-          <ArrowCircleRightOutlinedIcon
-            fontSize="large"
-            sx={{
-              color: activeStep?.label === "End Date" ? "#BDBDBD" : "#183084",
-              "&:hover": {
-                cursor:
-                  activeStep?.label === "End Date" ? "not-allowed" : "pointer",
-              },
-            }}
-            onClick={handleNextNavigation}
-          />
-        </Stack>
       </Stack>
       </Stack>
 
