@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Box, Paper, Stack, Typography } from "@mui/material";
+import ManillaFolder from "./ManillaFolder";
 import ContactParty from "./ContactParty";
 import ReviewCharging from "./ReviewCharging";
 import FactFinding from "./FactFinding";
-import ManillaFolder from "./ManillaFolder";
+import RecordDecision from "./RecordDecision";
+import EndDate from "./EndDate";
 
 const STEPS = [
   {
@@ -40,7 +42,7 @@ const STEPS = [
     completionStatus: "N",
     bgColor: "white",
     color: "black",
-    component: ContactParty,
+    component: RecordDecision,
   },
   {
     label: "End Date",
@@ -49,7 +51,7 @@ const STEPS = [
     completionStatus: "N",
     bgColor: "white",
     color: "black",
-    component: ContactParty,
+    component: EndDate,
   },
 ];
 
