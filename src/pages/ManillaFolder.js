@@ -8,15 +8,21 @@ const FolderTab = styled(Box)({
   // #a0d2a8 (even darker)
   // #88c692 (much darker)
   color: "black",
-  fontSize: "18px",
-  fontFamily: "serif",
+  fontSize: "10px",
+  fontFamily: "Arial, sans-serif",
+  fontWeight: "bold",
   textAlign: "center",
-  width: "150px",
-  padding: "10px",
-  transform: "rotate(90deg)",
-  outline: "1px solid black",
-  clipPath:
-    "path('M 15 0 H 125 A 15 15 0 0 1 140 15 V 65 A 15 15 0 0 1 125 80 Q 110 100 70 100 Q 30 100 15 80 A 15 15 0 0 1 0 65 V 15 A 15 15 0 0 1 15 0 Z')", // Proportionally adjusted
+  width: "45px",
+  height: "140px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  writingMode: "vertical-lr",
+  borderLeft: "1px solid black",
+  borderTopRightRadius: "20px",
+  borderBottomRightRadius: "20px",
+  flexShrink: 0,
+  margin:"3px 5px 3px 0"
 });
 
 const tabs = [
@@ -32,36 +38,28 @@ const ManillaFolder = () => {
     <Box
       sx={{
         display: "flex",
-        alignItems: "flex-start",
+        flexDirection: "column",
+        // alignContent: "flex-start",
         justifyContent: "center",
+        backgroundColor: "white",
+        gap: 1,
+        // height: "100%",
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          // alignContent: "flex-start",
-          justifyContent: "center",
-          backgroundColor: "white",
-          gap: 16, // Adjusted spacing for balance
-          height: "100%",
-        }}
-      >
-        {tabs.map((tab, index) => (
-          <FolderTab key={index} selected={tab.selected}>
-            <Typography
-              sx={{
-                marginLeft: "6px",
-                marginRight: "6px",
-                fontWeight: "bold",
-                fontSize: "13px", // Further reduced to fit
-              }}
-            >
-              {tab.label}
-            </Typography>
-          </FolderTab>
-        ))}
-      </Box>
+      {tabs.map((tab, index) => (
+        <FolderTab key={index} selected={tab.selected}>
+          <Typography
+            sx={{
+              marginLeft: "6px",
+              marginRight: "6px",
+              fontWeight: "bold",
+              fontSize: "13px",
+            }}
+          >
+            {tab.label}
+          </Typography>
+        </FolderTab>
+      ))}
     </Box>
   );
 };

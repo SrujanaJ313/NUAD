@@ -105,9 +105,6 @@ const WorkonCase = () => {
     <Box
       sx={{
         display: "flex",
-        flexDirection: "row",
-        width: "100%",
-        height: "100vh",
       }}
     >
       {/* Left Side: Main Content */}
@@ -129,7 +126,7 @@ const WorkonCase = () => {
               width="100%"
             >
               <Typography variant="h6" color="primary" fontWeight="bold">
-               {activeStep.label}
+                {activeStep.label}
               </Typography>
               <Stack direction="row" spacing={4}>
                 <Box display="flex" alignItems="center">
@@ -223,9 +220,12 @@ const WorkonCase = () => {
       </Box>
 
       {/* Right Side: ManillaFolder */}
+      <Stack sx={{ minHeight: "90vh" }}>
         <ManillaFolder />
+      </Stack>
     </Box>
   );
 };
 
 export default WorkonCase;
+

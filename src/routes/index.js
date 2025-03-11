@@ -35,7 +35,6 @@ import { ACCESS_TOKEN_EXPIRY, BUFFER_PARAMETERS } from "../helpers/Constants";
 // import AppointmentLookUpPage from "../pages/dashboard/appointments/AppointmentLookUpPage";
 import moment from "moment";
 import WorkonCase from "../pages/WorkOnCase";
-import ManillaFolder from "../pages/ManillaFolder";
 
 const PrivateRoute = () => {
   const [loading, setLoading] = useState(false);
@@ -138,7 +137,6 @@ function AppRoutes() {
           {/* <Route element={<Configurations />} path="/config" /> */}
           <Route element={<Dashboard />} path="/dashboard" />
           <Route element={<WorkonCase />} path="/workoncase" />
-          <Route element={<ManillaFolder />} path="/options" />
           {/* <Route element={<Reminders />} path="/reminders" />
           <Route element={<WorkSchedule />} path="/workSchedule" />
           <Route element={<Preferences />} path="/preferences" /> */}
