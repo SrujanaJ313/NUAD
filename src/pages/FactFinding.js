@@ -122,7 +122,7 @@ const FactFinding = ({
           <Button
             variant="contained"
             color="primary"
-            sx={{fontWeight: "bold" }}
+            sx={{ fontWeight: "bold" }}
           >
             NHES Law Book
           </Button>
@@ -224,7 +224,10 @@ const FactFinding = ({
                       alignItems="center"
                       justifyContent={"space-between"}
                     >
-                      <Typography>{issue.issueType}</Typography>
+                      <Stack width={"90%"} direction="row" justifyContent={"space-between"}>
+                        <Typography>{issue.issueType}</Typography>
+                        <Typography>....</Typography>
+                      </Stack>
                       <IconButton
                         onClick={() =>
                           startEditing(index, "issueType", issue.issueType)
@@ -308,7 +311,13 @@ const FactFinding = ({
 
                 <TableCell>{issue.cmt}</TableCell>
                 <TableCell>{issue.emp}</TableCell>
-                <TableCell>{issue.rsa}</TableCell>
+                <TableCell>
+                <Stack direction="row" justifyContent={"space-between"}>
+                <Typography>{issue.rsa}</Typography>
+                <Typography>....</Typography>
+                </Stack>
+
+                  </TableCell>
 
                 {/* Actions Column */}
                 <TableCell>
