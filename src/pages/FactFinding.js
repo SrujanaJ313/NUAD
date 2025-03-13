@@ -28,6 +28,9 @@ import FactFindingActionForm from "./FactFindingActionForm";
 import NavigationArrows from "./NavigationArrows";
 import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 import AddIcon from "@mui/icons-material/Add";
+import IssueSubIssueType from "../components/issueSubIssueType";
+import { useFormik } from "formik";
+import { v4 as uuidv4 } from "uuid";
 
 const initialIssues = [
   {
@@ -109,6 +112,22 @@ const FactFinding = ({
   const handleNewIssueChange = (e) => {
     setNewIssue({ ...newIssue, [e.target.name]: e.target.value });
   };
+  const formik = useFormik({
+    initialValues: {
+      issues: [
+        {
+          id: uuidv4(),
+          issueType: {},
+          subIssueType: {},
+          issueStartDate: null,
+          issueEndDate: null,
+        },
+      ],
+    },
+    // validationSchema: rescheduleValidationSchema,
+    validateOnChange: true,
+    validateOnBlur: false,
+  });
 
   return (
     <Stack spacing={2}>
@@ -363,158 +382,10 @@ const FactFinding = ({
             Add New Issue
           </Typography>
         </Stack>
+
         {showForm && (
-          <Stack
-            direction="row"
-            spacing={3}
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            {/* Issue Type Dropdown */}
-            <Box sx={{ flex: 1 }}>
-              <Typography
-                variant="body1"
-                sx={{ color: "#183084", fontWeight: "bold" }}
-              >
-                Issue Type
-              </Typography>
-              <Select
-                fullWidth
-                name="issueType"
-                value={newIssue.issueType}
-                onChange={handleNewIssueChange}
-                displayEmpty
-              >
-                <MenuItem value="">Select Issue Type</MenuItem>
-                <MenuItem value="Deductible Income">Deductible Income</MenuItem>
-                <MenuItem value="Availability">Availability</MenuItem>
-                <MenuItem value="Fired">Fired</MenuItem>
-                <MenuItem value="Illness">Illness</MenuItem>
-              </Select>
-            </Box>
-
-            {/* Issue Sub-Type Dropdown */}
-            <Box sx={{ flex: 1 }}>
-              <Typography
-                variant="body1"
-                sx={{ color: "#183084", fontWeight: "bold" }}
-              >
-                Issue Sub-Type
-              </Typography>
-              <Select
-                fullWidth
-                name="subIssueType"
-                value={newIssue.subIssueType}
-                onChange={handleNewIssueChange}
-                displayEmpty
-              >
-                <MenuItem value="">Click OK to Load This List</MenuItem>
-                <MenuItem value="Sub Type 1">Sub Type 1</MenuItem>
-                <MenuItem value="Sub Type 2">Sub Type 2</MenuItem>
-              </Select>
-            </Box>
-
-            {/* Employer Dropdown */}
-            <Box sx={{ flex: 1 }}>
-              <Typography
-                variant="body1"
-                sx={{ color: "#183084", fontWeight: "bold" }}
-              >
-                Employer
-              </Typography>
-              <Select
-                fullWidth
-                name="employer"
-                value={newIssue.employer}
-                onChange={handleNewIssueChange}
-                displayEmpty
-              >
-                <MenuItem value="">Select Employer</MenuItem>
-                <MenuItem value="LONDONDERRY SCHOOL DISTRICT">
-                  LONDONDERRY SCHOOL DISTRICT
-                </MenuItem>
-              </Select>
-            </Box>
-
-            {/* Detection Date Field */}
-            <Box sx={{ flex: 1 }}>
-              <Typography
-                variant="body1"
-                sx={{ color: "#183084", fontWeight: "bold" }}
-              >
-                Detection Date
-              </Typography>
-              <TextField
-                fullWidth
-                type="date"
-                name="detectionDate"
-                value={newIssue.detectionDate}
-                onChange={handleNewIssueChange}
-              />
-            </Box>
-            {/* Start Date Field */}
-            <Box sx={{ flex: 1 }}>
-              <Typography
-                variant="body1"
-                sx={{ color: "#183084", fontWeight: "bold" }}
-              >
-                Start Date
-              </Typography>
-              <TextField
-                fullWidth
-                type="date"
-                name="startDate"
-                value={newIssue.startDate}
-                onChange={handleNewIssueChange}
-              />
-            </Box>
-
-            <Box sx={{ flex: 1 }}>
-              <Typography
-                variant="body1"
-                sx={{ color: "#183084", fontWeight: "bold" }}
-              >
-                End Date
-              </Typography>
-              <TextField
-                fullWidth
-                type="date"
-                name="endDate"
-                value={newIssue.endDate}
-                onChange={handleNewIssueChange}
-                size="medium"
-              />
-            </Box>
-
-            {/* Assign to Self Radio Buttons */}
-            <Box sx={{ flex: 1, display: "flex", alignItems: "center" }}>
-              <Typography
-                variant="body1"
-                sx={{
-                  color: "#183084",
-                  fontWeight: "bold",
-                  marginRight: "8px",
-                }}
-              >
-                Assign to Self:
-              </Typography>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={newIssue.assignToSelf === "Yes"} // Set checked state
-                    onChange={(e) =>
-                      handleNewIssueChange({
-                        target: {
-                          name: "assignToSelf",
-                          value: e.target.checked ? "Yes" : "No",
-                        },
-                      })
-                    }
-                  />
-                }
-                label="" // No label needed since the text is already provided
-              />
-            </Box>
+          <Stack>
+            <IssueSubIssueType formik={formik} />
           </Stack>
         )}
       </Paper>

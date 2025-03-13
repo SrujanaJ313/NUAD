@@ -8,6 +8,8 @@ import {
   TextField,
   InputLabel,
   FormHelperText,
+  FormControlLabel,
+  Checkbox,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -89,7 +91,7 @@ const IssueSubIssueType = ({ formik }) => {
             <Stack direction="row" spacing={2} alignItems="flex-start">
               <FormControl
                 variant="outlined"
-                sx={{ minWidth: 200 }}
+                sx={{ minWidth: 150 }}
                 size="small"
               >
                 <InputLabel id="IssueType">Issue Type</InputLabel>
@@ -115,7 +117,7 @@ const IssueSubIssueType = ({ formik }) => {
 
               <FormControl
                 variant="outlined"
-                sx={{ minWidth: 200 }}
+                sx={{ minWidth: 150 }}
                 size="small"
               >
                 <InputLabel id="IssueSubType">Issue SubType</InputLabel>
@@ -136,6 +138,54 @@ const IssueSubIssueType = ({ formik }) => {
                   ))}
                 </Select>
               </FormControl>
+
+              <FormControl
+                variant="outlined"
+                sx={{ minWidth: 150 }}
+                size="small"
+              >
+                <InputLabel id="Employer">Employer</InputLabel>
+                <Select
+                  label="Employer"
+                  value={element.subIssueType.issueDesc}
+                  onChange={(e) => {
+                    const subIssueType = subIssueTypes.find(
+                      (s) => s.issueDesc === e.target.value
+                    );
+                    handleFieldChange(element.id, "subIssueType", subIssueType);
+                  }}
+                >
+                  {subIssueTypes?.map((subIssue) => (
+                    <MenuItem key={subIssue.issueId} value={subIssue.issueDesc}>
+                      {subIssue.issueDesc}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <Stack spacing={1}>
+                  <DatePicker
+                    label="Detection Date"
+                    slotProps={{
+                      textField: { size: "small" },
+                    }}
+                    value={element.issueStartDate}
+                    onChange={(date) => {
+                      handleFieldChange(element.id, "issueStartDate", date);
+                    }}
+                    renderInput={(params) => (
+                      <TextField {...params} size="small" variant="outlined" />
+                    )}
+                  />
+                  {formik.touched.issues?.[index]?.issueStartDate &&
+                    formik.errors.issues?.[index]?.issueStartDate && (
+                      <FormHelperText error>
+                        {formik.errors.issues[index].issueStartDate}
+                      </FormHelperText>
+                    )}
+                </Stack>
+              </LocalizationProvider>
 
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Stack spacing={1}>
@@ -179,13 +229,38 @@ const IssueSubIssueType = ({ formik }) => {
                 </Stack>
               </LocalizationProvider>
 
-              <IconButton
+              <FormControlLabel
+                sx={{
+                  minWidth: 120,
+                  "& .MuiFormControlLabel-label": {
+                    color: "#183084", // Change label color to blue
+                    fontWeight: "bold", // Make label text bold
+                  },
+                }}
+                control={
+                  <Checkbox
+                  // checked={newIssue.assignToSelf === "Yes"} // Set checked state
+                  // onChange={(e) =>
+                  //   handleNewIssueChange({
+                  //     target: {
+                  //       name: "assignToSelf",
+                  //       value: e.target.checked ? "Yes" : "No",
+                  //     },
+                  //   })
+                  // }
+                  />
+                }
+                label="Assign To Self" // No label needed since the text is already provided
+                labelPlacement="start"
+              />
+
+              {/* <IconButton
                 sx={{ padding: "0px", marginRight: "20px !important" }}
                 onClick={() => handleRemoveClick(element.id)}
                 disabled={element.id === formik?.values?.issues[0]?.id}
               >
                 <RemoveCircleIcon fontSize="small" />
-              </IconButton>
+              </IconButton> */}
             </Stack>
           </Stack>
         ))}
@@ -201,3 +276,4 @@ const IssueSubIssueType = ({ formik }) => {
 };
 
 export default IssueSubIssueType;
+
