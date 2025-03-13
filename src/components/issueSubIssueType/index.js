@@ -265,11 +265,11 @@ const IssueSubIssueType = ({ formik }) => {
           </Stack>
         ))}
 
-        <Stack direction="row" justifyContent="flex-end" spacing={2}>
+        {/* <Stack direction="row" justifyContent="flex-end" spacing={2}>
           <Button variant="text" type="Button" onClick={addIssue}>
             + Add more
           </Button>
-        </Stack>
+        </Stack> */}
       </Stack>
     </form>
   );
