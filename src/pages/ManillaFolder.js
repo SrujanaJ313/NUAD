@@ -40,10 +40,10 @@ const ManillaFolder = () => {
         display: "flex",
         flexDirection: "column",
         // alignContent: "flex-start",
-        justifyContent: "center",
+        justifyContent: "space-between",
         backgroundColor: "white",
         gap: 1,
-        // height: "100%",
+        height: "100%",
       }}
     >
       {tabs.map((tab, index) => (
@@ -53,7 +53,7 @@ const ManillaFolder = () => {
               marginLeft: "6px",
               marginRight: "6px",
               fontWeight: "bold",
-              fontSize: "13px",
+              fontSize: "15px",
             }}
           >
             {tab.label}

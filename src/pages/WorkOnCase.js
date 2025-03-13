@@ -69,7 +69,7 @@ const WorkonCase = () => {
           ...step,
           active: false,
           completionStatus: "Y",
-          bgColor: "#e8f4ea",
+          bgColor: "#a0d2a8",
           color: "#183084",
         };
       } else {
@@ -202,7 +202,8 @@ const WorkonCase = () => {
               >
                 <Typography
                   variant="h6"
-                  fontSize={step.active ? "bold" : "medium"}
+                  fontWeight={step.active ? "bold" : "medium"}
+                  fontSize={"18px"}
                 >
                   {step.stepNumber + 1}. {step.label}
                 </Typography>

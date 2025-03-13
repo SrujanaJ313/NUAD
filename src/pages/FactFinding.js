@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import {
   Box,
-  Button,
   IconButton,
   MenuItem,
   Paper,
-  Radio,
-  RadioGroup,
   Select,
   Stack,
   Table,
@@ -20,6 +17,7 @@ import {
   FormControlLabel,
   InputLabel,
   FormControl,
+  Checkbox,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
@@ -28,6 +26,8 @@ import CustomModal from "../components/customModal/CustomModal";
 import DialogContent from "@mui/material/DialogContent";
 import FactFindingActionForm from "./FactFindingActionForm";
 import NavigationArrows from "./NavigationArrows";
+import ImportContactsIcon from "@mui/icons-material/ImportContacts";
+import AddIcon from "@mui/icons-material/Add";
 
 const initialIssues = [
   {
@@ -119,13 +119,14 @@ const FactFinding = ({
           </Typography>
         </Stack>
         <Stack width={"50%"} direction={"row"} justifyContent={"flex-end"}>
-          <Button
+          {/* <Button
             variant="contained"
             color="primary"
             sx={{ fontWeight: "bold" }}
-          >
-            NHES Law Book
-          </Button>
+          > */}
+          {/* NHES Law Book */}
+          <ImportContactsIcon fontSize="large" color="primary" />
+          {/* </Button> */}
         </Stack>
       </Stack>
 
@@ -224,7 +225,11 @@ const FactFinding = ({
                       alignItems="center"
                       justifyContent={"space-between"}
                     >
-                      <Stack width={"90%"} direction="row" justifyContent={"space-between"}>
+                      <Stack
+                        width={"90%"}
+                        direction="row"
+                        justifyContent={"space-between"}
+                      >
                         <Typography>{issue.issueType}</Typography>
                         <Typography>....</Typography>
                       </Stack>
@@ -312,12 +317,11 @@ const FactFinding = ({
                 <TableCell>{issue.cmt}</TableCell>
                 <TableCell>{issue.emp}</TableCell>
                 <TableCell>
-                <Stack direction="row" justifyContent={"space-between"}>
-                <Typography>{issue.rsa}</Typography>
-                <Typography>....</Typography>
-                </Stack>
-
-                  </TableCell>
+                  <Stack direction="row" justifyContent={"space-between"}>
+                    <Typography>{issue.rsa}</Typography>
+                    <Typography>....</Typography>
+                  </Stack>
+                </TableCell>
 
                 {/* Actions Column */}
                 <TableCell>
@@ -332,18 +336,34 @@ const FactFinding = ({
       </TableContainer>
 
       {/* Add New Issue Button */}
-      <Button
+      {/* <Button
         variant="contained"
         color="primary"
         onClick={() => setShowForm(true)}
         sx={{ width: "15%" }}
       >
         + Add New Issue
-      </Button>
+      </Button> */}
 
       {/* New Issue Form */}
-      {showForm && (
-        <Paper sx={{ padding: 2, width: "100%" }}>
+      <Paper sx={{ padding: 1, width: "100%" }}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          onClick={() => setShowForm(true)}
+          sx={{
+            "&:hover": {
+              cursor: "pointer",
+            },
+            paddingBottom: showForm ? "10px" : "",
+          }}
+        >
+          <AddIcon fontSize="medium" color="white" />
+          <Typography variant="h6" fontSize={"18px"}>
+            Add New Issue
+          </Typography>
+        </Stack>
+        {showForm && (
           <Stack
             direction="row"
             spacing={3}
@@ -449,27 +469,55 @@ const FactFinding = ({
               />
             </Box>
 
-            {/* Assign to Self Radio Buttons */}
             <Box sx={{ flex: 1 }}>
               <Typography
                 variant="body1"
                 sx={{ color: "#183084", fontWeight: "bold" }}
               >
+                End Date
+              </Typography>
+              <TextField
+                fullWidth
+                type="date"
+                name="endDate"
+                value={newIssue.endDate}
+                onChange={handleNewIssueChange}
+                size="medium"
+              />
+            </Box>
+
+            {/* Assign to Self Radio Buttons */}
+            <Box sx={{ flex: 1, display: "flex", alignItems: "center" }}>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: "#183084",
+                  fontWeight: "bold",
+                  marginRight: "8px",
+                }}
+              >
                 Assign to Self:
               </Typography>
-              <RadioGroup
-                row
-                name="assignToSelf"
-                value={newIssue.assignToSelf}
-                onChange={handleNewIssueChange}
-              >
-                <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="No" control={<Radio />} label="No" />
-              </RadioGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={newIssue.assignToSelf === "Yes"} // Set checked state
+                    onChange={(e) =>
+                      handleNewIssueChange({
+                        target: {
+                          name: "assignToSelf",
+                          value: e.target.checked ? "Yes" : "No",
+                        },
+                      })
+                    }
+                  />
+                }
+                label="" // No label needed since the text is already provided
+              />
             </Box>
           </Stack>
-        </Paper>
-      )}
+        )}
+      </Paper>
 
       {editActionForm && (
         <CustomModal
@@ -477,8 +525,11 @@ const FactFinding = ({
           onClose={() => setEditActionForm(false)}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-          title="Fact Finding Questions"
+          title="Fact Finding"
           maxWidth={"lg"}
+          titleBgColor="#183084"
+          titleTextColor="white"
+          closeIconColor="white"
         >
           <DialogContent>
             <Stack

@@ -4,7 +4,6 @@ import {
   Typography,
   TextField,
   Box,
-  Divider,
   Table,
   TableBody,
   TableCell,
@@ -13,8 +12,8 @@ import {
   TableRow,
   Paper,
   Button,
-  FormControlLabel,
-  Checkbox,
+  // FormControlLabel,
+  // Checkbox,
 } from "@mui/material";
 
 const questions = {
@@ -110,23 +109,80 @@ const FactFindingActionForm = () => {
               ))}
               {/* Additional Information Row */}
               <TableRow>
+                {/* Left Cell */}
                 <TableCell
-                  colSpan={2}
-                  sx={{ borderTop: "2px solid #ccc", padding: "10px" }}
+                  sx={{
+                    borderTop: "2px solid #ccc",
+                    borderRight: "2px solid #ccc", // Add vertical separating line
+                    padding: "10px",
+                    width: "50%",
+                  }}
                 >
-                  <Typography
-                    variant="body2"
-                    sx={{ fontWeight: "bold", mb: 1 }}
+                  {/* Additional Comments Text Box and Certify Button */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      mb: 2,
+                    }}
                   >
+                    <TextField
+                      fullWidth
+                      multiline
+                      rows={4}
+                      placeholder="Additional Comments"
+                      variant="outlined"
+                    />
+                    <Button variant="contained" color="primary">
+                      Certify
+                    </Button>
+                  </Box>
+
+                  {/* Previously Captured Additional Info from Claimant */}
+                  <Typography variant="body2" sx={{ fontWeight: "bold" }}>
                     + Previously captured Additional Info from claimant
                   </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={{ fontWeight: "bold", mb: 1 }}
+                </TableCell>
+
+                {/* Right Cell */}
+                <TableCell
+                  sx={{
+                    borderTop: "2px solid #ccc",
+                    padding: "10px",
+                    width: "50%",
+                  }}
+                >
+                  {/* Additional Comments Text Box and Certify Button */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      mb: 2,
+                    }}
                   >
+                    <TextField
+                      fullWidth
+                      multiline
+                      rows={4}
+                      placeholder="Additional Comments"
+                      variant="outlined"
+                    />
+                    <Button variant="contained" color="primary">
+                      Certify
+                    </Button>
+                  </Box>
+
+                  {/* Previously Captured Additional Info from Employer */}
+                  <Typography variant="body2" sx={{ fontWeight: "bold" }}>
                     + Previously captured Additional Info from employer
                   </Typography>
-                  <Divider sx={{ my: 1, backgroundColor: "#ccc" }} />
+                </TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell colSpan={2}>
                   <Typography variant="body2" sx={{ fontSize: "0.9rem" }}>
                     <strong>Certified By:</strong> M. Tyrle (STF) on 02/28/2025
                     11:39
@@ -150,19 +206,19 @@ const FactFindingActionForm = () => {
                     variant="body2"
                     sx={{ fontWeight: "bold", mb: 1 }}
                   >
-                    Reasoning
+                    Fact Finding Complete
                   </Typography>
                   <TextField
                     variant="outlined"
                     fullWidth
                     multiline
                     rows={3}
-                    placeholder="Enter reasoning here"
+                    placeholder="Summary of staff finding:(if any)"
                     sx={{ mb: 2 }}
                   />
 
                   {/* Certification Checkboxes */}
-                  <Stack
+                  {/* <Stack
                     direction="row"
                     alignItems="center"
                     spacing={1}
@@ -173,7 +229,7 @@ const FactFindingActionForm = () => {
                     </Button>
                     <FormControlLabel control={<Checkbox />} label="Claimant" />
                     <FormControlLabel control={<Checkbox />} label="Employer" />
-                  </Stack>
+                  </Stack> */}
 
                   {/* Action Buttons */}
                   <Stack direction="row" spacing={1}>

@@ -31,6 +31,9 @@ function CustomModal(props) {
     fullWidth = true,
     PaperProps,
     endTitle,
+    titleBgColor = "#d2dfee",
+    titleTextColor = "#162e83",
+    closeIconColor = ""
   } = props;
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -82,7 +85,7 @@ function CustomModal(props) {
         id="alert-dialog-title"
         justifyContent="flex-start"
         alignItems="center"
-        sx={{ backgroundColor: "#d2dfee", color: "#162e83" }}
+        sx={{ backgroundColor: titleBgColor, color: "#162e83" }}
         style={{ padding: "0.25rem" }}
       >
         <Stack
@@ -96,7 +99,8 @@ function CustomModal(props) {
           <Typography
             variant="title1"
             whiteSpace="nowrap"
-            color={"#162e83"}
+            // color={"#162e83"}
+            color={titleTextColor}
             style={{
               fontWeight: "bold",
               fontSize: "0.9rem",
@@ -124,7 +128,7 @@ function CustomModal(props) {
             )}
             {onClose ? (
               <IconButton size="small" aria-label="close" onClick={onClose}>
-                <CloseIcon />
+                <CloseIcon sx={{color:closeIconColor}} />
               </IconButton>
             ) : null}
           </Stack>

@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import NavigationArrows from "./NavigationArrows";
+import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 
 const initialIssues = [
   {
@@ -44,13 +45,7 @@ function EndDate({
           </Typography>
         </Stack>
         <Stack width={"50%"} direction={"row"} justifyContent={"flex-end"}>
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ fontWeight: "bold" }}
-          >
-            NHES Law Book
-          </Button>
+        <ImportContactsIcon fontSize="large" color="primary" />
         </Stack>
       </Stack>
 
