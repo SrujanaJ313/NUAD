@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack } from "@mui/material";
+import { Stack, IconButton } from "@mui/material";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
 
@@ -9,34 +9,28 @@ function NavigationArrows({
   handleNextNavigation,
 }) {
   return (
-    <>
-      <Stack width={"20%"}>
+    <Stack direction={"row"}>
+      <IconButton disabled={activeStep?.label === "Contact Party"}>
         <ArrowCircleLeftOutlinedIcon
           fontSize="large"
           sx={{
-            color: activeStep?.label === "Contact" ? "#BDBDBD" : "#183084",
-            "&:hover": {
-              cursor:
-                activeStep?.label === "Contact" ? "not-allowed" : "pointer",
-            },
+            color:
+              activeStep?.label === "Contact Party" ? "#BDBDBD" : "#183084",
           }}
           onClick={handleBackNavigation}
         />
-      </Stack>
-      <Stack>
+      </IconButton>
+
+      <IconButton disabled={activeStep?.label === "End Date"}>
         <ArrowCircleRightOutlinedIcon
           fontSize="large"
           sx={{
             color: activeStep?.label === "End Date" ? "#BDBDBD" : "#183084",
-            "&:hover": {
-              cursor:
-                activeStep?.label === "End Date" ? "not-allowed" : "pointer",
-            },
           }}
           onClick={handleNextNavigation}
         />
-      </Stack>
-    </>
+      </IconButton>
+    </Stack>
   );
 }
 

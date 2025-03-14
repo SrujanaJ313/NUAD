@@ -41,6 +41,16 @@ const theme = createTheme({
         },
       }),
     },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          "& .MuiTypography-root": {
+            // Target Typography inside TableCell
+            fontSize: "1rem", // Set your desired font size
+          },
+        },
+      },
+    },
   },
   typography: {
     fontFamily: `"Aptos"`,
@@ -54,3 +64,4 @@ const theme = createTheme({
 });
 
 export default theme;
+

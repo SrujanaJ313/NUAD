@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   Stack,
   Typography,
@@ -41,6 +41,36 @@ const questions = {
 };
 
 const FactFindingActionForm = () => {
+  const [comments, setComments] = useState({
+    claimantComments: "",
+    employerComments: "",
+  });
+
+  const [storedComments, setStoredComments] = useState({
+    claimantComments: [],
+    employerComments: [],
+  });
+
+  const handleOnChangeComments = (e) => {
+    const { name: targetName, value } = e.target;
+    setComments((prevComments) => ({
+      ...prevComments,
+      [targetName]: value,
+    }));
+  };
+
+  const handleComments = (targetName, enteredComments) => {
+    const newComments = [...storedComments[targetName], enteredComments];
+    setStoredComments((prevComments) => ({
+      ...prevComments,
+      [targetName]: newComments,
+    }));
+    setComments((...prevComments) => ({
+      ...prevComments,
+      [targetName]: "",
+    }));
+  };
+
   return (
     <Stack width="100%" justifyContent="center" alignItems="center" mt={2}>
       <Stack width="100%" justifyContent="center" alignItems="center" mt={2}>
@@ -128,13 +158,25 @@ const FactFindingActionForm = () => {
                     }}
                   >
                     <TextField
+                      name="claimantComments"
                       fullWidth
                       multiline
                       rows={4}
                       placeholder="Additional Comments"
                       variant="outlined"
+                      onChange={handleOnChangeComments}
+                      value={comments.claimantComments}
                     />
-                    <Button variant="contained" color="primary">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() =>
+                        handleComments(
+                          "claimantComments",
+                          comments.claimantComments
+                        )
+                      }
+                    >
                       Certify
                     </Button>
                   </Box>
@@ -163,13 +205,25 @@ const FactFindingActionForm = () => {
                     }}
                   >
                     <TextField
+                      name="employerComments"
                       fullWidth
                       multiline
                       rows={4}
                       placeholder="Additional Comments"
                       variant="outlined"
+                      value={comments.employerComments}
+                      onChange={handleOnChangeComments}
                     />
-                    <Button variant="contained" color="primary">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() =>
+                        handleComments(
+                          "employerComments",
+                          comments.employerComments
+                        )
+                      }
+                    >
                       Certify
                     </Button>
                   </Box>
@@ -181,7 +235,7 @@ const FactFindingActionForm = () => {
                 </TableCell>
               </TableRow>
 
-              <TableRow>
+              {/* <TableRow>
                 <TableCell colSpan={2}>
                   <Typography variant="body2" sx={{ fontSize: "0.9rem" }}>
                     <strong>Certified By:</strong> M. Tyrle (STF) on 02/28/2025
@@ -194,8 +248,62 @@ const FactFindingActionForm = () => {
                     to equal 40 w/e 10/26/24.
                   </Typography>
                 </TableCell>
-              </TableRow>
+              </TableRow> */}
               {/* Reasoning Section */}
+              {(!!storedComments.claimantComments.length ||
+                !!storedComments.employerComments.length) &&
+                Array.from({
+                  length: Math.max(
+                    storedComments.claimantComments.length,
+                    storedComments.employerComments.length
+                  ),
+                }).map((_, index) => (
+                  <TableRow key={index}>
+                    <TableCell
+                      sx={{ width: "50%", borderRight: "2px solid #ccc" }}
+                    >
+                      {storedComments.claimantComments[index] && (
+                        <>
+                          <Typography
+                            variant="body2"
+                            sx={{ fontSize: "0.9rem" }}
+                          >
+                            <strong>Certified By:</strong> Michele Tyrie
+                            on 02/28/2025 11:39
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            sx={{ fontSize: "0.9rem" }}
+                          >
+                            <strong>Employer confirms:</strong>{" "}
+                            {storedComments.claimantComments[index]}.
+                          </Typography>
+                        </>
+                      )}
+                    </TableCell>
+
+                    <TableCell sx={{ width: "50%" }}>
+                      {storedComments.employerComments[index] && (
+                        <>
+                          <Typography
+                            variant="body2"
+                            sx={{ fontSize: "0.9rem" }}
+                          >
+                            <strong>Certified By:</strong> Michele Tyrie
+                            on 02/28/2025 11:39
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            sx={{ fontSize: "0.9rem" }}
+                          >
+                            <strong>Employer confirms:</strong>{" "}
+                            {storedComments.employerComments[index]}.
+                          </Typography>
+                        </>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ))}
               <TableRow>
                 <TableCell
                   colSpan={2}

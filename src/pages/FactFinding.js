@@ -26,11 +26,11 @@ import CustomModal from "../components/customModal/CustomModal";
 import DialogContent from "@mui/material/DialogContent";
 import FactFindingActionForm from "./FactFindingActionForm";
 import NavigationArrows from "./NavigationArrows";
-import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 import AddIcon from "@mui/icons-material/Add";
 import IssueSubIssueType from "../components/issueSubIssueType";
 import { useFormik } from "formik";
 import { v4 as uuidv4 } from "uuid";
+import ZoomInIcon from "@mui/icons-material/ZoomIn";
 
 const initialIssues = [
   {
@@ -40,7 +40,7 @@ const initialIssues = [
     employer: "LONDONDERRY SCHOOL DISTRICT",
     cmt: "Yes",
     emp: "N/A",
-    rsa: "RSA 282 A-14, 15, 22, '&' EMP 502.07",
+    rsa: "RSA 282 A-14, 15, 22, '&' EMP 502.07, RSA 301 A",
   },
   {
     issueType: "Availability / Transportation",
@@ -109,9 +109,9 @@ const FactFinding = ({
     setEditField(null);
   };
 
-  const handleNewIssueChange = (e) => {
-    setNewIssue({ ...newIssue, [e.target.name]: e.target.value });
-  };
+  // const handleNewIssueChange = (e) => {
+  //   setNewIssue({ ...newIssue, [e.target.name]: e.target.value });
+  // };
   const formik = useFormik({
     initialValues: {
       issues: [
@@ -131,24 +131,6 @@ const FactFinding = ({
 
   return (
     <Stack spacing={2}>
-      <Stack direction={"row"} justifyContent={"space-between"}>
-        <Stack width={"50%"}>
-          <Typography variant="h6" fontWeight="bold" sx={{ color: "#183084" }}>
-            Fact Finding
-          </Typography>
-        </Stack>
-        <Stack width={"50%"} direction={"row"} justifyContent={"flex-end"}>
-          {/* <Button
-            variant="contained"
-            color="primary"
-            sx={{ fontWeight: "bold" }}
-          > */}
-          {/* NHES Law Book */}
-          <ImportContactsIcon fontSize="large" color="primary" />
-          {/* </Button> */}
-        </Stack>
-      </Stack>
-
       <Stack direction={"row"} justifyContent="flex-end">
         <Stack
           direction={"row"}
@@ -175,7 +157,7 @@ const FactFinding = ({
                 "Employer",
                 "CMT",
                 "EMP",
-                "RSA & EMP",
+                "References",
                 "Actions",
               ].map((header) => (
                 <TableCell
@@ -189,7 +171,17 @@ const FactFinding = ({
           </TableHead>
           <TableBody>
             {issues.map((issue, index) => (
-              <TableRow key={index}>
+              <TableRow
+                key={index}
+                sx={{
+                  "&:nth-of-type(odd)": {
+                    borderBottom: "2px solid lightGray", // Border color for odd rows
+                  },
+                  "&:nth-of-type(even)": {
+                    borderBottom: "2px solid darkGray", // Border color for even rows
+                  },
+                }}
+              >
                 {/* Editable Issue Type */}
                 <TableCell>
                   {editIndex === index && editField === "issueType" ? (
@@ -257,7 +249,7 @@ const FactFinding = ({
                           startEditing(index, "issueType", issue.issueType)
                         }
                       >
-                        <EditIcon />
+                        {/* <EditIcon /> */}
                       </IconButton>
                     </Stack>
                   )}
@@ -324,7 +316,7 @@ const FactFinding = ({
                             startEditing(index, "employer", issue.employer)
                           }
                         >
-                          <EditIcon />
+                          {/* <EditIcon /> */}
                         </IconButton>
                       </Stack>
                     )}
@@ -345,11 +337,38 @@ const FactFinding = ({
                 {/* Actions Column */}
                 <TableCell>
                   <IconButton>
-                    <EditIcon onClick={() => setEditActionForm(true)} />
+                    {/* <EditIcon onClick={() => setEditActionForm(true)} /> */}
+                    <ZoomInIcon onClick={() => setEditActionForm(true)} />
                   </IconButton>
                 </TableCell>
               </TableRow>
             ))}
+            <TableRow>
+              <TableCell colSpan={8}>
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  onClick={() => setShowForm(true)}
+                  sx={{
+                    "&:hover": {
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  <AddIcon fontSize="medium" color="white" />
+                  <Typography variant="h6" fontSize={"16px"}>
+                    Add New Issue
+                  </Typography>
+                </Stack>
+              </TableCell>
+            </TableRow>
+            {showForm && (
+              <TableRow>
+                <TableCell colSpan={8}>
+                  <IssueSubIssueType formik={formik} />
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
@@ -365,7 +384,7 @@ const FactFinding = ({
       </Button> */}
 
       {/* New Issue Form */}
-      <Paper sx={{ padding: 1, width: "100%" }}>
+      {/* <Paper sx={{ padding: 1, width: "100%" }}>
         <Stack
           direction="row"
           alignItems="center"
@@ -388,7 +407,7 @@ const FactFinding = ({
             <IssueSubIssueType formik={formik} />
           </Stack>
         )}
-      </Paper>
+      </Paper> */}
 
       {editActionForm && (
         <CustomModal

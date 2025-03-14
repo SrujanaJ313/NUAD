@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Button,
   IconButton,
@@ -10,11 +11,11 @@ import {
   TableHead,
   TableRow,
   Typography,
-  TextField
+  TextField,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import NavigationArrows from "./NavigationArrows";
-import ImportContactsIcon from "@mui/icons-material/ImportContacts";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 const initialIssues = [
   {
@@ -31,24 +32,10 @@ const initialIssues = [
   },
 ];
 
-function EndDate({
-  handleNextNavigation,
-  handleBackNavigation,
-  activeStep,
-}) {
+function EndDate({ handleNextNavigation, handleBackNavigation, activeStep }) {
+  const [editAction, setEditActionForm] = useState(false);
   return (
     <Stack spacing={2}>
-      <Stack direction={"row"} justifyContent={"space-between"}>
-        <Stack width={"50%"}>
-          <Typography variant="h6" fontWeight="bold" sx={{ color: "#183084" }}>
-            End Date
-          </Typography>
-        </Stack>
-        <Stack width={"50%"} direction={"row"} justifyContent={"flex-end"}>
-        <ImportContactsIcon fontSize="large" color="primary" />
-        </Stack>
-      </Stack>
-
       <Stack direction={"row"} justifyContent="flex-end">
         <Stack
           direction={"row"}
@@ -121,6 +108,9 @@ function EndDate({
                 <TableCell sx={{ width: "100px" }}>
                   <IconButton>
                     <EditIcon onClick={() => setEditActionForm(true)} />
+                  </IconButton>
+                  <IconButton>
+                    <RefreshIcon onClick={() => setEditActionForm(true)} />
                   </IconButton>
                 </TableCell>
               </TableRow>

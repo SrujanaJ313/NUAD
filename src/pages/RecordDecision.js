@@ -14,7 +14,6 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import NavigationArrows from "./NavigationArrows";
 import WeeklyDistribution from "./WeeklyDistribution";
-import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 
 const initialIssues = [
   {
@@ -50,24 +49,6 @@ function RecordDecision({
 }) {
   return (
     <Stack spacing={2}>
-      <Stack direction={"row"} justifyContent={"space-between"}>
-        <Stack width={"50%"}>
-          <Typography variant="h6" fontWeight="bold" sx={{ color: "#183084" }}>
-            Record Decision
-          </Typography>
-        </Stack>
-        <Stack width={"50%"} direction={"row"} justifyContent={"flex-end"}>
-          {/* <Button
-            variant="contained"
-            color="primary"
-            sx={{ fontWeight: "bold" }}
-          >
-            NHES Law Book
-          </Button> */}
-          <ImportContactsIcon fontSize="large" color="primary" />
-        </Stack>
-      </Stack>
-
       <Stack direction={"row"} justifyContent="flex-end">
         <Stack
           direction={"row"}

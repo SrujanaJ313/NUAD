@@ -167,17 +167,18 @@ function ReviewCharging({
 
   return (
     <Stack spacing={2} p={2}>
-      <Typography variant="h6" sx={{ color: "#183084", fontWeight: "bold" }}>
-        Current Charge Liabilities
-      </Typography>
       <Stack direction={"row"} justifyContent="flex-end">
-      <Stack direction={"row"} justifyContent="flex-end" sx={{ width: "35%" }}>
-      <NavigationArrows
+        <Stack
+          direction={"row"}
+          justifyContent="flex-end"
+          sx={{ width: "35%" }}
+        >
+          <NavigationArrows
             activeStep={activeStep}
             handleBackNavigation={handleBackNavigation}
             handleNextNavigation={handleNextNavigation}
           />
-      </Stack>
+        </Stack>
       </Stack>
 
       <TableContainer component={Paper}>
@@ -263,7 +264,6 @@ function ReviewCharging({
         </RadioGroup>
 
         {!selectedOption && <SubmitCancelButtons />}
-
       </Stack>
 
       {selectedOption === "adjustTax" && (
@@ -370,7 +370,7 @@ function ReviewCharging({
                       sx: { color: "#183084", fontWeight: "bold" },
                     }}
                     size="small"
-                    sx={{ width: "20%" }}
+                    sx={{ width: "15%" }}
                   />
                   <TextField
                     label="End Date"
@@ -380,7 +380,7 @@ function ReviewCharging({
                       sx: { color: "#183084", fontWeight: "bold" },
                     }}
                     size="small"
-                    sx={{ width: "20%" }}
+                    sx={{ width: "15%" }}
                   />
                   <TextField
                     label="Fund Charge %"
@@ -390,7 +390,7 @@ function ReviewCharging({
                       sx: { color: "#183084", fontWeight: "bold" },
                     }}
                     size="small"
-                    sx={{ width: "20%" }}
+                    sx={{ width: "15%" }}
                   />
                 </Stack>
                 <FormControl size="small" sx={{ width: "40%" }}>
@@ -431,71 +431,79 @@ function ReviewCharging({
             View Details
           </Typography>
           <Stack spacing={2} p={2}>
-            <Typography
-              variant="h6"
-              sx={{ fontSize: "18px", color: "#183084", fontWeight: "bold" }}
-            >
-              Benefit Charging Details - Londonderry School District
-            </Typography>
-            <Stack>
-              <Stack direction="row" spacing={2}>
-                <Box
-                  component={Paper}
+            <Stack direction={"row"} justifyContent={"space-between"}>
+              <Stack justifyContent={"center"} sx={{width:"50%"}}>
+                <Typography
+                  variant="h6"
                   sx={{
-                    width: "35%",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    p: 2,
-                    height: "60px",
+                    fontSize: "18px",
+                    color: "#183084",
+                    fontWeight: "bold"
                   }}
                 >
-                  <Typography sx={{ color: "#183084", fontWeight: "bold" }}>
-                    - Charged to Account: $434.00
-                  </Typography>
-                  <Typography sx={{ color: "#183084", fontWeight: "bold" }}>
-                    Total Benefits: $427.00
-                  </Typography>
-                </Box>
-                <TableContainer component={Paper} sx={{ width: "65%" }}>
-                  <Table size="small">
-                    <TableHead>
-                      <TableRow sx={{ bgcolor: "#183084", color: "white" }}>
-                        {[
-                          "W/E Date",
-                          "Status",
-                          "Date Paid",
-                          "Benefit Amount",
-                          "Charges",
-                          "Credits",
-                          "Mutualized",
-                          "Net Charges",
-                        ].map((header) => (
-                          <TableCell
-                            key={header}
-                            sx={{ color: "white", fontWeight: "bold" }}
-                          >
-                            {header}
-                          </TableCell>
-                        ))}
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {benefitChargingDetailsdata.map((row, index) => (
-                        <TableRow key={index}>
-                          <TableCell>{row.date}</TableCell>
-                          <TableCell>{row.status}</TableCell>
-                          <TableCell>{row.paid}</TableCell>
-                          <TableCell>{row.benefit}</TableCell>
-                          <TableCell>{row.charges}</TableCell>
-                          <TableCell>{row.credits}</TableCell>
-                          <TableCell>{row.mutualized}</TableCell>
-                          <TableCell>{row.netCharges}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
+                  Benefit Charging Details - Londonderry School District
+                </Typography>
               </Stack>
+
+              <Box
+                component={Paper}
+                sx={{
+                  width: "50%",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  p: 2,
+                  height: "60px",
+                }}
+              >
+                <Typography sx={{ color: "#183084", fontWeight: "bold" }}>
+                  + Charged to Account: $434.00
+                </Typography>
+                <Typography sx={{ color: "#183084", fontWeight: "bold" }}>
+                  Total Benefits: $427.00
+                </Typography>
+              </Box>
+            </Stack>
+
+            <Stack>
+              <TableContainer component={Paper}>
+                <Table size="small">
+                  <TableHead>
+                    <TableRow sx={{ bgcolor: "#183084", color: "white" }}>
+                      {[
+                        "W/E Date",
+                        "Status",
+                        "Date Paid",
+                        "Benefit Amount",
+                        "Charges",
+                        "Credits",
+                        "Mutualized",
+                        "Net Charges",
+                      ].map((header) => (
+                        <TableCell
+                          key={header}
+                          sx={{ color: "white", fontWeight: "bold" }}
+                        >
+                          {header}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {benefitChargingDetailsdata.map((row, index) => (
+                      <TableRow key={index}>
+                        <TableCell>{row.date}</TableCell>
+                        <TableCell>{row.status}</TableCell>
+                        <TableCell>{row.paid}</TableCell>
+                        <TableCell>{row.benefit}</TableCell>
+                        <TableCell>{row.charges}</TableCell>
+                        <TableCell>{row.credits}</TableCell>
+                        <TableCell>{row.mutualized}</TableCell>
+                        <TableCell>{row.netCharges}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </Stack>
           </Stack>
         </>

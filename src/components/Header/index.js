@@ -26,6 +26,7 @@ import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
 import { TreeItem } from "@mui/x-tree-view/TreeItem";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getGreeting } from "../../helpers/utils";
+import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 
 const drawerWidth = 240;
 
@@ -168,15 +169,16 @@ export default function Header() {
               direction={"row"}
               justifyContent={"flex-end"}
               alignItems={"center"}
-              sx={{ width: "35%"}} 
+              sx={{ width: "45%"}} 
               gap={2}
             >
               <Stack>
                 <Typography color="white" fontSize={"14px"} fontWeight={"bold"}>
-                  Ryan Stevens....
+                  {/* Ryan Stevens.... */}
+                  Michele Tyrie
                 </Typography>
               </Stack>
-              <Stack direction={"row"}>
+              <Stack>
                 <Typography color={"white"} fontWeight="bold">
                   BYE start:&nbsp;
                   <Typography
@@ -208,11 +210,14 @@ export default function Header() {
                   7148625-1
                 </Typography>
               </Stack>
+              <Stack>
+              <ImportContactsIcon fontSize="large" sx={{color:"white"}} />
+              </Stack>
             </Stack>
           )}
 
           <Stack direction={"row"} alignItems={"center"}>
-            <Typography color="white"> {getGreeting(getUserName())}</Typography>
+            <Typography fontWeight={"bold"} color="white"> {getGreeting(getUserName())}</Typography>
             <IconButton
               color="inherit"
               onClick={handleOpenMenu}
