@@ -1,5 +1,4 @@
 import {
-  Button,
   IconButton,
   Paper,
   Stack,
@@ -12,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import NavigationArrows from "./NavigationArrows";
 import WeeklyDistribution from "./WeeklyDistribution";
 
 const initialIssues = [
@@ -49,20 +47,6 @@ function RecordDecision({
 }) {
   return (
     <Stack spacing={2}>
-      <Stack direction={"row"} justifyContent="flex-end">
-        <Stack
-          direction={"row"}
-          justifyContent="flex-end"
-          sx={{ width: "35%" }}
-        >
-          <NavigationArrows
-            activeStep={activeStep}
-            handleBackNavigation={handleBackNavigation}
-            handleNextNavigation={handleNextNavigation}
-          />
-        </Stack>
-      </Stack>
-
       {/* Issues Table */}
       <TableContainer component={Paper}>
         <Table>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Box,
   IconButton,
   MenuItem,
   Paper,
@@ -12,20 +11,15 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TextField,
   Typography,
-  FormControlLabel,
   InputLabel,
   FormControl,
-  Checkbox,
 } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import CustomModal from "../components/customModal/CustomModal";
 import DialogContent from "@mui/material/DialogContent";
 import FactFindingActionForm from "./FactFindingActionForm";
-import NavigationArrows from "./NavigationArrows";
 import AddIcon from "@mui/icons-material/Add";
 import IssueSubIssueType from "../components/issueSubIssueType";
 import { useFormik } from "formik";
@@ -131,20 +125,6 @@ const FactFinding = ({
 
   return (
     <Stack spacing={2}>
-      <Stack direction={"row"} justifyContent="flex-end">
-        <Stack
-          direction={"row"}
-          justifyContent="flex-end"
-          sx={{ width: "35%" }}
-        >
-          <NavigationArrows
-            activeStep={activeStep}
-            handleBackNavigation={handleBackNavigation}
-            handleNextNavigation={handleNextNavigation}
-          />
-        </Stack>
-      </Stack>
-
       {/* Issues Table */}
       <TableContainer component={Paper}>
         <Table>

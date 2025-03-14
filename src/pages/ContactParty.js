@@ -12,20 +12,13 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TextField,
-  // RadioGroup,
   FormControlLabel,
-  Radio,
   Checkbox,
   FormControl,
   InputLabel,
   styled,
   IconButton,
-  Box,
 } from "@mui/material";
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-// import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import AddIcon from "@mui/icons-material/Add";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -93,10 +86,12 @@ function ContactParty({
           <FormControlLabel
             control={<Checkbox />}
             label="Deadline has passed"
+            sx={{ width: "15%" }}
           />
           <FormControlLabel
             control={<Checkbox />}
             label="Deadline is upcoming"
+            sx={{ width: "15%" }}
           />
 
           <IconButton aria-label="reset" sx={{ color: "#183084" }}>

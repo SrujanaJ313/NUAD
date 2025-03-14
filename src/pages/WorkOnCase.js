@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import ManillaFolder from "./ManillaFolder";
 import ContactParty from "./ContactParty";
@@ -6,6 +6,7 @@ import ReviewCharging from "./ReviewCharging";
 import FactFinding from "./FactFinding";
 import RecordDecision from "./RecordDecision";
 import EndDate from "./EndDate";
+import NavigationArrows from "./NavigationArrows";
 
 const STEPS = [
   {
@@ -210,6 +211,16 @@ const WorkonCase = () => {
               </Paper>
             ))}
           </Stack>
+          {activeStep?.label !== "Contact Party" && (
+            <Stack alignItems={"flex-end"}>
+              <NavigationArrows
+                activeStep={activeStep}
+                handleBackNavigation={handleBackNavigation}
+                handleNextNavigation={handleNextNavigation}
+              />
+            </Stack>
+          )}
+
           {activeStep && (
             <activeStep.component
               handleBackNavigation={handleBackNavigation}

@@ -23,7 +23,6 @@ import {
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
-import NavigationArrows from "./NavigationArrows";
 
 const data = [
   {
@@ -167,20 +166,6 @@ function ReviewCharging({
 
   return (
     <Stack spacing={2} p={2}>
-      <Stack direction={"row"} justifyContent="flex-end">
-        <Stack
-          direction={"row"}
-          justifyContent="flex-end"
-          sx={{ width: "35%" }}
-        >
-          <NavigationArrows
-            activeStep={activeStep}
-            handleBackNavigation={handleBackNavigation}
-            handleNextNavigation={handleNextNavigation}
-          />
-        </Stack>
-      </Stack>
-
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -432,13 +417,13 @@ function ReviewCharging({
           </Typography>
           <Stack spacing={2} p={2}>
             <Stack direction={"row"} justifyContent={"space-between"}>
-              <Stack justifyContent={"center"} sx={{width:"50%"}}>
+              <Stack justifyContent={"center"} sx={{ width: "50%" }}>
                 <Typography
                   variant="h6"
                   sx={{
                     fontSize: "18px",
                     color: "#183084",
-                    fontWeight: "bold"
+                    fontWeight: "bold",
                   }}
                 >
                   Benefit Charging Details - Londonderry School District

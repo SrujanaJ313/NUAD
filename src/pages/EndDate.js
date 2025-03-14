@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Button,
   IconButton,
@@ -14,7 +14,6 @@ import {
   TextField,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import NavigationArrows from "./NavigationArrows";
 import RefreshIcon from "@mui/icons-material/Refresh";
 
 const initialIssues = [
@@ -36,20 +35,6 @@ function EndDate({ handleNextNavigation, handleBackNavigation, activeStep }) {
   const [editAction, setEditActionForm] = useState(false);
   return (
     <Stack spacing={2}>
-      <Stack direction={"row"} justifyContent="flex-end">
-        <Stack
-          direction={"row"}
-          justifyContent="flex-end"
-          sx={{ width: "35%" }}
-        >
-          <NavigationArrows
-            activeStep={activeStep}
-            handleBackNavigation={handleBackNavigation}
-            handleNextNavigation={handleNextNavigation}
-          />
-        </Stack>
-      </Stack>
-
       {/* Issues Table */}
       <TableContainer component={Paper}>
         <Table>
