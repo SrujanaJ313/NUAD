@@ -233,7 +233,7 @@ const WorkonCase = () => {
 
       {/* Right Side: ManillaFolder */}
       <Stack sx={{ minHeight: "90vh" }}>
-        <ManillaFolder />
+        <ManillaFolder activeStep={activeStep} />
       </Stack>
     </Box>
   );

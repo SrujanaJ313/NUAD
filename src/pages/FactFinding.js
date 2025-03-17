@@ -155,10 +155,10 @@ const FactFinding = ({
                 key={index}
                 sx={{
                   "&:nth-of-type(odd)": {
-                    borderBottom: "2px solid lightGray", // Border color for odd rows
+                    backgroundColor: "#C8C8C8",
                   },
                   "&:nth-of-type(even)": {
-                    borderBottom: "2px solid darkGray", // Border color for even rows
+                    backgroundColor: "#E8E8E8",
                   },
                 }}
               >
