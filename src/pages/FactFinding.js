@@ -65,11 +65,7 @@ const initialIssues = [
   },
 ];
 
-const FactFinding = ({
-  handleNextNavigation,
-  handleBackNavigation,
-  activeStep,
-}) => {
+const FactFinding = () => {
   const [issues, setIssues] = useState(initialIssues);
   const [editIndex, setEditIndex] = useState(null);
   const [editField, setEditField] = useState(null);
@@ -154,9 +150,9 @@ const FactFinding = ({
               <TableRow
                 key={index}
                 sx={{
-                  "&:nth-of-type(odd)": {
-                    backgroundColor: "#C8C8C8",
-                  },
+                  // "&:nth-of-type(odd)": {
+                  //   backgroundColor: "#C8C8C8",
+                  // },
                   "&:nth-of-type(even)": {
                     backgroundColor: "#E8E8E8",
                   },

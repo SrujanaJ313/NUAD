@@ -31,7 +31,7 @@ const initialIssues = [
   },
 ];
 
-function EndDate({ handleNextNavigation, handleBackNavigation, activeStep }) {
+function EndDate() {
   const [editAction, setEditActionForm] = useState(false);
   return (
     <Stack spacing={2}>

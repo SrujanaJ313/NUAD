@@ -106,17 +106,19 @@ const WorkonCase = () => {
     <Box
       sx={{
         display: "flex",
+        height:"100vh"
       }}
     >
       {/* Left Side: Main Content */}
       <Box sx={{ flex: 1, overflowY: "auto", p: 3 }}>
-        <Stack spacing={2} sx={{ minHeight: "90vh" }}>
+        <Stack spacing={2}>
+        {/* <Stack spacing={2} sx={{ minHeight: "90vh" }}> */}
           {/* Adjudicate Header */}
           <Paper
             sx={{
               width: "100%",
               margin: "auto",
-              padding: 2,
+              padding: 1,
               backgroundColor: "#f5f5f5",
             }}
           >
@@ -124,47 +126,83 @@ const WorkonCase = () => {
               direction="row"
               justifyContent="space-between"
               alignItems="center"
-              width="100%"
             >
-              <Typography variant="h6" color="primary" fontWeight="bold">
-                {activeStep.label}
-              </Typography>
-              <Stack direction="row" spacing={4}>
+              <Stack
+                direction={"row"}
+                width={"25%"}
+                justifyContent={"space-between"}
+                alignItems={"center"}
+              >
+                <Typography variant="h6" color="primary" fontWeight="bold">
+                  {activeStep.label}
+                </Typography>
+
+                <NavigationArrows
+                  activeStep={activeStep}
+                  handleBackNavigation={handleBackNavigation}
+                  handleNextNavigation={handleNextNavigation}
+                />
+              </Stack>
+              <Stack
+                direction="row"
+                spacing={4}
+                border={"2px solid #183084"}
+                padding={1}
+              >
                 <Box display="flex" alignItems="center">
-                  <Typography variant="body1" fontWeight="bold">
+                  <Typography
+                    fontWeight="bold"
+                    sx={{
+                      fontFamily: "Calibri, sans-serif", // Set font family to Calibri
+                      fontSize: "12px", // Set font size to 12px
+                      color: "#183084",
+                    }}
+                  >
                     Case Due Date:&nbsp;
                   </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={{ color: "#183084", fontWeight: "bold" }}
-                  >
+                  <Typography sx={{ color: "#183084", fontWeight: "bold" }}>
                     1/23/2025
                   </Typography>
                 </Box>
                 <Box display="flex" alignItems="center">
-                  <Typography variant="body1" fontWeight="bold">
+                  <Typography
+                    fontWeight="bold"
+                    sx={{
+                      fontFamily: "Calibri, sans-serif", // Set font family to Calibri
+                      fontSize: "12px", // Set font size to 12px
+                      color: "#183084",
+                    }}
+                  >
                     Issues:&nbsp;
                   </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={{ color: "#183084", fontWeight: "bold" }}
-                  >
+                  <Typography sx={{ color: "#183084", fontWeight: "bold" }}>
                     4
                   </Typography>
                 </Box>
                 <Box display="flex" alignItems="center">
-                  <Typography variant="body1" fontWeight="bold">
+                  <Typography
+                    fontWeight="bold"
+                    sx={{
+                      fontFamily: "Calibri, sans-serif", // Set font family to Calibri
+                      fontSize: "12px", // Set font size to 12px
+                      color: "#183084",
+                    }}
+                  >
                     Claim Status:&nbsp;
                   </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={{ color: "#183084", fontWeight: "bold" }}
-                  >
+                  <Typography sx={{ color: "#183084", fontWeight: "bold" }}>
                     Valid Final
                   </Typography>
                 </Box>
                 <Box display="flex" alignItems="center">
-                  <Typography variant="body1" fontWeight="bold">
+                  <Typography
+                    fontWeight="bold"
+                    sx={{
+                      fontFamily: "Calibri, sans-serif", // Set font family to Calibri
+                      fontSize: "12px", // Set font size to 12px
+                      color: "#183084",
+                    }}
+                  >
                     WBA:&nbsp;
                   </Typography>
                   <Typography
@@ -211,30 +249,16 @@ const WorkonCase = () => {
               </Paper>
             ))}
           </Stack>
-          {activeStep?.label !== "Contact Party" && (
-            <Stack alignItems={"flex-end"}>
-              <NavigationArrows
-                activeStep={activeStep}
-                handleBackNavigation={handleBackNavigation}
-                handleNextNavigation={handleNextNavigation}
-              />
-            </Stack>
-          )}
 
-          {activeStep && (
-            <activeStep.component
-              handleBackNavigation={handleBackNavigation}
-              handleNextNavigation={handleNextNavigation}
-              activeStep={activeStep}
-            />
-          )}
+          {activeStep && <activeStep.component />}
         </Stack>
       </Box>
 
       {/* Right Side: ManillaFolder */}
-      <Stack sx={{ minHeight: "90vh" }}>
+      {/* <Stack sx={{ minHeight: "90vh" }}> */}
+      {/* <Stack> */}
         <ManillaFolder activeStep={activeStep} />
-      </Stack>
+      {/* </Stack> */}
     </Box>
   );
 };

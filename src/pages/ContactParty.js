@@ -31,11 +31,7 @@ const StyledTableCell = styled(TableCell)({
   paddingRight: "2px",
 });
 
-function ContactParty({
-  handleNextNavigation,
-  handleBackNavigation,
-  activeStep,
-}) {
+function ContactParty() {
   const [isAddContactVisible, setIsAddContactVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -97,13 +93,13 @@ function ContactParty({
           <IconButton aria-label="reset" sx={{ color: "#183084" }}>
             <RestartAltIcon />
           </IconButton>
-          <Stack direction={"row"} justifyContent="end" sx={{ width: "35%" }}>
+          {/* <Stack direction={"row"} justifyContent="end" sx={{ width: "35%" }}>
             <NavigationArrows
               activeStep={activeStep}
               handleBackNavigation={handleBackNavigation}
               handleNextNavigation={handleNextNavigation}
             />
-          </Stack>
+          </Stack> */}
         </Stack>
       </TableContainer>
 

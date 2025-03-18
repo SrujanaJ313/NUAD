@@ -40,11 +40,7 @@ const initialIssues = [
   },
 ];
 
-function RecordDecision({
-  handleNextNavigation,
-  handleBackNavigation,
-  activeStep,
-}) {
+function RecordDecision() {
   return (
     <Stack spacing={2}>
       {/* Issues Table */}

@@ -169,18 +169,21 @@ export default function Header() {
               direction={"row"}
               justifyContent={"flex-end"}
               alignItems={"center"}
-              sx={{ width: "45%"}} 
+              sx={{ width: "45%" }}
               gap={2}
             >
               <Stack>
-                <Typography color="white" fontSize={"14px"} fontWeight={"bold"}>
-                  {/* Ryan Stevens.... */}
-                  Michele Tyrie
+                <Typography
+                  color="white"
+                  fontSize={"12.8px"}
+                  fontWeight={"bold"}
+                >
+                  Ryan Stevens....
                 </Typography>
               </Stack>
               <Stack>
                 <Typography color={"white"} fontWeight="bold">
-                  BYE start:&nbsp;
+                  BY:&nbsp;
                   <Typography
                     variant="body2"
                     component="span" // Use span to keep it inline
@@ -188,8 +191,7 @@ export default function Header() {
                   >
                     11/17/2024
                   </Typography>
-                  &nbsp;-&nbsp; {/* Add the separator */}
-                  BYE end:&nbsp;
+                  &nbsp; - &nbsp;
                   <Typography
                     variant="body2"
                     component="span" // Use span to keep it inline
@@ -211,13 +213,16 @@ export default function Header() {
                 </Typography>
               </Stack>
               <Stack>
-              <ImportContactsIcon fontSize="large" sx={{color:"white"}} />
+                <ImportContactsIcon fontSize="large" sx={{ color: "white" }} />
               </Stack>
             </Stack>
           )}
 
           <Stack direction={"row"} alignItems={"center"}>
-            <Typography fontWeight={"bold"} color="white"> {getGreeting(getUserName())}</Typography>
+            <Typography fontWeight={"bold"} color="white">
+              {" "}
+              {getGreeting(getUserName())}
+            </Typography>
             <IconButton
               color="inherit"
               onClick={handleOpenMenu}

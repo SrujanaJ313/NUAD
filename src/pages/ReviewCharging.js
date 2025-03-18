@@ -143,11 +143,7 @@ const SubmitCancelButtons = () => {
   );
 };
 
-function ReviewCharging({
-  handleNextNavigation,
-  handleBackNavigation,
-  activeStep,
-}) {
+function ReviewCharging() {
   const [selectedOption, setSelectedOption] = useState("");
   const [currencyExchange, setCurrencyExchange] = useState(false);
   const [viewDetails, setViewDetails] = useState(false);
