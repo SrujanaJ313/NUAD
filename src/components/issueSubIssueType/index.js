@@ -235,6 +235,7 @@ const IssueSubIssueType = ({ formik }) => {
                   "& .MuiFormControlLabel-label": {
                     color: "#183084", // Change label color to blue
                     fontWeight: "bold", // Make label text bold
+                    fontSize:"14px"
                   },
                 }}
                 control={

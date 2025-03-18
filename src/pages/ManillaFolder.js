@@ -33,7 +33,7 @@ const tabs = [
 const ManillaFolder = ({ activeStep }) => {
   const GapFillTab = styled(Box)({
     backgroundColor: "#a0d2a8",
-    width: "30px",
+    width: "38px",
     // height: activeStep.label === "Record Decision" ? "150px" : "70px", // Use the height prop or default to 150px
     height: "11px", // Use the height prop or default to 150px
   });

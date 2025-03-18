@@ -34,7 +34,7 @@ const initialIssues = [
     employer: "LONDONDERRY SCHOOL DISTRICT",
     cmt: "Yes",
     emp: "N/A",
-    rsa: "RSA 282 A-14, 15, 22, '&' EMP 502.07, RSA 301 A",
+    rsa: "RSA 282 A-14,15,22",
   },
   {
     issueType: "Availability / Transportation",

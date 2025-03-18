@@ -127,21 +127,41 @@ function AttemptContactDetails() {
             value="direct"
             control={<Radio />}
             label="Direct Contact made, see comments below"
+            sx={{
+              "& .MuiFormControlLabel-label": { // Target the label specifically
+                fontSize: "14px", // Set your desired font size
+              },
+            }}
           />
           <FormControlLabel
             value="message"
             control={<Radio />}
             label="Left message advising party that failure to respond by MM/DD/YYYY 00:00 AM/PM will result in determination based on available information"
+            sx={{
+              "& .MuiFormControlLabel-label": { // Target the label specifically
+                fontSize: "14px", // Set your desired font size
+              },
+            }}
           />
           <FormControlLabel
             value="unsuccessful"
             control={<Radio />}
             label="Unsuccessful contact attempt"
+            sx={{
+              "& .MuiFormControlLabel-label": { // Target the label specifically
+                fontSize: "14px", // Set your desired font size
+              },
+            }}
           />
           <FormControlLabel
             value="unsuccessful"
             control={<Radio />}
             label="Unauthorized person contacted"
+            sx={{
+              "& .MuiFormControlLabel-label": { // Target the label specifically
+                fontSize: "14px", // Set your desired font size
+              },
+            }}
           />
         </RadioGroup>
         <Stack direction="row" spacing={2} sx={{ width: "80%" }}>
@@ -171,3 +191,4 @@ function AttemptContactDetails() {
 }
 
 export default AttemptContactDetails;
+
